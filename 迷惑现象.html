@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>迷惑现象</title>
+</head>
+<body>
+<script>
+  // 1
+  (function () {
+    var a = b = 5;
+  })();
+  // (function () {
+  //   b = 5        // 等同于
+  //   var a = b;   // 等同于
+  // })();
+  console.log(b);   // 5
+  console.log(a);   // undefined
+
+  // 2
+  function A(x) {
+    this.x = x;
+  }
+  A.prototype.x = 1;        // 这个属性永远无法被访问到，因为自身已经有一个 同名属性了 ，就不会去原型中找 ; 除非直接访问 __proto__ 但该操作很危险
+  A.prototype.sayX = function () {
+    console.log(this.x)
+  }
+
+  function B(x) {
+    this.x = x;
+  }
+
+  B.prototype = new A();    // B.prototype = new A() 相当于 B.prototype = {x:undefined} ， x 存在不会再去原型找 x ，即使 x = undefined
+  var a = new A(2), b = new B(3);
+  delete b.x
+
+  console.log(a.x, b.x,a.__proto__.x, b.__proto__.__proto__.x)    // 2 undefined 1 1
+  b.sayX()
+
+</script>
+</body>
+</html>

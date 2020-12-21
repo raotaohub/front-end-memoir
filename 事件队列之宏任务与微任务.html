@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现队列之宏任务和微任务</title>
+</head>
+
+<body>
+  <div class="outer" style="height: 100px; width: 100px; background: red;">
+    <div class="inner" style="height: 50px; width: 50px; background: blue;"></div>
+  </div>
+  <script>
+    /****************************************************************************************************************/
+
+    // // Let's get hold of those elements
+    // var outer = document.querySelector('.outer');
+    // var inner = document.querySelector('.inner');
+
+    // // Let's listen for attribute changes on the
+    // // outer element
+    // new MutationObserver(function () {
+    //   console.log('mutate');
+    // }).observe(outer, {
+    //   attributes: true,
+    // });
+
+    // // Here's a click listener…
+    // function onClick() {
+    //   console.log('click');
+
+    //   setTimeout(function () {
+    //     console.log('timeout');
+    //   }, 0);
+
+    //   Promise.resolve().then(function () {
+    //     console.log('promise');
+    //   });
+
+    //   outer.setAttribute('data-random', Math.random());
+    // }
+
+    // // …which we'll attach to both elements
+    // inner.addEventListener('click', onClick);
+    // outer.addEventListener('click', onClick);
+    /****************************************************************************************************************/
+
+    // // 若是用脚本调用
+    // // console.log('——————————————————————————inner——————————————————————————')
+    // // inner.click()
+    // // console.log('——————————————————————————outer——————————————————————————')
+    // // outer.click()
+    /****************************************************************************************************************/
+
+    // // setTimeout(() => {
+    // //   //执行后 回调一个宏事件
+    // //   console.log('内层宏事件3')
+    // // }, 0)
+    // // console.log('外层宏事件1');
+
+    // // new Promise((resolve) => {
+    // //   console.log('外层宏事件2');
+    // //   resolve()
+    // // }).then(() => {
+    // //   console.log('微事件1');
+    // // }).then(() => {
+    // //   console.log('微事件2')
+    // // })
+
+    /****************************************************************************************************************/
+
+    // console.log(cscs)
+    // var cscs = 1
+
+    // // let name = 'Nicholas';
+    // // let age = 36;
+    // // wocao = '11111111111'
+    // // oooo = '卧槽'
+    // console.log(name)
+
+    // // typeof
+    // console.log(typeof {}, typeof [], typeof null, typeof undefined, typeof function () { })// 'object' 'object' 'object' 'undefined' 'function'
+    // console.log(typeof NaN) // 'number'
+    // console.log(Boolean(-2))
+    // let num = 5e3324
+    // console.log(5e3324)
+
+    // // Symbol
+    // let genericSymbol = Symbol();
+    // console.log(genericSymbol); // Symbol()
+
+    // let fooSymbol = Symbol('foo');
+    // console.log(fooSymbol); // Symbol(foo);
+
+    // let fooSymbol2 = Symbol('foo');
+
+    // let object = {
+    //   1: '1',
+    //   2: '2',
+    //   3: '3',
+    //   4: '4'
+    // }
+    // // for in 语句
+    // for (let i in object) {
+    //   console.log(i)
+    // }
+    // // object
+    // console.log(object.hasOwnProperty('1'))
+    // console.log(object.toLocaleString())
+    // console.log(object.toString())
+    // console.log(object.valueOf())
+    // // 相等比较 和全等比较的区别在于 全等比较不做类型转换
+    // console.log('1' == 1)   // true
+    // console.log(1 == '1')   // true
+
+    // let value = {
+    //   1: '1'
+    // }
+    // console.log(value.valueOf() == 1)
+    // owerw = 11241241
+    // console.log(owerw)
+    // // 函数提升
+    // logPing()
+    // function logPing() {
+    //   console.log('logPing')
+    // }
+
+
+    // //
+    // // var color = "blue";
+    // // function changeColor() {
+    // //   if (color === "blue") {
+    // //     color = "red";
+    // //     console.log(color)
+    // //   } else {
+    // //     color = "blue";
+    // //   }
+    // // }
+    // // changeColor();
+
+    // //
+    // var color = "blue";
+    // function changeColor() {
+    //   let anotherColor = "red";
+    //   function swapColors() {
+    //     let tempColor = anotherColor;
+    //     anotherColor = color;
+    //     color = tempColor;
+    //     // 这里可以访问color、anotherColor 和tempColor
+    //     console.log(color)
+    //   }
+    //   // 这里可以访问color 和anotherColor，但访问不到tempColor
+    //   swapColors();
+    // }
+    // // 这里只能访问color
+    // changeColor();
+    // // 作用域
+    // function add(num1, num2) {
+    //   sum = num1 + num2;
+    //   return sum;
+    // }
+    // let result = add(10, 20); // 30
+    // console.log(sum); // 30
+
+    // //
+    // oooooooo = '1111111111111111'
+    // oooooooo = '22222222222222222'
+    // console.log(oooooooo)
+
+    // for (var i = function () { return '哈哈哈哈哈哈哈' }; i < 10; ++i) { }
+    // console.log(i()); // 10
+    // for (let j = 0; j < 10; ++j) { }
+
+    // let set = new Set()
+    // console.log(typeof set, set instanceof Set) //object   true
+
+
+    // let a1 = [1, 2, 3, 4]
+    // let b1 = [5, 6, 7, 8]
+    // let c1 = { 0: 9, 1: 10, 2: 11, 3: 12, length: 4 }
+
+    // console.log([...a1, ...b1, ...Array.from(c1)])
+
+    // // (12) [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+
+
+    /****************************************************************************************************************/
+
+    // async function async1() {
+    //   console.log('async1 start');  //2
+
+    //   await async2()
+
+    //   console.log('async1 end');
+    //   console.log('我可是同步代码？？？？？？？？？？？？？？？？？？？？？');
+    //   console.log('我可是同步代码？？？？？？？？？？？？？？？？？？？？？');
+    // }
+
+    // async function async2() {
+    //   console.log('async2');
+    //   return 'caicai'
+    // }
+
+    // console.log('script start'); // 1
+
+    // setTimeout(function () {
+    //   console.log('setTimeout');
+    // }, 0)
+
+    // async1();
+
+    // new Promise(function (resolve) {
+    //   console.log('promise1');
+    //   resolve();
+    //   console.log("???");
+    // }).then(function () {
+    //   console.log('promise2');
+    // })
+
+    // console.log('script end');
+
+    /****************************************************************************************************************/
+
+    // async function test1() {
+    //   console.log('start test1');
+    //   console.log(await test2());
+    //   console.log('end test1');
+    // }
+    // async function test2() {
+    //   console.log('test2');
+    //   return await 'return test2 value'
+    // }
+    // test1();
+
+    // console.log('start async');
+
+    // setTimeout(() => {
+    //   console.log('setTimeout');
+    // }, 0);
+
+    // new Promise((resolve, reject) => {
+    //   console.log('promise1');
+    //   resolve();
+    // }).then(() => {
+    //   console.log('promise2');
+    // });
+
+    /****************************************************************************************************************/
+
+    // async function hd() {
+    //   const promise = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve("houdunren.com");
+    //     }, 2000);
+    //   });
+    //   let result = await promise;
+    //   console.log(result);
+    // }
+    // hd()
+
+    /****************************************************************************************************************/
+
+  </script>
+
+</body>
+
+</html>

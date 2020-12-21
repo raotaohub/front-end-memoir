@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<script>
+  // console.log(1..__proto__ === Number.prototype);// true
+  // console.log('1'.__proto__ === String.prototype);; // true
+  // console.log(true.__proto__ === Boolean.prototype);; // true
+
+  // var a = 1 // 基本类型的数据
+  // var b = { name: 'woow_wu7' } // 引用类型的数据
+  // var aa = a // a 和 aa 是不同的数据
+  // var bb = b // b 和 bb 指向堆中的同一份数据，修改堆中数据，b和bb的指向没变，则引用的值也会跟着改变
+
+  // b.name = 'wang'
+  // console.log(a === aa, 'a和aa是不同的数据') // 改变后不等
+
+  // console.log(a, aa, 'a和aa是不同的数据') // 改变后不等
+  // console.log(b.name, bb.name, 'b和bb两个变量中的指针 => 都同时指向了同一个堆内存中的数据') // 改变后相等
+  // console.log(b === bb) // true，说明两个变量指向了同一个堆内存
+
+  // console.log(typeof 10n === 'bigint') // true
+
+  const objComplex = {
+    name: 'woow_wu7',
+    address: {
+      city: 'chongqing',
+      district: 'yubei',
+      town: 'jiazhou',
+      detail: ['chongqing', 'yubei', 'jiazhou']
+    },
+    arr: [1, 2, {l: 20, r: 30}],
+    fn: function () { }, // Function
+    date: new Date(), // Date
+    err: new Error(), // Error
+    reg: new RegExp(), // RegExp
+    number: 1,
+    string: '',
+    boolean: true,
+    null: null,
+    undefined: undefined,
+    symbol: Symbol('symbol'), // Symbol
+  }
+
+  const copy = JSON.parse(JSON.stringify(objComplex))
+  console.log(copy);
+  const a1 = [1, 2, 3, 4];
+  const a2 = Array.from(a1);
+  a1[0] = 11
+  console.log(a1); // [1, 2, 3, 4]
+  console.log(a2); // [1, 2, 3, 4]
+  console.log(a1 === a2); // false
+
+  function deepClone(obj, hash = new WeakMap()) {
+    if (obj === null) return obj; // 如果是null或者undefined我就不进行拷贝操作
+    if (obj instanceof Date) return new Date(obj);
+    if (obj instanceof RegExp) return new RegExp(obj);
+    // 可能是对象或者普通的值  如果是函数的话是不需要深拷贝
+    if (typeof obj !== "object") return obj;
+    // 是对象的话就要进行深拷贝
+    if (hash.get(obj)) return hash.get(obj);
+    let cloneObj = new obj.constructor();
+    // 找到的是所属类原型上的constructor,而原型上的 constructor 指向的是当前类本身
+    hash.set(obj, cloneObj);
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        // 实现一个递归拷贝
+        cloneObj[key] = deepClone(obj[key], hash);
+      }
+    }
+    return cloneObj;
+  }
+
+  function deepClone(obj, hash = new WeakMap()) {
+    if (obj === null) return obj
+    if (obj instanceof Date) return new Date(obj)
+    if (obj instanceof RegExp) return new RegExp(obj)
+    if (typeof obj !== 'object') return obj
+
+    if (hash.get(obj)) return hash.get(obj)
+
+    let cloneObj = new obj.constructor()
+    hash.set(obj, cloneObj)
+
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        cloneObj[key] = deepClone(obj[key], hash)
+      }
+    }
+    return cloneObj
+
+  }
+
+  // 渐进式克隆
+  // function clone(obj) {
+  //   let cloneObj = {}
+  //   for (const key in obj) {
+  //     cloneObj[key] = obj[key]
+  //   }
+  //   return cloneObj
+  // }
+  // //
+  // function clone(obj) {
+  //   if (typeof obj === 'object') {
+  //     let cloneObj = Array.isArray(obj) ? [] : {}
+  //     for (const key in obj) {
+  //       cloneObj[key] = clone(obj[key])
+  //     }
+  //     return cloneObj
+  //   } else {
+  //     return obj
+  //   }
+  // }
+  function clone(obj, map = new Map()) {
+    if (typeof obj === 'object') {
+      let cloneObj = Array.isArray(obj) ? new Array() : new Object()
+
+      if (map.get(obj)) { // 检查map中有无客隆过的对象,有则直接返回,没有则把它加入到map中
+        return map.get(obj)
+      }
+      map.set(obj, cloneObj)
+
+      for (const key in obj) {
+        cloneObj[key] = clone(obj[key], map)
+      }
+      return cloneObj
+
+    } else {
+
+      return obj
+
+    }
+  }
+  // const target = {
+  //   field1: 1,
+  //   field2: undefined,
+  //   field3: 'ConardLi',
+  //   field4: {
+  //     child: 'child',
+  //     child2: {
+  //       child2: 'child2'
+  //     }
+  //   },
+  //   field5: [1, 2]
+  // };
+  const target = {
+    field1: 1,
+    field2: undefined,
+    field3: {
+      child: 'child'
+    },
+    ts: null,
+    field4: [2, 4, 8],
+    f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {}}}}}}}}}}}},
+    func1: () => {
+      console.log('code秘密花园');
+    },
+    func2: function (a, b) {
+      return a + b;
+    }
+  };
+
+  target.target = target;
+
+  console.time();
+  const result = clone(target);
+  console.timeEnd();
+
+  console.log(result);
+
+  const clone1 = deepClone(target)
+  console.log(clone1);
+</script>
+
+</body>
+
+</html>

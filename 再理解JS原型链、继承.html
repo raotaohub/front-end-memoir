@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>再读JS原型链、继承</title>
+</head>
+<body>
+<!--
+
+ -->
+<script>
+  // JavaScript 创建对象
+  // a1对象字面量, a2调用构造函数 ,a3用传入对象的prototype提供新对象的[[prototype]], a4 实例化 , a5 浅复制
+  let a1 = {name: 'ect', age: 16},
+      a2 = Object({name: 'pig', age: 12}),
+      a3 = Object.create(a2),
+      a4 = new Object({name: 'pig', age: 12}),
+      a5 = Object.assign(a1, a2, a3);
+  console.log(a1, a2, a3.__proto__, a4, a5)
+
+  // 1、工厂模式
+  function Person(age, name) {
+    let o = {}
+    o.age = age
+    o.name = name
+    return o
+  }
+
+  let a6 = Person(19, '工厂模式没有对象标识')
+
+  //  2、构造函数模式 将属性和方法定义在 this 上，问题：会为每个实例都创建一遍方法，而实例拥有相同的方法却不是来自同一个Function的实例
+  function Cat(size, font, len) {
+    this.size = size
+    this.font = font
+    this.len = len
+    this.sayName = function () {
+      document.write(this.size)
+    }
+  }
+
+  let a7 = new Cat(99, '构造函数模式', 7)
+
+  // 3、原型模式 将属性和方法定义在构造函数的 prototype ,实例之间共享它的属性和方法
+  function Proto() {
+  }
+
+  Proto.prototype.age = 24
+  Proto.prototype.name = '原型模式'
+  Proto.prototype.list = ['尉迟恭', '秦叔宝', '狄仁杰']
+  Proto.prototype.sayName = function () {
+    document.write(this.age)
+  }
+  let a8 = new Proto()
+  let a9 = new Proto()
+  console.log(a8)
+  a9.list.push('孙悟空')// 问题:其他实例对象修改原型中引用数据类型的值,会影响其他实例
+
+  console.log(a6, a7, a8)
+
+  console.log(typeof Proto.prototype);
+  console.log(Proto.prototype.constructor === Proto);
+  console.log(a9.__proto__ === Proto.prototype)
+  console.log(a9 instanceof Object)
+
+</script>
+<body>
+<!--
+    ES5 实现继承的几种方式:
+        1、 原型继承
+        2、 盗用构造函数
+        3、 组合继承
+        4、 原型式继承
+        5、 寄生式继承
+        6、 寄生组合式继承
+-->
+<script>
+  console.log('1、 原型链子继承------------------------------------------------------------------------')
+  // 思路: 将所有的
+  // 父类
+  function Dog() {
+    this.name = "Dog"
+    this.age = 29
+  }
+
+  Dog.prototype.sayName = function () {
+    return this.name
+  }
+
+  function Keji() {}
+
+  // 子类继承父类
+  Keji.prototype = new Dog()
+  Keji.prototype.constructor = Keji
+
+  // 创建子类实例
+  let keji = new Keji()
+  console.log(keji.name, keji.age, keji.sayName())
+
+  console.log('2、 盗用构造函数继承---------------------------------------------------------------------')
+  // 父类
+  function Parent(name) {
+    this.name = name       // 将方法和属性定义在父类的构造函数中
+    this.sayName = function () {
+      return 'sayName方法' + this.name
+    }
+  }
+  // 子类
+  function Child(name) {
+    Parent.call(this, name) //  在子类的构造函数中 利用call apply 调用父类构造函数; 可以传参，不能使用 instanceof
+  }
+
+  let parent = new Parent('蛋生')
+  let child = new Child('猴哥')
+  console.log(parent.sayName(), child.sayName())
+
+  console.log('3、 组合继承(原型+构造函数)---------------------------------------------------------------')
+  // 父类
+  function Person(name, age) {
+    this.name = name        // 将属性定义在父类构造函数的构造函数中
+    this.age = age
+  }
+
+  Person.prototype.sayAge = function () {
+    return this.age         // 将方法定义在父类的 原型 属性中
+  }
+  // 子类
+  function Rao(name, age) {
+    Person.call(this, name, age)    // 在子类构造函数中用call 或者 apply 调用父类构造函数，继承父类的属性
+  }
+
+  Rao.prototype = new Person()      // 将子类的原型 指向 父类的原型的方法和属性
+  Rao.prototype.constructor = Rao   // 然后修正子类的 constructor 属性
+
+  let person = new Person('aaa', 12)
+  let rao = new Rao('rao', 22)
+  console.log(rao.name, rao.age, rao.sayAge(), person.name, person.age, person.sayAge())
+
+  console.log('4、 原型式继承(中介函数)------------------------------------------------------------------')
+  // 思路:
+  // 1、定义一个函数object，在函数的内部创建一个临时的构造函数 【F】
+  // 2、指定一个参数【obj对象】，将 临时的构造函数 【F】 的原型属性指向 该参数 【obj 对象】
+  // 3、返回一个 F 的实例; 这样该实例就继承自 【obj 对象】
+  // * 该方案 等同于 Object.create() 只传一个参的情况
+  function object(obj) {
+    function F() {}
+    F.prototype = obj
+    return new F()
+  }
+
+  person = {
+    name: '原型式',
+    age: 14,
+    sayName() {
+      return this.name
+    }
+  }
+  // 使用需要传入一个对象!!(注意不是传入函数)
+  let person2 = object(person)
+  console.log(person2.name, person2.age, person2.sayName())
+
+  console.log('5、 寄生式继承(原型式 + return)------------------------------------------------------------')
+
+  function createAnother(original) {
+    let clone = object(original)    // 利用原型式继承 继承某个对象  original 并返回实例 clone
+    clone.sayBay = function () {    // 然后在该实例上 clone 定义方法 sayBay
+      return '拜拜ヾ(•ω•`)o'
+    }
+    return clone                    // 返回该实例
+  }
+  // clone 继承自 person ; 并增强了 sayBay 方法 ; 缺点:难以重用 与构造函数模式类似
+  let clone = createAnother(person)
+  console.log(clone.name, clone.age, clone.sayBay())
+
+  console.log('6、 寄生式组合继承(原型式 + 组合(构造+原型链))------------------------------------------------------------')
+
+  function inheritPrototype(subType, superType) {
+    let prototype = object(superType.prototype)     //  1、 创建 父类副本  （prototype 是 F 中介函数的实例）
+    prototype.constructor = subType                 //  2、 父类副本的构造函数属性　指向到　子类
+    subType.prototype = prototype                   //  3、 将子类的原型 指向 父类的副本
+  }
+
+  function SuperType(name) {
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+  }
+  SuperType.prototype.sayName = function () {
+    return this.name
+  }
+  function SubType(name, age) {
+    SuperType.call(this, name)
+    this.age = age
+  }
+  inheritPrototype(SubType, SuperType)
+
+  let sub = new SubType('子类的实例', 22)
+  console.log(sub.name, sub.age, sub.sayName())
+</script>
+
+</body>
+<script>
+  // 函数也是一种特殊的对象，它是具有n条语句的，具有特定功能且可以执行的对象
+  let b1 = function () {
+  };
+
+  function
+  b2() {
+  }
+
+  console.log(b1.prototype, b2.prototype)
+
+  console.log(b1.prototype.constructor === b1)  // 每个函数 prototype的construct 属性 指向构造函数本身
+</script>
+<script>
+  // 数组对象
+  let c1 = [], c2 = new Array(), c3 = Array.of(), c4 = Array.from('传有length的类数组'), c5 = '字,符,串'.split(',')
+  console.log(c1, c2, c3, c4, c5);
+
+  console.log(
+      (function () {
+        var x = foo();
+        function foo() {
+          return "foobar"
+        };
+        return x;
+      })()
+  )
+
+  let str = String('111')
+  console.log(str)
+
+  console.log('foo' == new function () { return String('foo') })
+  console.log('foo' == new function () { return new String('foo') })
+
+  console.log([] == 0)
+  console.log(![])
+  console.log(!0)
+
+  console.log([] == 0)
+
+  console.log(Number({}))
+  console.log(Number([]))
+
+
+</script>
+<script>
+
+</script>
+</body>
+</html>

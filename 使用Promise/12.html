@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    let p = new Promise((resolve, reject) => {
+      resolve('成功')
+      // reject('失败')
+    })
+      .then(res => {
+        console.log(res)
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // resolve('解决了')
+            reject('没解决')
+          }, 3000);
+
+        })
+      },
+        err => {
+          console.log(err)
+        })
+      .then(value => {
+        console.log(value)
+      },
+        err => {
+          console.log(err)
+        })
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
