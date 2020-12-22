@@ -19,10 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6886f35-61f8-46a8-9074-757c97bb426b" name="默认的" comment="">
+    <list default="true" id="d6886f35-61f8-46a8-9074-757c97bb426b" name="默认的" comment="订正">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Compile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Compile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Observer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/PubSub.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/mvvm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/mvvm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/vue.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/Compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mvvm/Compile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Mvvm/mvvm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mvvm/mvvm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/事件队列之宏任务与微任务.html" beforeDir="false" afterPath="$PROJECT_DIR$/事件队列之宏任务与微任务.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/深拷贝.html" beforeDir="false" afterPath="$PROJECT_DIR$/深拷贝.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -58,9 +68,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Mvvm/极简MVVM" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -72,6 +85,11 @@
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\raota\Desktop\Speaking-JavaScript\Mvvm\极简MVVM" />
+    </key>
   </component>
   <component name="RunManager" selected="Node.js.Observer.js">
     <configuration name="Observer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/PubSub/Observer.js" working-dir="$PROJECT_DIR$/PubSub">
@@ -104,8 +122,17 @@
       <workItem from="1608023268562" duration="36246000" />
       <workItem from="1608116975594" duration="48542000" />
       <workItem from="1608558307763" duration="328000" />
-      <workItem from="1608565213155" duration="72000" />
+      <workItem from="1608565213155" duration="1165000" />
+      <workItem from="1608620056419" duration="4117000" />
     </task>
+    <task id="LOCAL-00001" summary="订正">
+      <created>1608565341223</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608565341223</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <option name="taskHistoryLength" value="100" />
     <servers />
   </component>
@@ -122,6 +149,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="订正" />
+    <option name="LAST_COMMIT_MESSAGE" value="订正" />
   </component>
   <component name="WindowStateProjectService">
     <state x="720" y="298" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608104637196">
@@ -152,19 +184,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="162" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608558257097" />
-    <state x="46" y="92" width="1739" height="886" key="SettingsEditor" timestamp="1608278718597">
+    <state x="40" y="69" width="1739" height="886" key="SettingsEditor" timestamp="1608620427212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="40" y="69" width="1768" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608037844561" />
+    <state x="40" y="69" width="1768" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608620427212" />
     <state x="46" y="92" width="1739" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608278718597" />
     <state x="568" y="199" width="749" height="668" key="find.popup" timestamp="1608036032528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="568" y="199" width="749" height="668" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608036032528" />
-    <state x="2459" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1608298628571">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1608620702391">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="5" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608035788738" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608620702391" />
     <state x="2459" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608298628571" />
   </component>
 </project>

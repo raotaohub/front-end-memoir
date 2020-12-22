@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>mvvm</title>
 </head>
-<script src="mvvm.js"></script>
 <body>
 <div id="app">
     <div>{{username}}</div>
@@ -13,6 +12,7 @@
     <div>{{item}}</div>
     <input type="text" v-model="username">
 </div>
+<script src="mvvm.js"></script>
 <script>
   //   class SubJect {
   //     constructor() {
@@ -96,11 +96,11 @@
   //     }
   //   }
   const vm = new Mvvm({
-    el: '#app' ,
+    el: '#app',
     data: {
-      username: '借你趁早' ,
-      github: 'https://github.com/raotaohub' ,
-      item: '极简版的MVVM实现' ,
+      username: '借你趁早',
+      github: 'https://github.com/raotaohub',
+      item: '极简版的MVVM实现',
       age: 99
     }
   })

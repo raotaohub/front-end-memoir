@@ -27,38 +27,40 @@
 
   // console.log(typeof 10n === 'bigint') // true
 
+  // 定义一个数据
   const objComplex = {
-    name: 'woow_wu7',
+    name: 'woow_wu7' ,
     address: {
-      city: 'chongqing',
-      district: 'yubei',
-      town: 'jiazhou',
-      detail: ['chongqing', 'yubei', 'jiazhou']
-    },
-    arr: [1, 2, {l: 20, r: 30}],
-    fn: function () { }, // Function
-    date: new Date(), // Date
-    err: new Error(), // Error
-    reg: new RegExp(), // RegExp
-    number: 1,
-    string: '',
-    boolean: true,
-    null: null,
-    undefined: undefined,
-    symbol: Symbol('symbol'), // Symbol
+      city: 'chongqing' ,
+      district: 'yubei' ,
+      town: 'jiazhou' ,
+      detail: ['chongqing' , 'yubei' , 'jiazhou']
+    } ,
+    arr: [1 , 2 , {l: 20 , r: 30}] ,
+    fn: function () { } , // Function
+    date: new Date() , // Date
+    err: new Error() , // Error
+    reg: new RegExp() , // RegExp
+    number: 1 ,
+    string: '' ,
+    boolean: true ,
+    null: null ,
+    undefined: undefined ,
+    symbol: Symbol('symbol') , // Symbol
   }
-
+  // 1. 一般情况下使用 JSON 的parse 和stringify 可以满足
   const copy = JSON.parse(JSON.stringify(objComplex))
   console.log(copy);
-  const a1 = [1, 2, 3, 4];
+  const a1 = [1 , 2 , 3 , 4];
   const a2 = Array.from(a1);
   a1[0] = 11
   console.log(a1); // [1, 2, 3, 4]
   console.log(a2); // [1, 2, 3, 4]
   console.log(a1 === a2); // false
 
-  function deepClone(obj, hash = new WeakMap()) {
-    if (obj === null) return obj; // 如果是null或者undefined我就不进行拷贝操作
+  // 2.
+  function deepClone(obj , hash = new WeakMap()) {
+    if (obj == null) return obj; // 如果是null或者undefined我就不进行拷贝操作
     if (obj instanceof Date) return new Date(obj);
     if (obj instanceof RegExp) return new RegExp(obj);
     // 可能是对象或者普通的值  如果是函数的话是不需要深拷贝
@@ -67,18 +69,20 @@
     if (hash.get(obj)) return hash.get(obj);
     let cloneObj = new obj.constructor();
     // 找到的是所属类原型上的constructor,而原型上的 constructor 指向的是当前类本身
-    hash.set(obj, cloneObj);
+    hash.set(obj , cloneObj);
+
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
         // 实现一个递归拷贝
-        cloneObj[key] = deepClone(obj[key], hash);
+        cloneObj[key] = deepClone(obj[key] , hash);
       }
     }
     return cloneObj;
   }
 
-  function deepClone(obj, hash = new WeakMap()) {
-    if (obj === null) return obj
+  // 3.
+  function deepClone(obj , hash = new WeakMap()) {
+    if (obj == null) return obj
     if (obj instanceof Date) return new Date(obj)
     if (obj instanceof RegExp) return new RegExp(obj)
     if (typeof obj !== 'object') return obj
@@ -86,11 +90,11 @@
     if (hash.get(obj)) return hash.get(obj)
 
     let cloneObj = new obj.constructor()
-    hash.set(obj, cloneObj)
+    hash.set(obj , cloneObj)
 
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        cloneObj[key] = deepClone(obj[key], hash)
+        cloneObj[key] = deepClone(obj[key] , hash)
       }
     }
     return cloneObj
@@ -117,17 +121,17 @@
   //     return obj
   //   }
   // }
-  function clone(obj, map = new Map()) {
+  function clone(obj , map = new Map()) {
     if (typeof obj === 'object') {
       let cloneObj = Array.isArray(obj) ? new Array() : new Object()
 
       if (map.get(obj)) { // 检查map中有无客隆过的对象,有则直接返回,没有则把它加入到map中
         return map.get(obj)
       }
-      map.set(obj, cloneObj)
+      map.set(obj , cloneObj)
 
       for (const key in obj) {
-        cloneObj[key] = clone(obj[key], map)
+        cloneObj[key] = clone(obj[key] , map)
       }
       return cloneObj
 
@@ -150,18 +154,18 @@
   //   field5: [1, 2]
   // };
   const target = {
-    field1: 1,
-    field2: undefined,
+    field1: 1 ,
+    field2: undefined ,
     field3: {
       child: 'child'
-    },
-    ts: null,
-    field4: [2, 4, 8],
-    f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {}}}}}}}}}}}},
+    } ,
+    ts: null ,
+    field4: [2 , 4 , 8] ,
+    f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {f: {}}}}}}}}}}}} ,
     func1: () => {
       console.log('code秘密花园');
-    },
-    func2: function (a, b) {
+    } ,
+    func2: function (a , b) {
       return a + b;
     }
   };
