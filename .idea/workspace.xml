@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -30,6 +31,10 @@
       <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Mvvm/vue.html" beforeDir="false" />
     </list>
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="d6886f35-61f8-46a8-9074-757c97bb426b" name="默认的" comment="" />
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +43,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
         <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
@@ -46,6 +52,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+=======
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
   <component name="JsBowerSettings">
     <node-interpreter value="project" />
     <bower-package value="" />
@@ -58,18 +71,27 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1lddK5G3DoENnubtknPln7MQDcJ" />
+<<<<<<< HEAD
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+=======
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Mvvm/极简MVVM" />
+=======
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -82,11 +104,14 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
   </component>
+<<<<<<< HEAD
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\raota\Desktop\Speaking-JavaScript\Mvvm\极简MVVM" />
     </key>
   </component>
+=======
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
   <component name="RunManager" selected="Node.js.Observer.js">
     <configuration name="Observer.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/PubSub/Observer.js" working-dir="$PROJECT_DIR$/PubSub">
       <method v="2" />
@@ -118,6 +143,7 @@
       <workItem from="1608023268562" duration="36246000" />
       <workItem from="1608116975594" duration="48542000" />
       <workItem from="1608558307763" duration="328000" />
+<<<<<<< HEAD
       <workItem from="1608565213155" duration="1165000" />
       <workItem from="1608620056419" duration="4544000" />
     </task>
@@ -136,12 +162,16 @@
       <updated>1608648646930</updated>
     </task>
     <option name="localTasksCounter" value="3" />
+=======
+    </task>
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
     <option name="taskHistoryLength" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -159,6 +189,8 @@
     <MESSAGE value="学习复杂版的mvvm" />
     <option name="LAST_COMMIT_MESSAGE" value="学习复杂版的mvvm" />
   </component>
+=======
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
   <component name="WindowStateProjectService">
     <state x="720" y="298" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608104637196">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -188,19 +220,33 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1921" height="162" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608558257097" />
+<<<<<<< HEAD
     <state x="40" y="69" width="1739" height="886" key="SettingsEditor" timestamp="1608620427212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="40" y="69" width="1768" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608620427212" />
+=======
+    <state x="46" y="92" width="1739" height="886" key="SettingsEditor" timestamp="1608278718597">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="40" y="69" width="1768" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608037844561" />
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
     <state x="46" y="92" width="1739" height="886" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608278718597" />
     <state x="568" y="199" width="749" height="668" key="find.popup" timestamp="1608036032528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="568" y="199" width="749" height="668" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608036032528" />
+<<<<<<< HEAD
     <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1608620702391">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608620702391" />
+=======
+    <state x="2459" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1608298628571">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="539" y="5" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608035788738" />
+>>>>>>> 17ebba1d0335c75eb4137169fea78a649e614141
     <state x="2459" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608298628571" />
   </component>
 </project>
