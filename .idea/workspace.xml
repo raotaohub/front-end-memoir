@@ -19,20 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6886f35-61f8-46a8-9074-757c97bb426b" name="默认的" comment="订正">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Compile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Compile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/Observer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/PubSub.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/mvvm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/mvvm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mvvm/极简MVVM/vue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mvvm/Compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mvvm/Compile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Mvvm/mvvm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/事件队列之宏任务与微任务.html" beforeDir="false" afterPath="$PROJECT_DIR$/事件队列之宏任务与微任务.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/深拷贝.html" beforeDir="false" afterPath="$PROJECT_DIR$/深拷贝.html" afterDir="false" />
+    <list default="true" id="d6886f35-61f8-46a8-9074-757c97bb426b" name="默认的" comment="学习复杂版的mvvm">
+      <change afterPath="$PROJECT_DIR$/Mvvm/MVVM/Compile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mvvm/MVVM/mvvm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/Compile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/Compile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/Observer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/PubSub.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/mvvm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mvvm/vue.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +119,7 @@
       <workItem from="1608116975594" duration="48542000" />
       <workItem from="1608558307763" duration="328000" />
       <workItem from="1608565213155" duration="1165000" />
-      <workItem from="1608620056419" duration="4117000" />
+      <workItem from="1608620056419" duration="4544000" />
     </task>
     <task id="LOCAL-00001" summary="订正">
       <created>1608565341223</created>
@@ -132,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608565341223</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="学习复杂版的mvvm">
+      <created>1608648646930</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608648646930</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <option name="taskHistoryLength" value="100" />
     <servers />
   </component>
@@ -153,7 +156,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="订正" />
-    <option name="LAST_COMMIT_MESSAGE" value="订正" />
+    <MESSAGE value="学习复杂版的mvvm" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习复杂版的mvvm" />
   </component>
   <component name="WindowStateProjectService">
     <state x="720" y="298" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608104637196">
