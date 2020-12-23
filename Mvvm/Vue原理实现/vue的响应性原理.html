@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.vue的响应性原理</title>
+</head>
+<body>
+<span class="cell b1"></span>
+<script>
+
+  // const onStateChange = _update => {
+  //   update = _update
+  // }
+  // onStateChange(() => {
+  //   document.querySelector('.cell.b1').textContent = state.a * 10
+  // })
+  //
+  // const setState = newState => {
+  //   state = newState
+  //   update()
+  // }
+  //
+  // let state = {a: 100}
+  // setState(state)
+
+  // 标识
+  let activeUpdate = null
+
+  window.Dep = class Dep {
+    constructor() {
+      this.subscribers = new Set()
+    }
+    depend(activeUpdate) {
+      activeUpdate && this.subscribers.add(activeUpdate)
+    }
+    notify() {
+      this.subscribers.forEach(sub => sub())
+    }
+  }
+
+  function autorun(update) {
+    const wrappedUpdate = () => {
+      activeUpdate = wrappedUpdate
+      update()
+      activeUpdate = null
+    }
+    wrappedUpdate()
+  }
+
+  function observe(obj) {
+    Object.keys(obj).forEach(key => {
+      let innerValue = obj[key]
+      const dep = new Dep()
+
+      Object.defineProperty(obj, key, {
+        configurable: true,
+        enumerable: true,
+        get() {
+          dep.depend()
+          return innerValue
+        },
+        set(newValue) {
+          const changed = innerValue !== newValue
+          innerValue = newValue
+          changed && dep.notify()
+        }
+      })
+    })
+    return obj
+  }
+</script>
+
+</body>
+</html>

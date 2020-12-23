@@ -36,16 +36,19 @@ class Mvvm {
     this.proxy()
     this.compile()
   }
+  defineReactProp(key) {
+    
+  }
 //  Proxy 数据劫持
   proxy() {
     for (let key in this.$data) {
       // 每个数据都是观察的目标
       this.subObj[key] = new SubJect()
 
-      Object.defineProperty(this , key , {
+      Object.defineProperty(this, key, {
         get() {
           return this.$data[key]
-        } ,
+        },
         // 在数据变动时发布消息给订阅者，触发相应的监听回调
         set(newVal) {
           this.$data[key] = newVal
@@ -58,7 +61,7 @@ class Mvvm {
 //  Compile 编译模板
   compile() {
     let eleList = this.$el.children
-    let reg = /{{(.*)}}/
+    let reg = /\{\{(.*)\}\}/
     for (let i = 0; i < eleList.length; i++) {
       if (eleList[i].tagName === 'INPUT') {
         // 获取 v-model的属性值

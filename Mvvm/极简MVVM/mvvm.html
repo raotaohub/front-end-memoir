@@ -11,6 +11,8 @@
     <div>{{github}}</div>
     <div>{{item}}</div>
     <input type="text" v-model="username">
+    <div>{{message}}</div>
+    <div>{{obj.message}}</div>
 </div>
 <script src="mvvm.js"></script>
 <script>
@@ -101,7 +103,17 @@
       username: '借你趁早',
       github: 'https://github.com/raotaohub',
       item: '极简版的MVVM实现',
-      age: 99
+      age: 99,
+      message: '往事随风2',
+      obj: {
+        message: '往事随风2',
+        name: '借你趁早2',
+        age: 19,
+        isFlag: false,
+        page: 10,
+        title: 'Vue',
+        list: [],
+      }
     }
   })
 
