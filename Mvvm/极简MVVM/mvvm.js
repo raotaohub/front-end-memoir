@@ -10,7 +10,9 @@ class SubJect {
     this.objList.forEach(observer => observer.update(newVal))
   }
 }
-//  Observer 观察者/订阅者 多 对 1
+//  Observer 观察者/订阅者;
+//  观察谁？ 观察传入的属性;
+//  观察者拥有一个更新方法;
 class Observer {
   constructor(el) {
     this.el = el
@@ -38,10 +40,7 @@ class Mvvm {
     this.proxy()
     this.compile()
   }
-  defineReactProp(key) {
-
-  }
-//  Proxy 数据劫持
+//  Proxy 数据代理与劫持
   proxy() {
     for (let key in this.$data) {
       // 每个数据都是观察的目标

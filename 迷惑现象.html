@@ -34,9 +34,31 @@
   var a = new A(2), b = new B(3);
   delete b.x
 
-  console.log(a.x, b.x,a.__proto__.x, b.__proto__.__proto__.x)    // 2 undefined 1 1
+  console.log(a.x, b.x, a.__proto__.x, b.__proto__.__proto__.x)    // 2 undefined 1 1
   b.sayX()
 
+  //  3. 连续赋值的迷惑现象
+  var a = {n: 1};
+
+  var b = a;
+
+  a.x = a = {n: 2}; // 由于 . 操作符大于 = ; 故 语句为 a.x = a ; a = {n:2}
+
+  console.log(a.x); // undefined
+  console.log(b.x); // {n: 2}         b.x 是 a 的引用地址
+  console.log(a)    // {n: 2}         a 已经被重新赋值了新的引用地址
+  console.log(b)    // {n:1,x:{n:2}}; b 还保存着 原来 a 的引用
+
+  // 在一般的赋值运算中 js赋值是从右到左的
+  var n = 1
+  var m = n = 3
+  //上面这句等同于
+  // n = 3 ;
+  // var m = n ;
+  console.log(n)
+  console.log(m)
+
 </script>
+
 </body>
 </html>
