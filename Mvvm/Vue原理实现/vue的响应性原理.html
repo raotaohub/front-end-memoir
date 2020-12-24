@@ -8,35 +8,21 @@
 <span class="cell b1"></span>
 <script>
 
-  // const onStateChange = _update => {
-  //   update = _update
-  // }
-  // onStateChange(() => {
-  //   document.querySelector('.cell.b1').textContent = state.a * 10
-  // })
-  //
-  // const setState = newState => {
-  //   state = newState
-  //   update()
-  // }
-  //
-  // let state = {a: 100}
-  // setState(state)
-
-  // 标识
-  let activeUpdate = null
-
-  window.Dep = class Dep {
+  class Dep {
     constructor() {
       this.subscribers = new Set()
     }
-    depend(activeUpdate) {
+    depend() {
+      // 添加
       activeUpdate && this.subscribers.add(activeUpdate)
     }
     notify() {
+      // 通知
       this.subscribers.forEach(sub => sub())
     }
   }
+
+  let activeUpdate = null
 
   function autorun(update) {
     const wrappedUpdate = () => {
@@ -47,6 +33,7 @@
     wrappedUpdate()
   }
 
+  // 劫持和代理的部分
   function observe(obj) {
     Object.keys(obj).forEach(key => {
       let innerValue = obj[key]
@@ -62,12 +49,33 @@
         set(newValue) {
           const changed = innerValue !== newValue
           innerValue = newValue
-          changed && dep.notify()
+          if (changed) {
+            dep.notify()
+          }
         }
       })
     })
     return obj
   }
+
+  const state = {
+    count: 0
+  }
+
+  observe(state)
+
+  autorun(() => {
+    console.log(state.count)
+  })
+  // 打印"count is: 0"
+
+  state.count++
+  // 打印"count is: 1"
+  state.count = 5
+  state.count = 6
+  state.count = 7
+  state.count = 8
+  state.count = 9
 </script>
 
 </body>

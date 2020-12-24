@@ -1,3 +1,4 @@
+// 目标/发布者
 class SubJect {
   constructor() {
     this.objList = []
@@ -9,7 +10,7 @@ class SubJect {
     this.objList.forEach(observer => observer.update(newVal))
   }
 }
-//  Observer 观察者 多 对 1
+//  Observer 观察者/订阅者 多 对 1
 class Observer {
   constructor(el) {
     this.el = el
@@ -26,6 +27,7 @@ class Observer {
     }
   }
 }
+
 class Mvvm {
   constructor(options) {
     const that = this
@@ -37,7 +39,7 @@ class Mvvm {
     this.compile()
   }
   defineReactProp(key) {
-    
+
   }
 //  Proxy 数据劫持
   proxy() {

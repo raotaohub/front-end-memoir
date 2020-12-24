@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据代理的实现</title>
+</head>
+<script src="mvvm.js"></script>
+<body>
+<script>
+  const vm = new Mvvm({
+    el: '#app',
+    data: {
+      a: 'raotao',
+      b: '你好',
+      c: {d: {e: {f: '2fff'}}}
+    }
+  })
+  //  1. 我们操作的时  vm.a  实际上获取的是 vm._data.a 的值 ，因此 vm 代理了 vm._data 中的数据
+  //  2. 而vm._data中的值，来自于用户的 data
+
+</script>
+</body>
+</html>

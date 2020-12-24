@@ -4,6 +4,7 @@ class Mvvm {
     var data = this.$data = this.$options.data
     var me = this
     observe(data)
+
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
         Object.defineProperty(me, key, {
@@ -50,6 +51,6 @@ function observe(data) {
   return new Observe(data)
 }
 
-function Compile(el,vm) {
+function Compile(el, vm) {
 
 }
