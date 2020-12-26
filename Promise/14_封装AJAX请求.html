@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<script>
+  async function fn() {
+    console.log('哈哈哈大笑')
+    // return await '还可以'
+    return await new Promise((resolve, reject) => {
+      // resolve(new Error('手动给你一个异常'))
+      // reject(new Error('手动给你一个异常'))
+      throw new Error('手动给你一个异常');
+    })
+  }
+
+  const result = fn()
+
+  result.then(
+    val => { console.log('第一个回调', val) },
+    err => { console.log('第二个回调', err); }
+  ).catch(msg => {
+    console.error('error' + msg);
+  });
+
+  // async function cs1() {
+  //   console.log(await fn())
+  // }
+  // cs1()
+
+  // result.then(
+  //   data => { console.log('我在.then的第一个回调' + data) },
+  //   err => { console.log('我在第二个回调' + err) })
+
+  // .catch((err) => {
+  //   console.log('111111111111111111111111111')
+  //   console.log('试试我可以出生吗' + err.message)
+  // })
+
+
+</script>
+
+</body>
+
+</html>
