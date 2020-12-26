@@ -56,26 +56,94 @@ function Promise(executor) {
   }
 }
 /**
- *  then 方法接收两个函数作为参数
- *    1. 成功的回调
- *    2. 失败的回调
- *  判断当前状态来决定调用哪个回调
- *  回调什么时候执行？
- *    状态改变的时候才执行 => 状态改变依靠 1.resolve()、 2.reject()、 3.throw;
+ *  一、then 方法接收两个函数作为参数
+ *    1. 成功的回调  onResolved
+ *    2. 失败的回调  onRejected
+ *
+ *  二、调用哪个回调？
+ *    1. 判断当前的 PromiseState
+ *
+ *  三、回调什么时候执行？
+ *    1. 状态改变的时候才执行 => 状态改变依靠 1.resolve()、 2.reject()、 3.throw;
+ *
+ *  四、then 方法返回的也是一个Promise对象它的状态 由什么决定？
+ *   答: 2种情况,判断返回的结果值
+ *      1. 回调函数返回的是 Promise
+ *          调用返回值的 then 方法
+ *      2. 回调函数返回的非 Promise
+ *          调用对应状态的回调函数
+ *  五、异常处理
+ *      利用try/catch 捕获异常 并且在catch中调用 reject 来抛出错误改变Promise状态
+ *
  */
 Promise.prototype.then = function then(onResolved, onRejected) {
-
-  if (this.PromiseState === this.state.FULFILL) {
-    onResolved(this.PromiseReason)
-  }
-  if (this.PromiseState === this.state.REJECTED) {
-    onRejected(this.PromiseReason)
-  }
-  if (this.PromiseState === this.state.PENDING) {
-    this.callbacks.push({
-      onResolved: onResolved,
-      onRejected: onRejected
-    })
-  }
+  const self = this
+  return new Promise((resolve, reject) => {
+    // 状态为成功时 内部有可能又是一个Promise，该Promise的结果 决定了返回的Promise对象的状态
+    if (this.PromiseState === 'fulfill') {
+      try {
+        let result = onResolved(this.PromiseReason) // 这个返回值是实例上的返回值
+        if (result instanceof Promise) {
+          result.then(
+            r => {
+              resolve(r)
+            }, e => {
+              reject(e)
+            })
+        } else {
+          resolve(result)
+        }
+      } catch (e) {
+        reject(e)
+      }
+    }
+    // 状态为失败时
+    if (this.PromiseState === 'rejected') {
+      onRejected(this.PromiseReason)
+    }
+    // 状态为不确定时也有两种情况同 fulfill
+    if (this.PromiseState === 'pending') {
+      this.callbacks.push({
+        onResolved: function () {
+          /**
+           * 使用 try/catch 语句包裹所有代码 来捕获期间的异常，
+           * 若有异常就调用 reject()方法
+           * */
+          try {
+            const result = onResolved(self.PromiseReason) // 这个返回值是实例上的返回值
+            if (result instanceof Promise) {
+              result.then(r => {
+                resolve(r)
+              }, e => {
+                reject(e)
+              })
+            } else {
+              resolve(result)
+            }
+          } catch (e) {
+            reject(e)
+            console.log('onResolved 捕获异常')
+          }
+        },
+        onRejected: function () {
+          try {
+            const result = onRejected(self.PromiseReason)
+            if (result instanceof Promise) {
+              result.then(r => {
+                resolve(r)
+              }, e => {
+                reject(e)
+              })
+            } else {
+              resolve(result)
+            }
+          } catch (e) {
+            reject(e)
+            console.log('onRejected 捕获异常')
+          }
+        }
+      })
+    }
+  })
 }
 
