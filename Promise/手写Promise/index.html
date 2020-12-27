@@ -9,29 +9,34 @@
 <script>
   let p = new Promise((resolve, reject) => {
     setTimeout(() => {      // 思考如果Promise对象中的任务是 异步的 ？
-      resolve('成功')        // 此时状态是 fulfill 只有异步结束后才会改变状态
+      // resolve('成功')        // 此时状态是 fulfill 只有异步结束后才会改变状态
       // reject('Error')
       // throw 'error'
     }, 1000)
+    // resolve('成功')
+    reject('Error')
+    // throw 'error'
   })
 
   const result = p.then(res => {
-      // console.log(res)
-      throw 'error'
+      console.log(res)
+      // throw 'error'
     },
     err => {
       // return new Promise((resolve, reject) => {
       //   reject(err)
       // })
-      // console.log(err)
+      console.log(err)
       throw 'error'
-    })
-
-  result.then(res => {
-    console.log(res)
-  }, err => {
-    console.log(err)
+    }).catch(e => {
+    console.log(e)
   })
+
+  // result.then(res => {
+  //   console.log(res)
+  // }, err => {
+  //   console.log(err)
+  // })
 
   // p.then(res => {
   //     alert(res)
@@ -49,6 +54,8 @@
 
   console.log(result)
   // console.log(p)
+
+
 </script>
 </body>
 </html>

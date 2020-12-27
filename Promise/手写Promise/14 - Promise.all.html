@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14 - Promise.all</title>
+    <script src="promise.js"></script>
+</head>
+<body>
+<!--
+    Promise.all([p1:<Promise>,p2:<Promise>,...])
+    参数:   可迭代的对象    (需拥有Symbol(Symbol.iterator)属性)
+    返回值: Promise 对象
+    返回值的结果由数组中的 Promise 对象的结果决定:
+      1. 若都为成功  则返回的Promise也成功; reason 为由成功的值组成的数组 并且有序
+      2. 若有一个失败 则返回的Promise就失败; reason 为首个造成失败的值
+-->
+<script>
+  const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('111')
+    }, 1000)
+  })
+  const p2 = Promise.resolve('222')
+  const p3 = Promise.resolve('333')
+
+  let result1 = Promise.all([p1, p2, p3])
+
+  console.log(result1)
+
+  const p4 = new Promise((resolve, reject) => {
+    resolve([111])
+  })
+  const p5 = Promise.reject('222')
+  const p6 = Promise.resolve('333')
+
+  let result2 = Promise.all([p4, p5, p6])
+
+  console.log(result2)
+</script>
+
+</body>
+</html>

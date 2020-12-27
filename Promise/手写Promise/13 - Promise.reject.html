@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13 - Promise.reject</title>
+        <script src="promise.js"></script>
+</head>
+<body>
+<script>
+  const p1 = Promise.reject('Error')
+  const p2 = Promise.reject(Promise.resolve('失败'))
+  const p3 = Promise.reject(new Promise((resolve, reject) => {
+    resolve('还是失败')
+  }))
+
+  console.log(p1)
+  console.log(p2)
+  console.log(p3)
+</script>
+
+</body>
+</html>

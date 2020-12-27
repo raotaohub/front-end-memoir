@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11 - catch方法与异常穿透</title>
+    <script src="promise.js"></script>
+</head>
+<body>
+<script>
+  let p = new Promise((resolve, reject) => {
+    // resolve('成功')
+    reject('失败')
+    // throw 'Error'
+  })
+
+  let result = p.then(res => {
+    console.log(res)
+  }, err => {
+    console.log(err)
+  }).then(res => {
+    console.log('111')
+  }).then(res => {
+    console.log('222')
+  }).then(res => {
+    console.log('333')
+  }).catch(e => {
+    console.warn(e)
+  })
+
+  console.log(result)
+</script>
+</body>
+</html>

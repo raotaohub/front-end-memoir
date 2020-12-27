@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15 - Promise.race</title>
+    <script src="promise.js"></script>
+</head>
+<body>
+<!--
+    Promise.race([p1:<Promise>,p2:<Promise>,...])
+        参数:   可迭代对象 (需拥有Symbol(Symbol.iterator)属性)
+        返回值:  Promise对象
+        返回值的结果由参数中最先改变状态的 Promise 的结果决定
+-->
+<script>
+  let p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('成功')
+    }, 1000)
+  })
+  let p2 = Promise.resolve('我也成功')
+  let p3 = Promise.resolve('我又成功')
+
+  // let result1 = Promise.race([p1, p2, p3])
+  let result2 = Promise.race(p1)
+
+  // console.log(result1)
+  console.log(result2)
+  // console.log(Symbol.iterator in {})
+</script>
+
+</body>
+</html>
