@@ -54,6 +54,7 @@ function Promise(executor) {
     // 发生异常 则try/catch捕获 并调用 reject()
     reject(e)
   }
+
 }
 /** Promise静态方法
  *  Promise.resolve() 返回的是一个 Promise 对象
@@ -182,26 +183,26 @@ Promise.prototype.then = function then(onResolved, onRejected) {
      *  四、五、
      */
     function callback(type) {
-      // let timer = setTimeout(() => {
-      try {
-        let result = type(self.PromiseReason) // 这个返回值是实例上的返回值
-        if (result instanceof Promise) {
-          result.then(
-            r => {
-              resolve(r)
-            }, e => {
-              reject(e)
-            })
-        } else {
-          resolve(result)
+      let timer = setTimeout(() => {
+        try {
+          let result = type(self.PromiseReason) // 这个返回值是实例上的返回值
+          if (result instanceof Promise) {
+            result.then(
+              r => {
+                resolve(r)
+              }, e => {
+                reject(e)
+              })
+          } else {
+            resolve(result)
+          }
+          clearTimeout(timer)
+        } catch (e) {
+          reject(e)
+          console.log('try/catch 捕获到异常')
+          clearTimeout(timer)
         }
-        // clearTimeout(timer)
-      } catch (e) {
-        reject(e)
-        console.log('try/catch 捕获到异常')
-        // clearTimeout(timer)
-      }
-      // }, 0)
+      })
     }
 
     // 状态为成功时 内部有可能又是一个Promise，该Promise的结果 决定了返回的Promise对象的状态
@@ -239,3 +240,4 @@ Promise.prototype.then = function then(onResolved, onRejected) {
 Promise.prototype.catch = function _catch(onRejected) {
   return this.then(undefined, onRejected)
 }
+

@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>16 - then 方法异步的回调</title>
+    <script src="promise.js"></script>
 </head>
 <body>
+<script>
+  let p = new Promise((resolve, reject) => {
+    // resolve('成功')
+    reject('失败')
+    console.log('111')
+  })
+  setTimeout(() => {
+    console.log('timer')
+  })
+  p.then(r => {
+    console.log('222')
+  }, e => {
+    console.log('444')
+  })
+
+  console.log('333')
+
+</script>
+
 
 </body>
 </html>
