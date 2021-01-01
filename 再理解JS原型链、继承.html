@@ -12,10 +12,10 @@
   // JavaScript 创建对象
   // a1对象字面量, a2调用构造函数 ,a3用传入对象的prototype提供新对象的[[prototype]], a4 实例化 , a5 浅复制
   let a1 = {name: 'ect', age: 16},
-      a2 = Object({name: 'pig', age: 12}),
-      a3 = Object.create(a2),
-      a4 = new Object({name: 'pig', age: 12}),
-      a5 = Object.assign(a1, a2, a3);
+    a2 = Object({name: 'pig', age: 12}),
+    a3 = Object.create(a2),
+    a4 = new Object({name: 'pig', age: 12}),
+    a5 = Object.assign(a1, a2, a3);
   console.log(a1, a2, a3.__proto__, a4, a5)
 
   // 1、工厂模式
@@ -53,7 +53,7 @@
   let a8 = new Proto()
   let a9 = new Proto()
   console.log(a8)
-  a9.list.push('孙悟空')// 问题:其他实例对象修改原型中引用数据类型的值,会影响其他实例
+  a9.list.push('孙悟空')// 问题:实例对象修改原型中引用数据类型的值,会影响所有实例
 
   console.log(a6, a7, a8)
 
@@ -66,15 +66,38 @@
 <body>
 <!--
     ES5 实现继承的几种方式:
-        1、 原型继承
-        2、 盗用构造函数
-        3、 组合继承
-        4、 原型式继承
-        5、 寄生式继承
-        6、 寄生组合式继承
+        1、 原型继承: 在父类构造函数中定义属性和方法，让子类的prototype指向父类的实例
+            优点: 1.实现了继承。
+            缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
+                 2. 子类在实例化的时候无法传参给父类的构造函数。
+
+        2、 盗用构造函数: 在父类构造函数中定义属性和方法，在子类中用 call apply 调用父类构造函数并传参
+            优点: 1.　实现了继承，可以传参。
+            缺点: 1. 不能使用 instanceof ，无法解决标识问题。
+                 2. 方法不能重用。
+
+        3、 组合继承: 原型继承 + 盗用构造函数
+            优点:实现了继承，可以使用　instanceof和isPrototypeOf(), 实例属性独立，方法共用。
+                缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
+                     2. 子类在实例化的时候无法传参给父类的构造函数。
+
+        4、 原型式继承:
+            优点:实现了继承
+                缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
+                     2. 子类在实例化的时候无法传参给父类的构造函数。
+
+        5、 寄生式继承:
+            优点:实现了继承
+                缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
+                     2. 子类在实例化的时候无法传参给父类的构造函数。
+
+        6、 寄生组合式继承:
+            优点:实现了继承
+                缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
+                     2. 子类在实例化的时候无法传参给父类的构造函数。
 -->
 <script>
-  console.log('1、 原型链子继承------------------------------------------------------------------------')
+  console.log('1、 原型链继承------------------------------------------------------------------------')
   // 思路: 将所有的
   // 父类
   function Dog() {
@@ -123,6 +146,7 @@
   Person.prototype.sayAge = function () {
     return this.age         // 将方法定义在父类的 原型 属性中
   }
+
   // 子类
   function Rao(name, age) {
     Person.call(this, name, age)    // 在子类构造函数中用call 或者 apply 调用父类构造函数，继承父类的属性
@@ -154,12 +178,12 @@
       return this.name
     }
   }
+
   // 使用需要传入一个对象!!(注意不是传入函数)
   let person2 = object(person)
   console.log(person2.name, person2.age, person2.sayName())
 
   console.log('5、 寄生式继承(原型式 + return)------------------------------------------------------------')
-
   function createAnother(original) {
     let clone = object(original)    // 利用原型式继承 继承某个对象  original 并返回实例 clone
     clone.sayBay = function () {    // 然后在该实例上 clone 定义方法 sayBay
@@ -216,13 +240,13 @@
   console.log(c1, c2, c3, c4, c5);
 
   console.log(
-      (function () {
-        var x = foo();
-        function foo() {
-          return "foobar"
-        };
-        return x;
-      })()
+    (function () {
+      var x = foo();
+      function foo() {
+        return "foobar"
+      };
+      return x;
+    })()
   )
 
   let str = String('111')
