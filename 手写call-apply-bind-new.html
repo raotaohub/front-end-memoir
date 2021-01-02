@@ -145,15 +145,15 @@
     }
 
     let args = [...arguments].slice(1),//第一个参数是 context ;取之后的全部
-        argsLength = args.length,
-        fn = this,
-        Fn = function () {      // 中介函数
-        },
-        fBound = function () {
-          let params = [...arguments].slice()    // 取到返回的函数的所有参数的数组
-          // 判断当前调用的是否为 实例对象; 并将参数都拼接起来传递给 fn
-          fn.apply(this.constructor === fn ? this : context, args.concat(params))
-        }
+      argsLength = args.length,
+      fn = this,
+      Fn = function () {      // 中介函数
+      },
+      fBound = function () {
+        let params = [...arguments].slice()    // 取到返回的函数的所有参数的数组
+        // 判断当前调用的是否为 实例对象; 并将参数都拼接起来传递给 fn
+        fn.apply(this.constructor === fn ? this : context, args.concat(params))
+      }
     Fn.prototype = fn.prototype
     fBound.prototype = new Fn()
     return fBound
@@ -179,7 +179,7 @@
     return closure
   }
 
-  const curry = (fn, arity = fn.length, ...args) => arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args)
+  // const curry = (fn, arity = fn.length, ...args) => arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args)
 
   // if (!Function.prototype.bind) (function () {
   //   var ArrayPrototypeSlice = Array.prototype.slice;
