@@ -11,7 +11,7 @@
 
 <script>
   console.log('--------------------------------call--------------------------------')
-
+  // call 函数可以改变函数调用时this的指向，并且返回调用的结果
   // 实现call
   // 1. 当第一个参数为null时，默认指向 window
   // 2. 函数执行可能有返回值，所以使用 eval() 执行
@@ -19,7 +19,7 @@
 
   Function.prototype.mycall = function (context) {
     var context = context || window // 判断传入参数是否存在，若无则默认指向 window
-    context.fn = this               // 给context添加一个属性
+    context.fn = this               // 给context添加一个方法，就是 this，它指像调用 call 的函数
     let args = [...arguments].slice(1)// 取出第1个之后的参数
     let result = eval(`context.fn(...args)`)
     delete context.fn
