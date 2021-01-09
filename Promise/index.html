@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手写Promise</title>
+</head>
+<body>
+<script src="promise.js"></script>
+<script>
+  let p = new Promise((resolve, reject) => {
+    resolve('成功了')
+    // reject('失败了')
+    // throw '出错了'
+  })
+
+  // const result = p.then(
+  //   res => {
+  //     console.log(res)
+  //   },
+  //   err => {
+  //     console.log(err)
+  //   })
+
+  // p.then(value => {
+  //   console.log('111')
+  // }).then(value => {
+  //   console.log('222')
+  //   throw '中间失败'
+  // }).then(value => {
+  //   console.log('333')
+  // }).catch(err => {
+  //   console.warn(err)
+  // })
+  // console.log(result)
+
+  let a1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('成功1')
+    }, 1000)
+  })
+  let a2 = new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      resolve('成功2')
+    },2000)
+  })
+  let a3 = new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      resolve('成功3')
+    },3000)
+  })
+
+  let result = Promise.all([a1, a2, a3])
+
+  console.log(result)
+
+  let race = Promise.race([a1, a2, a3])
+  console.log(race)
+</script>
+
+</body>
+</html>

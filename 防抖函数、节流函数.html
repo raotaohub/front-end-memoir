@@ -7,7 +7,7 @@
 <body>
 <!--
   节流函数的应用场景:
-      用户在表单进行搜索时，会发送ajax请求，利用节流函数，限制
+      用户在表单进行搜索时，会发送ajax请求，利用节流函数，作用是多次触发时间，只执行一次
 -->
 <script>
 
@@ -53,6 +53,29 @@
       if (nowTime - lastTime >= time) {
         fn.apply(this)
         lastTime = new Date()
+      }
+    }
+  }
+
+  function debounce(fn, wait) {
+    let timer = null
+    return function () {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() => {
+        fn.apply(this)
+      }, wait)
+    }
+  }
+
+  function throttle(fn, wait) {
+    let lastTime = 0
+    return function () {
+      let nowTime = new Date()
+      if (nowTime - lastTime >= wait) {
+        fn.apply(this)
+        lastTime = nowTime
       }
     }
   }

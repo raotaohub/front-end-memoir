@@ -106,6 +106,13 @@
   //     fn.apply(obj)
   //   }
   // }
+
+  function bindtest(context) {
+    let fn = this
+    return function () {
+      fn.apply(context)
+    }
+  }
   var z = 0;
   var obj = {
     z: 1
@@ -248,7 +255,17 @@
   let child = mynew(Parent, 'new操作', 20)
   console.log(child)
 
+  const _mynew = function (Parent, ...rest) {
+    let child = Object.create(Parent.prototype)
+    let result = Parent.apply(child, rest)
+    return typeof result === 'object' ? result : child
+  }
+  let child1 = _mynew(Parent, 'new操作1', 201)
+  console.log(child1)
 
+  Function.prototype._call = function (content) {
+
+  }
 </script>
 </body>
 </html>

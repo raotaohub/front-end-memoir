@@ -174,7 +174,7 @@ Promise.prototype.then = function then(onResolved, onRejected) {
     }
   }
   if (typeof onRejected !== 'function') {
-    onResolved = defaultOnReject => {
+    onRejected = defaultOnReject => {
       throw defaultOnReject
     }
   }
@@ -196,11 +196,9 @@ Promise.prototype.then = function then(onResolved, onRejected) {
           } else {
             resolve(result)
           }
-          clearTimeout(timer)
         } catch (e) {
           reject(e)
-          console.log('try/catch 捕获到异常')
-          clearTimeout(timer)
+          console.warn('try/catch 捕获到异常')
         }
       })
     }
@@ -215,7 +213,7 @@ Promise.prototype.then = function then(onResolved, onRejected) {
       callback(onRejected)
     }
 
-    // 状态为不确定时也有两种情况同 fulfill ;将回调函数保存在一个数组中;并在状态改变时依次执行回调
+    // 状态为不确定时也有两种情况同;将回调函数保存在一个数组中;并在状态改变时依次执行回调
     if (this.PromiseState === 'pending') {
       this.callbacks.push({
         onResolved: function () {

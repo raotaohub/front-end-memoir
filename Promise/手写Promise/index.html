@@ -13,47 +13,24 @@
       // reject('Error')
       // throw 'error'
     }, 1000)
-    // resolve('成功')
-    reject('Error')
+    resolve('成功')
+    // reject('Error')
     // throw 'error'
   })
 
-  const result = p.then(res => {
-      console.log(res)
-      // throw 'error'
-    },
-    err => {
-      // return new Promise((resolve, reject) => {
-      //   reject(err)
-      // })
-      console.log(err)
-      throw 'error'
-    }).catch(e => {
-    console.log(e)
+
+  p.then(v => {
+    console.log('111')
+  }).then(v => {
+    console.log('222')
+  }).then(v => {
+    console.log('333')
+    throw '中间失败'
+  }).then(v => {
+    console.log('444')
+  }).catch(err=>{
+    console.warn(err)
   })
-
-  // result.then(res => {
-  //   console.log(res)
-  // }, err => {
-  //   console.log(err)
-  // })
-
-  // p.then(res => {
-  //     alert(res)
-  //   },
-  //   err => {
-  //     alert(err)
-  //   })
-  //
-  // p.then(res => {
-  //     document.write(res)
-  //   },
-  //   err => {
-  //     document.write(err)
-  //   })
-
-  console.log(result)
-  // console.log(p)
 
 
 </script>

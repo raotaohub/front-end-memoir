@@ -17,7 +17,7 @@
   console.log(delete foo)           // false    G 型属性
   console.log(delete window.bar)    // false    G 型属性
   console.log(delete window.foo)    // false    G 型属性
-  console.log(delete b)             // false    未声明赋值  但是可以被删除 b 属于未声明的赋值的属性
+  console.log(delete b)             // true     未声明赋值  但是可以被删除 b 属于未声明的赋值的属性
 
   console.log(delete fun)           // true     GP 型属性  可删除
   console.log(delete obj)           // true     GP 型属性  可删除

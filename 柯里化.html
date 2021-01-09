@@ -86,6 +86,20 @@
   const fetchFruitsAndDrinks = combinedFetcher("fruits", "drinks");
   fetchFruitsAndDrinks(console.log)
   // *************************************************************************
+
+  function currying(fn) {
+
+    let length = fn.length
+    let args = [...arguments].slice(1)
+
+    function closure() {
+      args = args.concat([...arguments])
+      if (args.length < length) return closure
+      fn.apply(null, args)
+    }
+
+    return closure
+  }
 </script>
 </body>
 

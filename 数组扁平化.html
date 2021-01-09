@@ -6,46 +6,62 @@
 </head>
 <body>
 <script>
-    let arr = [[2, 2, 5, 654, 3], [331], 13, 46, 5, 213, [23, 5, 241, [26, 2, 5]], [1, [2, [5]]]]
+  let arr = [[2, 2, 5, 654, 3], [331], 13, 46, 5, 213, [23, 5, 241, [26, 2, 5]], [1, [2, [5]]]]
 
-    // const newArr = arr.toString().split(',')
-    // console.log(newArr)
-    //
-    // function arrayTostr(array) {
-    //     if (array instanceof Array) {
-    //         return array.toString().split(',')
-    //     }
-    // }
-    //
-    // console.log(arrayTostr(arr).every((item) => newArr.indexOf(item) != -1))
-    // console.log(typeof arrayTostr(arr)[0])
-    // 上面的办法会导致 数组值 类型都变成 string
+  // const newArr = arr.toString().split(',')
+  // console.log(newArr)
+  //
+  // function arrayTostr(array) {
+  //     if (array instanceof Array) {
+  //         return array.toString().split(',')
+  //     }
+  // }
+  //
+  // console.log(arrayTostr(arr).every((item) => newArr.indexOf(item) != -1))
+  // console.log(typeof arrayTostr(arr)[0])
+  // 上面的办法会导致 数组值 类型都变成 string
 
-    // 使用这个方案
-    function arrayTostr2(array) {
-        let result = []
+  // 使用这个方案
+  function arrayTostr2(array) {
+    let result = []
 
-        function flat(arr) {
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i] instanceof Array) {
-                    flat(arr[i])
-                } else {
-                    result.push(arr[i])
-                }
-            }
+    function flat(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] instanceof Array) {
+          flat(arr[i])
+        } else {
+          result.push(arr[i])
         }
-
-        flat(array)
-        return result
+      }
     }
 
-    console.log(arrayTostr2(arr))
-    console.log(typeof arrayTostr2(arr)[0])
+    flat(array)
+    return result
+  }
 
+  console.log(arrayTostr2(arr))
+  console.log(typeof arrayTostr2(arr)[0])
 
-    let obj = {}, obj1 = {}
-    console.log(obj == obj1)
+  let obj = {}, obj1 = {}
+  console.log(obj == obj1)
 
+  function cs(array) {
+    let result = []
+
+    function flag(array) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] instanceof Array) {
+          flag(array[i])
+        } else {
+          result.push(array[i])
+        }
+      }
+    }
+
+    flag(array)
+    return result
+  }
+  console.log(cs(arr))
 </script>
 </body>
 </html>
