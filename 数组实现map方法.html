@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现数组map方法</title>
+</head>
+<body>
+<!--
+map() 方法创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。
+callback 函数只会在有值的索引上被调用
+-->
+<script>
+  Array.prototype.mymap = function (cb) {
+    let result = []
+    let array = this
+    let value
+    for (let i = 0; i < array.length; i++) {
+      value = cb(array[i])
+      result.push(value)
+    }
+    return result
+  }
+
+  let arr = [, , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  let cb = function (value) {
+    return value + 1
+  }
+  console.log(arr.mymap(cb))
+
+  /*
+  *  1. 判断空位，对下标使用in或者hasOwnProperty判断
+  *  2. 对下标处理，使用Array.from、数组解构或者for...of，将空位当当做undefined处理
+  *  3. 其他大部分方法 forEach  some filter every Object.keys 都会略过空位不进行处理
+  *  4. map方法会跳过空位，但是会在结果中保留这个值！
+  * */
+
+  let array = [, 1, , 2, , 3];
+  array = array.map((i) => ++i)
+  console.log(array) // Array(6) [ <1 empty slot>, 2, <1 empty slot>, 3, <1 empty slot>, 4 ]
+                     //                 空位
+
+  console.log([, , , , , , ,])
+</script>
+
+</body>
+</html>

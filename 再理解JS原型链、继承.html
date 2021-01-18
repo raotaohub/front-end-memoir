@@ -80,6 +80,7 @@
             优点:实现了继承，可以使用　instanceof和isPrototypeOf(), 实例属性独立，方法共用。
                 缺点: 1. 实例对象修改原型中引用数据类型的值，会影响所有实例的访问。
                      2. 子类在实例化的时候无法传参给父类的构造函数。
+                     3. 父类构造函数始终会被调用两次：一次在是创建子类原型时调用，另一次是在子类构造函数中调用
 
         4、 原型式继承:
             优点:实现了继承
@@ -165,6 +166,7 @@
   // 2、指定一个参数【obj对象】，将 临时的构造函数 【F】 的原型属性指向 该参数 【obj 对象】
   // 3、返回一个 F 的实例; 这样该实例就继承自 【obj 对象】
   // * 该方案 等同于 Object.create() 只传一个参的情况
+
   function object(obj) {
     function F() {}
     F.prototype = obj
@@ -184,6 +186,7 @@
   console.log(person2.name, person2.age, person2.sayName())
 
   console.log('5、 寄生式继承(原型式 + return)------------------------------------------------------------')
+
   function createAnother(original) {
     let clone = object(original)    // 利用原型式继承 继承某个对象  original 并返回实例 clone
     clone.sayBay = function () {    // 然后在该实例上 clone 定义方法 sayBay
@@ -195,7 +198,13 @@
   let clone = createAnother(person)
   console.log(clone.name, clone.age, clone.sayBay())
 
-  console.log('6、 寄生式组合继承(原型式 + 组合(构造+原型链))------------------------------------------------------------')
+  console.log('6、 寄生式组合继承(原型式 + 组合(构造+原型链))-------------------------------------------------')
+
+  function inheritPrototype(subType, superType) {
+    let prototype = object(superType)
+    prototype.constructor = subType
+    subType.prototype = prototype
+  }
 
   function inheritPrototype(subType, superType) {
     let prototype = object(superType.prototype)     //  1、 创建 父类副本  （prototype 是 F 中介函数的实例）
@@ -267,7 +276,40 @@
 
 </script>
 <script>
+  console.log('Class——内部定义的函数没有 prototype属性———————————————————————————————————————————————')
 
+  class MyClass {
+    constructor(str, num) {
+      this.str = str
+      this.num = num
+    }
+    output() {
+      console.log(this.str, this.num)
+    }
+  }
+
+  const myclass = new MyClass('sssss', 1111)
+  myclass.output()
+  console.log(myclass)
+
+  console.log('构造函数——————————————————————————————————————————————————————————————————--————————')
+  function UserClass(str, num) {
+    this.str = str
+    this.num = num
+  }
+  UserClass.prototype.output = function output() {
+    console.log(this.str, this.num)
+  }
+  const userclass = new UserClass('xxxxx', 2222)
+  userclass.output()
+  console.log(userclass)
+
+  console.log(`
+     1. class 内部定义的方法和属性都是不可以遍历的。
+     2. class 内部定义的方法都没有prototype（原型），构造函数有
+     3. class 受块作用域限制，构造函数受函数作用域限制
+     4. class 定义不会提升，构造函数使用函数定义会提升
+  `)
 </script>
 </body>
 </html>

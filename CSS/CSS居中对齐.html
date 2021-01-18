@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS居中对齐</title>
+</head>
+<style>
+    /* 方案一 子绝父相 0 0 0 0 auto 已知高度*/
+    /*.parent {*/
+    /*    position: relative;*/
+    /*    height: 500px;*/
+    /*}*/
+
+    /*.child {*/
+    /*    position: absolute;*/
+    /*    width: 100px;*/
+    /*    height: 100px;*/
+    /*    background: darkred;*/
+    /*    top: 0;*/
+    /*    left: 0;*/
+    /*    bottom: 0;*/
+    /*    right: 0;*/
+    /*    margin: auto;*/
+    /*}*/
+
+    /* 方案二 子绝父相 50% -50% 已知高度 !推荐!*/
+    /*.parent {*/
+    /*    position: relative;*/
+    /*    height: 500px;*/
+    /*}*/
+
+    /*.child {*/
+    /*    width: 100px;*/
+    /*    height: 100px;*/
+    /*    background: darkred;*/
+    /*    position: absolute;*/
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    transform: translateX(-50%) translateY(-50%);*/
+    /*}*/
+
+    /* 方案三 flex  grid */
+    .parent {
+        display: grid;
+        /*align-items: center;*/
+        /*justify-content: center;*/
+        place-content: center;
+    }
+
+    .child {
+        width: 100px;
+        height: 100px;
+        background: darkred;
+    }
+    /*方案四 flex 布局*/
+    /*.parent {*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+    /*    height: 500px;*/
+    /*}*/
+
+    /*.child {*/
+    /*    width: 100px;*/
+    /*    height: 100px;*/
+    /*    background: darkred;*/
+    /*}*/
+</style>
+<body>
+<div class="parent">
+    <div class="child">
+
+    </div>
+</div>
+
+</body>
+</html>

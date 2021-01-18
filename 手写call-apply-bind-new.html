@@ -26,6 +26,15 @@
     return result
   }
 
+  Function.prototype._call = function (context) {
+    var context = context || window
+    context.fn = this
+    let args = [...arguments].slice(1)
+    let result = context.fn(...args)
+    delete context.fn
+    return result
+  }
+
   var name = '时间跳跃'
   var obj = {
     name: '听风是风'
@@ -40,6 +49,9 @@
   fn.mycall(null, "我的", "名字", "是")               // 我的名字是时间跳跃
   console.log(result1)                              // Array(3) [ "我的", "名字", "是" ]
 
+  let result22 = fn._call(obj, "我的", "名字", "是")
+  fn._call(null, "我的", "名字", "是")
+  console.log(result22)
 </script>
 
 <script>
@@ -63,6 +75,18 @@
     return result
   }
 
+  Function.prototype._apply = function (context, list) {
+    var context = context || window
+    context.fn = this
+    let result
+    if (Array.isArray(list)) {
+      result = context.fn(...list)
+    } else {
+      result = context.fn()
+    }
+    delete context.fn
+    return result
+  }
   // ES5 字符串拼接
   // var args = []
   // for (var i = 0, len = list.length; i < len; i++) {
@@ -84,6 +108,10 @@
   fn.myapply(null, ["我的", "名字", "是"]);              // 我的名字是时间跳跃
   console.log(result2)                                 // Array(3) [ "我的", "名字", "是" ]
 
+  let result33 = fn._apply(obj, ["我的", "名字", "是"]); // 我的名字是听风是风
+  fn._apply(null, ["我的", "名字", "是"]);               // 我的名字是时间跳跃
+  console.log(result33)                                // Array(3) [ "我的", "名字", "是" ]
+
 </script>
 
 <script>
@@ -91,6 +119,7 @@
   // Javascript中bind()方法的使用与实现
   // var altwrite = document.write;
   // altwrite("hello");   此时的this会指向 global 或 window
+
   //1.以上代码有什么问题   非法调用接口
   //2.正确操作是怎样的     altwrite.bind(document)("hello")
 
@@ -99,7 +128,7 @@
   // 2、 bind方法会返回一个 指定了 this 的函数
   // 3、 bnid方法可以传入参数序列 (a,b,c,...)
 
-  // 本质上 bind 就是这样一个过程，给我一个 fn 返回一个绑定了指定this的fn 👇
+  // 本质上 bind 就是这样一个过程，给一个 fn 返回一个绑定了指定this的fn 👇
   // Function.prototype.mybind = function (obj) {
   //   var fn = this;
   //   return function () {
@@ -107,12 +136,13 @@
   //   }
   // }
 
-  function bindtest(context) {
-    let fn = this
-    return function () {
-      fn.apply(context)
-    }
-  }
+  // function bindtest(context) {
+  //   let fn = this
+  //   return function () {
+  //     fn.apply(context)
+  //   }
+  // }
+
   var z = 0;
   var obj = {
     z: 1
@@ -144,6 +174,22 @@
   console.log(person.age)       // 26
   person.sayAge()               // 26
   person.sayName()              // 听风是风
+
+  Function.prototype._bind = function (context) {
+    if (typeof context !== 'function') {
+      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+    }
+    let fn = this,
+      args = [...arguments].slice(1),
+      Fn = function () {},
+      fBound = function () {
+        let params = [...arguments].slice()
+        fn.apply(this.constructor === fn ? this : context, args.concat(params))
+      }
+    Fn.prototype = fn.prototype
+    fBound.prototype = new Fn()
+    return fBound
+  }
 
   // mybind 实现
   Function.prototype.mybind = function (context) {
@@ -236,7 +282,6 @@
 -->
 </body>
 <script>
-
   console.log('--------------------------------new--------------------------------')
   const mynew = function (Parent, ...rest) {
     let child = Object.create(Parent.prototype)
@@ -263,9 +308,12 @@
   let child1 = _mynew(Parent, 'new操作1', 201)
   console.log(child1)
 
-  Function.prototype._call = function (content) {
-
+  const __mynew = function (Parent, ...params) {
+    let child = Object.create(Parent)
+    let result = Parent.apply(this, params)
+    return typeof result === 'object' ? result : child
   }
+
 </script>
 </body>
 </html>
