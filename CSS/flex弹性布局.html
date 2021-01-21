@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex浮动布局</title>
+</head>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background: darkcyan;
+        width: 400px;
+        height: 250px;
+        box-sizing: content-box;
+    }
+
+    .item {
+        /*width: 50px;*/
+        height: 100px;
+        background: hotpink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex1 {
+        /*flex-grow: 2;*/
+        /*flex-shrink: 1;*/
+        /*width: 100px;*/
+        flex-basis: 250px;
+    }
+
+    .flex2 {
+        /*flex-grow: 2;*/
+        /*width: 100px;*/
+        /*flex-shrink: 1;*/
+        flex-basis: 50px;
+    }
+
+    .flex3 {
+        /*flex-grow: 1;*/
+        /*width: 100px;*/
+        /*flex-shrink: 1;*/
+        flex-basis: 50px;
+    }
+
+    .flex4 {
+        /*flex-grow: 1;*/
+        /*width: 100px;*/
+        /*flex-shrink: 1;*/
+        flex-basis: 50px;
+    }
+
+    .flex5 {
+        /*flex-grow: 1;*/
+        /*width: 100px;*/
+        /*flex-shrink: 1;*/
+        flex-basis: 50px;
+    }
+
+    .content1 {
+        background: green;
+    }
+
+    .content2 {
+        background: yellowgreen;
+    }
+
+    .content3 {
+        background: cadetblue;
+    }
+
+    .content4 {
+        background: coral;
+    }
+
+    .content5 {
+        background: sienna;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="item content1 flex1">
+        <div class="content1">1</div>
+    </div>
+    <div class="item content2 flex2">
+        <div class="content2">2</div>
+    </div>
+    <div class="item content3 flex3">
+        <div class="content3">3</div>
+    </div>
+    <div class="item content4 flex4">
+        <div class="content4">4</div>
+    </div>
+    <div class="item content5 flex5">
+        <div class="content5">5</div>
+    </div>
+    <div class="item content1 flex1">
+        <div class="content1">1</div>
+    </div>
+    <div class="item content2 flex2">
+        <div class="content2">2</div>
+    </div>
+
+</div>
+</div>
+
+<div class="parent">
+    <div class="child"></div>
+</div>
+
+</body>
+</html>
