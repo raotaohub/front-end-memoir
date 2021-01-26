@@ -26,7 +26,13 @@ console.log(obj)
 
 console.log(obj.a.b.c)
 
-
+/**
+ * Vm实例化的时候，就调用 observe(data)函数
+ * 接下来 会对 data 添加__ob__属性
+ *
+ * @ob 用于存储 Observer实例
+ * @return 如果value不是对象返回 undefined，对象返回 @ob
+ * */
 function observe(value) {
   if (!value || typeof value !== 'object') return;
 

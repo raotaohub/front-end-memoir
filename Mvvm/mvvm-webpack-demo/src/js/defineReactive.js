@@ -1,12 +1,12 @@
 import {observe} from "./Vm"
 
+let count = 0
 export default function defineReactive(obj, key, value) {
 
-  // if (arguments.length === 2) {
-  //   value = obj[key]
-  // }
-  value = obj[key]
+  console.log(count++)
+
   let childOb = observe(value)
+
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
