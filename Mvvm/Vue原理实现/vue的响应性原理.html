@@ -7,6 +7,10 @@
 <body>
 <span class="cell b1"></span>
 <script>
+  /**
+   * @activeUpdate 一个全局变量，用于指向当前的 watcher
+   * */
+  let activeUpdate = null
 
   class Dep {
     constructor() {
@@ -21,8 +25,6 @@
       this.subscribers.forEach(sub => sub())
     }
   }
-
-  let activeUpdate = null
 
   function autorun(update) {
     const wrappedUpdate = () => {

@@ -1,6 +1,2 @@
-import {observe} from "./js/Vm";
-
-
-
-
+import {observe, obj} from "./js/Vm";
 
