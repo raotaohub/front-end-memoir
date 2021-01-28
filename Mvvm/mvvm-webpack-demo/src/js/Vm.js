@@ -1,5 +1,6 @@
 import Observer from "./Observer"
-import Watcher from "./Watcher"
+import {Watcher} from "./Watcher"
+
 /**
  * vue Mvvm模式，对于对象嵌套的监视，是通过链式调用，间接递归的手法实现的。
  *    来看看具体实现
@@ -26,7 +27,12 @@ const obj = {
 }
 
 observe(obj)
-console.log(obj)
+new Watcher(obj, 'obj.a', function () {
+  console.log('Component' + 'Render Function' + '视图更新的回调')
+})
+
+console.log(obj.a)
+obj.a = ['111', '222', ['数组222', '数组333'], {obj: '数组对象444'}]
 
 /**
  * Vm实例化的时候，就调用 observe(data)函数
@@ -48,8 +54,24 @@ function observe(value) {
   }
   return ob
 }
-
-export {observe, obj}
+/**
+ * dependArray函数是用于收集数组中的每个元素的依赖(wacther)
+ * @value:Array
+ * */
+function dependArray(value) {
+  for (let i = 0; i < value.length; i++) {
+    ele = value[i]
+    /**
+     * 如果数组中的某个元素 也拥有__ob__和__ob__.dep属性
+     * 说明这个元素是个对象，因此调用 depend方法收集这个对象的依赖
+     * */
+    ele && ele.__ob__ && ele.__ob__.dep.depend()
+    if (Array.isArray(ele)) {
+      dependArray(ele)
+    }
+  }
+}
+export {observe, dependArray, obj}
 
 
 

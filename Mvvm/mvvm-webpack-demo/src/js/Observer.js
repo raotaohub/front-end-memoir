@@ -28,7 +28,6 @@ export default function Observer(value) {
   } else {
     this.walk(value)
   }
-
 }
 /**
  * walk()方法，会遍历当前对象中所有的属性，并调用 defineReactive()函数，至此形成了间接递归，对data进行层层监听。
