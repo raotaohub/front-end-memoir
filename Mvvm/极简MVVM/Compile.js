@@ -1,6 +1,5 @@
 //  Compile 编译模板是什么？ 就是将绑定的节点，如在vue中经常用的方式是 id='app' , 把app所有的子节点取出来解析编译
-compile()
-{
+function compile() {
   let eleList = this.$el.children
   let reg = /{{(.*)}}/
   for (let i = 0; i < eleList.length; i++) {

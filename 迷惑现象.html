@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-  // 1
+  // 1.
   (function () {
     var a = b = 5;
   })();
@@ -17,7 +17,7 @@
   console.log(b);   // 5
   console.log(a);   // undefined
 
-  // 2
+  // 2.
   function A(x) {
     this.x = x;
   }
@@ -57,6 +57,14 @@
   // var m = n ;
   console.log(n)    // 3
   console.log(m)    // 3
+
+  //  4. let
+
+  // console.log(f) // Uncaught ReferenceError: f is not defined
+  // console.log(e) // Uncaught ReferenceError: can't access lexical declaration 'e' before initialization
+  console.log(g)
+  g = 2
+  var e = f = 1
 
 </script>
 

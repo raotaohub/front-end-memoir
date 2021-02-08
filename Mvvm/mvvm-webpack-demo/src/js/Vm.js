@@ -52,6 +52,7 @@ function observe(value) {
   } else {
     ob = new Observer(value)
   }
+
   return ob
 }
 /**

@@ -15,7 +15,7 @@ callback 函数只会在有值的索引上被调用
     let array = this
     let value
     for (let i = 0; i < array.length; i++) {
-      value = cb(array[i])
+      value = cb(array[i],i,array)
       result.push(value)
     }
     return result

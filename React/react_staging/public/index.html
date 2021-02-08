@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello-React</title>
+    <!-- 方案1 去掉.-->
+    <!--    <link rel="stylesheet" href="/css/bootstrap.css">    -->
+    <!-- 方案2 使用 %PUBLIC_URL% 代替.-->
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap.css">
+    <!-- 方案3 HashRouter ,此模式下 地址栏#后的参数都不会发送给服务器，因此地址是什么都无所谓-->
+    <!--    import { HashRouter} from "react-router-dom"; -->
+    <style>
+        .demo {
+            color: white !important;
+            background-color: #5cb85c !important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="root"></div>
+</body>
+
+</html>

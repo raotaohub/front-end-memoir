@@ -30,14 +30,14 @@ export default function defineReactive(obj, key, value) {
           }
         }
       }
-      console.log('get' + '您试图访问' + key + '属性', value)
+      console.log('访问数据触发get' + '您试图访问' + key + '属性', value)
       return value
     },
     set(newVal) {
       if (newVal === value) {
         return
       }
-      console.log('set' + '您试图修改' + key + '属性', newVal)
+      console.log('修改数据触发set' + '您试图修改' + key + '属性', newVal)
       value = newVal
       childOb = observe(value)
       dep.notify()
