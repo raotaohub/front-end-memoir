@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02_props的基本使用</title>
+</head>
+<body>
+
+<div id="test1"></div>
+<div id="test2"></div>
+<div id="test3"></div>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+
+  class Person extends React.Component {
+    render() {
+      /** props属性是只读的，修改会报错！！ **/
+      const {name, sex, age} = this.props
+      return (
+        <ul>
+          <li>姓名：{name}</li>
+          <li>性别：{sex}</li>
+          <li>年龄：{age + 1}</li>
+        </ul>
+      )
+    }
+  }
+  const data = {
+    name: "猪猪", sex: "女", age: 16
+  }
+  /** 类型限制和必要性 **/
+  Person.propTypes = {
+    name: PropTypes.string.isRequired,
+    sex: PropTypes.string,
+    age: PropTypes.number,
+    speak: PropTypes.func
+  }
+  /** 默认值设置 **/
+  Person.defaultProps = {
+    sex: "不男不女",
+    age: -1
+  }
+
+  ReactDOM.render(<Person {...data}/>, document.getElementById('test1'))
+  ReactDOM.render(<Person name="狗狗" age={27}/>, document.getElementById('test2'))
+  ReactDOM.render(<Person name="蛇蛇" sex="女" age={38}/>, document.getElementById('test3'))
+
+  /*
+  * 1. 引入包
+  *     2. 给类添加属性 Person.propType
+  *         3. 限制传入的属性 name : PropTypes.string.isRequest
+  * */
+
+</script>
+</body>
+</html>

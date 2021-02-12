@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_验证diffing算法</title>
+</head>
+<body>
+<div id="test1"></div>
+
+<script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
+<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+<script type="text/babel">
+
+  class Time extends React.Component {
+
+    state = {data: new Date()}
+
+    render() {
+      let {data} = this.state
+      return (
+        <div>
+          <h1>北京时间</h1>
+          <input/>
+          <div>{data.toTimeString()}</div>
+        </div>
+      )
+    }
+
+    componentDidMount() {
+      setInterval(() => {
+        this.setState({data: new Date()})
+      }, 980)
+    }
+  }
+  ReactDOM.render(<Time/>, document.getElementById('test1'))
+
+</script>
+</body>
+</html>

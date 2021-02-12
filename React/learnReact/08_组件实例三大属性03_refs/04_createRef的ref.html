@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_createRef的ref</title>
+</head>
+<body>
+
+<div id="test1"></div>
+
+<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+
+  class Demo extends React.Component {
+    /**
+     React.createRef 调用可以返回一个容器，该容器可以储存被ref所标识的节点
+     */
+    myRef = React.createRef()
+    showData = () => {
+      console.log(this.myRef)
+    }
+
+    render() {
+      return (
+        <div>
+          <input ref={this.myRef} placeholder="点击按钮提示内容"/>
+          <button ref="btn" onClick={this.showData}>点击展示左侧输入框的内容</button>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Demo/>, document.getElementById('test1'))
+
+</script>
+</body>
+</html>

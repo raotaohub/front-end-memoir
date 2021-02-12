@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_生命周期</title>
+</head>
+<body>
+<div id="test1"></div>
+
+<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+
+  class Life extends React.Component {
+
+    state = {
+      opacity: 1
+    }
+    data = () => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('test1'))
+    }
+    /** 组件挂载完成 **/
+    componentDidMount() {
+      console.log("@@")
+      this.timer = setInterval(() => {
+        let {opacity} = this.state
+        opacity -= 0.1
+        if (opacity <= 0) {
+          opacity = 1
+        }
+        this.setState({opacity})
+
+      }, 300)
+    }
+    /** 组件卸载前 **/
+    componentWillUnmount() {
+      clearInterval(this.timer)
+    }
+    render() {
+      console.log("render")
+      return (
+        <div>
+          <h1 style={{opacity: this.state.opacity}}>React学不会怎么办</h1>
+          <button onClick={this.data}>不给饭吃！</button>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Life/>, document.getElementById('test1'))
+
+</script>
+</body>
+</html>

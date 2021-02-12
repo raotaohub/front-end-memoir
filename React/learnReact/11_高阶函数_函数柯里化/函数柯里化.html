@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数柯里化</title>
+</head>
+<body>
+<div id="test1"></div>
+
+<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+
+  class Login extends React.Component {
+
+    state = {
+      username: '',
+      password: ''
+    }
+    handleSubmit = (event) => {
+      const {username, password} = this.state
+      event.preventDefault()
+      alert(`您输入的用户名是${username}, 密码是${password}`)
+    }
+    /** 通过柯里化，可以在指定事件回调的时候，传入参数**/
+    handle = (dataType) => {
+      return (event) => {
+        this.setState({[dataType]: event.target.value})
+      }
+    }
+    render() {
+      return (
+        <form action={void 0} onSubmit={this.handleSubmit}>
+          用户名：<input onChange={this.handle("username")} type="text" name="username"/>
+          密码：<input onChange={this.handle("password")} type="password" name="password"/>
+          <button>点击提交</button>
+        </form>
+      )
+    }
+  }
+
+  ReactDOM.render(<Login/>, document.getElementById('test1'))
+
+</script>
+</body>
+</html>

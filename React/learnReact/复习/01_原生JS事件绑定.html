@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_原生JS的事件绑定</title>
+</head>
+<body>
+
+<button id="btn1">按钮1</button>
+<button id="btn2">按钮2</button>
+<button id="btn3" onclick="demo3(this)">按钮3</button>
+
+<div id="test"></div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+  /*
+  * 原生JS的事件点击事件如何绑定
+  *     1. addEventListener
+  *         2. onclick = function(){}
+  *             3. <tag onclick="callback"></tag>   ※React※推荐在标签内写事件绑定 且要onclick => onClick
+  * */
+
+  const btn1 = document.getElementById("btn1")
+  btn1.addEventListener("click", () => {
+    alert("按钮1被点击")
+  })
+
+  const btn2 = document.getElementById("btn2")
+  btn2.onclick = function () {
+    alert("按钮2被点击")
+  }
+
+  const demo3 = (self) => {
+    alert("按钮3被点击")
+    console.log(self)
+  }
+
+</script>
+</body>
+</html>
