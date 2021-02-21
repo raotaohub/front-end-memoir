@@ -1,0 +1,121 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-21 17:20:11
+ * @LastEditTime: 2021-02-21 17:50:00
+ * @LastEditors: raotaohub
+ * @FilePath: \Speaking-JavaScript\JS的事件流.html
+ * @Description: Edit......
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #btn3 {
+        width: 300px;
+        height: 300px;
+        background-color: rgb(240, 63, 116);
+      }
+      #btn2 {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(255, 255, 71);
+      }
+      #btn1 {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(80, 141, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="btn3">
+      btn3
+      <div id="btn2">
+        btn2
+        <div id="btn1">btn1</div>
+      </div>
+    </div>
+    <!-- <script>
+      /**
+       * 当点击最里面的 btn1 的时候输出 => 1 2 3 说明是默认通过冒泡传递事件的
+       */
+      var btn3 = document.getElementById("btn3");
+      var btn2 = document.getElementById("btn2");
+      var btn1 = document.getElementById("btn1");
+
+      btn3.onclick = () => {
+        console.log(3);
+      };
+
+      btn2.onclick = () => {
+        console.log(2);
+      };
+
+      btn1.onclick = () => {
+        console.log(1);
+      };
+    </script> -->
+    <script>
+      /**
+       *当点击最里面的 btn1 的时候输出 => 1 2 3 说明是默认通过冒泡传递事件的
+       */
+      var btn3 = document.getElementById("btn3");
+      var btn2 = document.getElementById("btn2");
+      var btn1 = document.getElementById("btn1");
+
+      btn3.addEventListener("click", () => {
+        console.log(3);
+      });
+
+      btn2.addEventListener("click", () => {
+        console.log(2);
+      });
+
+      btn1.addEventListener("click", (event) => {
+        // event.stopPropagation(); //阻止事件冒泡
+        event.stopImmediatePropagation(); // 阻止事件冒泡 并阻止同元素，同事件名的监听器执行
+        console.log(1);
+      });
+      btn1.addEventListener("click", (event) => {
+        console.log("btn1的其他click事件");
+      });
+    </script>
+    <!-- <script>
+      /**
+       *当点击最里面的 btn1 的时候输出 => 3 2 1 说明第3个参数传入 true 表示使用的是事件捕获
+       */
+      var btn3 = document.getElementById("btn3");
+      var btn2 = document.getElementById("btn2");
+      var btn1 = document.getElementById("btn1");
+
+      btn3.addEventListener(
+        "click",
+        () => {
+          console.log(3);
+        },
+        true
+      );
+
+      btn2.addEventListener(
+        "click",
+        () => {
+          console.log(2);
+        },
+        true
+      );
+
+      btn1.addEventListener(
+        "click",
+        () => {
+          console.log(1);
+        },
+        true
+      );
+    </script> -->
+  </body>
+</html>
