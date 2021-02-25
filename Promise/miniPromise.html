@@ -1,0 +1,51 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-25 18:12:18
+ * @LastEditTime: 2021-02-25 19:58:17
+ * @LastEditors: raotaohub
+ * @FilePath: \Speaking-JavaScript\Promise\miniPromise.html
+ * @Description: Edit......
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./miniPromise.js"></script>
+    <script>
+      let p = new Promise((resolve, reject) => {
+        // resolve("成功");
+        reject("失败");
+        // throw 'Error'
+      });
+
+      let result = p
+        .then(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+        .then((res) => {
+          console.log("111");
+        })
+        .then((res) => {
+          console.log("222");
+        })
+        .then((res) => {
+          console.log("333");
+        })
+        .catch((e) => {
+          console.warn(e);
+        });
+
+      console.log(result);
+    </script>
+  </body>
+</html>
