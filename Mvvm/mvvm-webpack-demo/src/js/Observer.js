@@ -18,7 +18,6 @@ import {Dep} from "./Dep";
 export default function Observer(value) {
   this.dep = new Dep()
   def(value, '__ob__', this, false)
-
   /**
    * 拦截数组修改自身的方法，如果传入的对象是数组，就把这个数组的原型替换成  arrayMethods
    * */
@@ -29,6 +28,7 @@ export default function Observer(value) {
     this.walk(value)
   }
 }
+
 /**
  * walk()方法，会遍历当前对象中所有的属性，并调用 defineReactive()函数，至此形成了间接递归，对data进行层层监听。
  * */
