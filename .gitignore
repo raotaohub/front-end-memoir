@@ -1,4 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
+**/node_modules/
+**.idea
+node_modules
+npm-debug.log
+package-lock.json
 .idea/jsLibraryMappings.xml
 Mvvm/mvvm-webpack-demo/dist/
 Mvvm/mvvm-webpack-demo/node_modules/

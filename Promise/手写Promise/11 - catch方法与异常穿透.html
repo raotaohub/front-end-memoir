@@ -1,33 +1,49 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2020-12-27 16:05:45
+ * @LastEditTime: 2021-02-25 18:36:33
+ * @LastEditors: raotaohub
+ * @FilePath: \Speaking-JavaScript\Promise\手写Promise\11 - catch方法与异常穿透.html
+ * @Description: Edit......
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>11 - catch方法与异常穿透</title>
     <script src="promise.js"></script>
-</head>
-<body>
-<script>
-  let p = new Promise((resolve, reject) => {
-    // resolve('成功')
-    reject('失败')
-    // throw 'Error'
-  })
+  </head>
+  <body>
+    <script>
+      let p = new Promise((resolve, reject) => {
+        // resolve('成功')
+        reject("失败");
+        // throw 'Error'
+      });
 
-  let result = p.then(res => {
-    console.log(res)
-  }, err => {
-    console.log(err)
-  }).then(res => {
-    console.log('111')
-  }).then(res => {
-    console.log('222')
-  }).then(res => {
-    console.log('333')
-  }).catch(e => {
-    console.warn(e)
-  })
+      let result = p
+        .then(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+        .then((res) => {
+          console.log("111");
+        })
+        .then((res) => {
+          console.log("222");
+        })
+        .then((res) => {
+          console.log("333");
+        })
+        .catch((e) => {
+          console.warn(e);
+        });
 
-  console.log(result)
-</script>
-</body>
+      console.log(result);
+    </script>
+  </body>
 </html>

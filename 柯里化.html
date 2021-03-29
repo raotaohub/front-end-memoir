@@ -1,106 +1,122 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2020-12-21 23:36:52
+ * @LastEditTime: 2021-02-22 12:35:14
+ * @LastEditors: raotaohub
+ * @FilePath: \Speaking-JavaScript\柯里化.html
+ * @Description: Edit......
+-->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-<script>
+  <body>
+    <script>
+      // function say(company) {
+      //   return function (academy) {
+      //     return function (name) {
+      //       console.log(`我的公司是${company},职业是${academy},名字叫做${name}`);
+      //     }
+      //   }
+      // }
 
-  // function say(company) {
-  //   return function (academy) {
-  //     return function (name) {
-  //       console.log(`我的公司是${company},职业是${academy},名字叫做${name}`);
-  //     }
-  //   }
-  // }
+      function say(company, academy, name) {
+        console.log(`我的公司是${company},职业是${academy},名字叫做${name}`);
+        console.log(arguments);
+      }
 
-  function say(company, academy, name) {
-    console.log(`我的公司是${company},职业是${academy},名字叫做${name}`)
-    console.log(arguments)
-  }
+      // 函数柯里化通行版本
+      function currying(fn) {
+        let argsArr = [...arguments].slice(1); // 允许调用currying时就传入多个参数
+        let length = fn.length; // 获取被柯里化函数的参数长度
+        console.log(length);
+        let closure = function () {
+          argsArr = argsArr.concat(...arguments); // 先把参数拼接到一个数组
+          console.log(...argsArr, ...arguments);
+          if (argsArr.length < length) return closure; // 如果参数没满，返回闭包等待下一次调用
 
-  // 函数柯里化通行版本
-  function currying(fn) {
-    let argsArr = [...arguments].slice(1)                 // 允许调用currying时就传入多个参数
-    let length = fn.length                                // 获取被柯里化函数的参数长度
-    console.log(length)
-    let closure = function () {
+          return fn.apply(null, argsArr); // 如果参数满了，传递完成，执行fn函数并传入所有参数
+        };
 
-      argsArr = argsArr.concat(...arguments)              // 先把参数拼接到一个数组
-      console.log(...argsArr, ...arguments)
-      if (argsArr.length < length) return closure         // 如果参数没满，返回闭包等待下一次调用
+        return closure;
+      }
 
-      return fn.apply(null, argsArr)                      // 如果参数慢了，传递完成，执行fn函数并传入所有参数
-    }
+      //currying
+      let array = ["array", "object", "function"];
+      let setInfo2 = currying(say, "fff");
+      let s2 = setInfo2("ggg");
+      s2("hhh", "额外传入的参数44");
 
-    return closure
-  }
+      // let setInfo3 = currying(say)
+      // let a2 = setInfo3('aaa')('bbb')
+      // a2('ccc')
+    </script>
+    <script>
+      // *************************************************************************
+      function fetch(arg) {
+        return `response with: ${arg}`;
+      }
 
-  //currying
-  let array = ['array', 'object', 'function']
-  let setInfo2 = currying(say, 'fff')
-  let s2 = setInfo2('ggg')
-  s2('hhh', '额外传入的参数44')
+      function fetcher(arg, cb) {
+        let res = fetch(arg);
+        cb(res);
+      }
 
-  // let setInfo3 = currying(say)
-  // let a2 = setInfo3('aaa')('bbb')
-  // a2('ccc')
+      function combinedFetcher(...args) {
+        const len = args.length;
+        let cnt = 0;
+        const res = [];
 
-</script>
-<script>
-  // *************************************************************************
-  function fetch(arg) {
-    return `response with: ${arg}`;
-  }
+        function innerCB(r, cb) {
+          cnt++;
+          res.push(r);
+          if (cnt === len) cb(res);
+        }
 
-  function fetcher(arg, cb) {
-    let res = fetch(arg);
-    cb(res);
-  }
+        return (cb) =>
+          args.forEach((arg) => fetcher(arg, (r) => innerCB(r, cb)));
+        // return function (cb) {
+        //   args.forEach(arg){
+        //     fetcher(arg, r){
+        //       innerCB(r, cb)
+        //     }
+        //   }
+        // }
+      }
 
-  function combinedFetcher(...args) {
-    const len = args.length;
-    let cnt = 0;
-    const res = [];
+      const fetchFruitsAndDrinks = combinedFetcher("fruits", "drinks");
+      fetchFruitsAndDrinks(console.log);
+      // *************************************************************************
 
-    function innerCB(r, cb) {
-      cnt++;
-      res.push(r)
-      if (cnt === len) cb(res);
-    }
+      function currying(fn) {
+        let length = fn.length;
+        let args = [...arguments].slice(1);
 
-    return cb => args.forEach(arg => fetcher(arg, r => innerCB(r, cb)));
-    // return function (cb) {
-    //   args.forEach(arg){
-    //     fetcher(arg, r){
-    //       innerCB(r, cb)
-    //     }
-    //   }
-    // }
-  }
+        function closure() {
+          args = args.concat([...arguments]);
+          if (args.length < length) return closure;
+          fn.apply(null, args);
+        }
 
-  const fetchFruitsAndDrinks = combinedFetcher("fruits", "drinks");
-  fetchFruitsAndDrinks(console.log)
-  // *************************************************************************
+        return closure;
+      }
 
-  function currying(fn) {
+      function currying(fn) {
+        let length = fn.length;
+        let args = [...arguments].slice(1);
 
-    let length = fn.length
-    let args = [...arguments].slice(1)
+        function closure() {
+          args = args.concat([...arguments]);
+          if (args.length < length) return closure;
+          fn.apply(null, args);
+        }
 
-    function closure() {
-      args = args.concat([...arguments])
-      if (args.length < length) return closure
-      fn.apply(null, args)
-    }
-
-    return closure
-  }
-</script>
-</body>
-
+        return closure;
+      }
+    </script>
+  </body>
 </html>
