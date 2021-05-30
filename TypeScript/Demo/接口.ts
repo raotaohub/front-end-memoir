@@ -16,29 +16,29 @@ function printLabel(labeledObj: LabelledValue) {
   console.log(labeledObj.label)
 }
 
-let myObj = { size: 10, label: "饶韬 size 10 Object" }
+let myObj = { size: 10, label: '饶韬 size 10 Object' }
 
 printLabel(myObj)
 
 /**************************************              可选属性              **************************************/
 
 interface SquareConfig {
-  color?: string;  // ? 表示这个属性是可选的
-  width?: number;  // ? 表示这个属性是可选的
+  color?: string // ? 表示这个属性是可选的
+  width?: number // ? 表示这个属性是可选的
 }
 
 function createSquare(config: SquareConfig): { color: string; area: number } {
-  let newSquare = { color: "white", area: 100 };
+  let newSquare = { color: 'white', area: 100 }
   if (config.color) {
-    newSquare.color = config.color;
+    newSquare.color = config.color
   }
   if (config.width) {
-    newSquare.area = config.width * config.width;
+    newSquare.area = config.width * config.width
   }
-  return newSquare;
+  return newSquare
 }
 
-let mySquare = createSquare({ color: "black", width: 99 });
+let mySquare = createSquare({ color: 'black', width: 99 })
 console.log(mySquare) // { color: 'black', area: 100 }
 
 /**************************************              接口也可以描述函数类型              **************************************/
@@ -49,7 +49,7 @@ console.log(mySquare) // { color: 'black', area: 100 }
  */
 
 interface SearchFunc {
-  (source: string, subString: string): boolean; //定义了一个函数类型的接口 要求返回值是 boolean类型
+  (source: string, subString: string): boolean //定义了一个函数类型的接口 要求返回值是 boolean类型
 }
 let mySearch: SearchFunc
 mySearch = function (src: string, sub: string) {
@@ -68,162 +68,25 @@ interface StringArry {
 /**************************************              类类型             **************************************/
 
 interface ClockInterface {
-  currentTime: Date;
-  setTime(d: Date);
+  currentTime: Date
+  setTime(d: Date)
 }
 //  实现一个类 implements 关键字
 class Clock implements ClockInterface {
-  currentTime: Date;
+  currentTime: Date
   setTime(d: Date) {
-    this.currentTime = d;
+    this.currentTime = d
   }
-  constructor(h: number, m: number) { }
+  constructor(h: number, m: number) {}
 }
 // 类静态部分与实例部分的区别
 interface ClockConstructor {
-  new(hour: number, minute: number);
+  new (hour: number, minute: number)
 }
 
 class aClock implements ClockConstructor {
-  currentTime: Date;
-  constructor(h: number, m: number) { }
+  currentTime: Date
+  constructor(h: number, m: number) {}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export { }
+export {}
