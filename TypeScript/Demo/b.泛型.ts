@@ -80,6 +80,7 @@ seleterRow1.getSelect(1)
 
 interface ISelectRow {
   name: string
+  [key: string]: unknown
 }
 
 class SelectRow2<T extends ISelectRow> {
@@ -91,7 +92,7 @@ class SelectRow2<T extends ISelectRow> {
 
 // 这就要求了实例化时传入的 [] 中每一个元素是一个对象，并且必须有name属性
 
-const selectRow2 = new SelectRow2([
+const selectRow2 = new SelectRow2<ISelectRow>([
   { name: '猪猪' },
   { name: '蛇蛇' },
   { name: '狗狗', age: 19 },
