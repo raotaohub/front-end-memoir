@@ -17,7 +17,18 @@
   <body>
     <script>
       let array = [1, 1, 2, 3, 4, 5, 6, 4, 6, 8, 65, 77];
-
+      // 根据数组对象中的 某个 key 进行去重      
+       function arrayToHeavy(arr, key) {
+         let newobj = {}, newArr = [];
+          for (let i = 0; i < arr.length; i++) {
+              let item = arr[i];
+              if (!newobj[item[key]]) {
+                  newobj[item[key]] = newArr.push(item);
+              }
+          }
+          return newArr;
+      }
+      
       // filter 返回过滤函数中，返回值为 true 的元素组成的♥新数组
       function arrayToHeavy(array) {
         return array.filter((item, index) => {
