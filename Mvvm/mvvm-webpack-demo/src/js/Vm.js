@@ -7,7 +7,7 @@
  * @Description: Edit......
  */
 import Observer from "./Observer";
-import {Watcher} from "./Watcher";
+import { Watcher } from "./Watcher";
 
 /**
  * vue Mvvm模式，对于对象嵌套的监视，是通过链式调用，间接递归的手法实现的。
@@ -26,12 +26,12 @@ import {Watcher} from "./Watcher";
  * */
 
 const obj = {
-  a: {
-    b: {
-      c: 3,
+    a: {
+        b: {
+            c: 3
+        }
     },
-  },
-  d: [33, 44, 55],
+    d: [33, 44, 55]
 };
 
 /**
@@ -39,11 +39,11 @@ const obj = {
  * */
 observe(obj);
 
-new Watcher(obj, "obj.a", function (value, oldValue) {
-  console.log("Component" + "Render Function" + "视图更新的回调", value, oldValue);
+new Watcher(obj, "obj.a", function(value, oldValue) {
+    console.log("Component" + "Render Function" + "视图更新的回调", value, oldValue);
 });
 
-obj.a = ["111", "222", ["数组222", "数组333"], {obj: "数组对象444"}];
+obj.a = ["111", "222", ["数组222", "数组333"], { obj: "数组对象444" }];
 
 /**
  * Vm实例化的时候，就调用 observe(data)函数
@@ -54,34 +54,34 @@ obj.a = ["111", "222", ["数组222", "数组333"], {obj: "数组对象444"}];
  * @return ob 属性身上的__ob__
  * */
 function observe(value) {
-  if (!value || typeof value !== "object") return;
+    if (!value || typeof value !== "object") return;
 
-  let ob;
+    let ob;
 
-  if (typeof value.__ob__ !== "undefined") {
-    ob = value.__ob__;
-  } else {
-    ob = new Observer(value);
-  }
+    if (typeof value.__ob__ !== "undefined") {
+        ob = value.__ob__;
+    } else {
+        ob = new Observer(value);
+    }
 
-  return ob;
+    return ob;
 }
 /**
  * dependArray函数是用于收集数组中的每个元素的依赖(wacther)
  * @value:Array
  * */
 function dependArray(value) {
-  let ele
-  for (let i = 0; i < value.length; i++) {
-    ele = value[i];
-    /**
-     * 如果数组中的某个元素 存在/且拥有__ob__属性
-     * 说明这个元素是个对象，因此调用 depend方法收集这个对象的依赖
-     * */
-    ele && ele.__ob__ && ele.__ob__.dep.depend();
-    if (Array.isArray(ele)) {
-      dependArray(ele);
+    let ele;
+    for (let i = 0; i < value.length; i++) {
+        ele = value[i];
+        /**
+         * 如果数组中的某个元素 存在/且拥有__ob__属性
+         * 说明这个元素是个对象，因此调用 depend方法收集这个对象的依赖
+         * */
+        ele && ele.__ob__ && ele.__ob__.dep.depend();
+        if (Array.isArray(ele)) {
+            dependArray(ele);
+        }
     }
-  }
 }
-export {observe, dependArray, obj};
+export { observe, dependArray, obj };

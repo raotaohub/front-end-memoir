@@ -16,25 +16,25 @@
   <input type="text" v-model="username">
 </div>
 <script>
-  const data = {
-    username: '借你趁早',
-    age: 1998
-  }
-  let app = document.querySelector('#app')
-  let array = app.children
-  console.log(array)
-  let reg = /{{(.*)}}/
-  for (let i = 0; i < array.length; i++) {
+    const data = {
+        username: "借你趁早",
+        age: 1998
+    };
+    let app = document.querySelector("#app");
+    let array = app.children;
+    console.log(array);
+    let reg = /{{(.*)}}/;
+    for (let i = 0; i < array.length; i++) {
 
-    if (array[i].tagName === 'INPUT') {
-      let key = array[i].getAttribute('v-model')
-      array[i].value = data[key]
-    } else {
-      let key = reg.exec(array[i].innerHTML)[1]
-      array[i].innerHTML = data[key]
+        if (array[i].tagName === "INPUT") {
+            let key = array[i].getAttribute("v-model");
+            array[i].value = data[key];
+        } else {
+            let key = reg.exec(array[i].innerHTML)[1];
+            array[i].innerHTML = data[key];
+        }
+
     }
-
-  }
 </script>
 
 </body>

@@ -1,38 +1,38 @@
 // 发布订阅模式
 class PubSub {
-  constructor() {
-    this.eventBus = new Map()
-  }
-  on(eventName, callback) {
-    const {eventBus} = this
-    if (!eventBus.has(eventName)) {
-      eventBus.set(eventName, [])
+    constructor() {
+        this.eventBus = new Map();
     }
-    eventBus.get(eventName).push(callback)
-  }
+    on(eventName, callback) {
+        const { eventBus } = this;
+        if (!eventBus.has(eventName)) {
+            eventBus.set(eventName, []);
+        }
+        eventBus.get(eventName).push(callback);
+    }
 
-  emit(eventName, args) {
-    const {eventBus} = this
-    if (!eventBus.has(eventName)) {
-      throw new Error('该事件不存在')
+    emit(eventName, args) {
+        const { eventBus } = this;
+        if (!eventBus.has(eventName)) {
+            throw new Error("该事件不存在");
+        }
+        const listeners = eventBus.get(eventName);
+        listeners.forEach(event => event(args));
     }
-    const listeners = eventBus.get(eventName)
-    listeners.forEach(event => event(args))
-  }
 
-  off(eventName) {
-    const {eventBus} = this
-    if (eventBus.has(eventName)) {
-      eventBus.delete(eventName)
+    off(eventName) {
+        const { eventBus } = this;
+        if (eventBus.has(eventName)) {
+            eventBus.delete(eventName);
+        }
     }
-  }
 }
 
-const pub = new PubSub()
-pub.on('test', function (a) {
-  console.log(a)
-})
-pub.emit('test', 'test,test,test,test,test,test,')
+const pub = new PubSub();
+pub.on("test", function(a) {
+    console.log(a);
+});
+pub.emit("test", "test,test,test,test,test,test,");
 
 // 题外话 表编程 即策略模式
 // {

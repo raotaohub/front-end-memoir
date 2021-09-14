@@ -17,30 +17,30 @@ Dep.target = null;
  * @this.subs 每个Dep实例身上都有一个 subs 数组用于存放 watcher
  * */
 function Dep() {
-  this.id = uid++;
-  this.subs = [];
+    this.id = uid++;
+    this.subs = [];
 }
 /**
  * addSub 将 watcher 添加到 dep 中；
  * 由 Dep 的实例调用
  * @sub Watcher的实例
  * */
-Dep.prototype.addSub = function (sub) {
-  console.log("addSub");
-  this.subs.push(sub);
+Dep.prototype.addSub = function(sub) {
+    console.log("addSub");
+    this.subs.push(sub);
 };
 
-Dep.prototype.depend = function () {
-  console.log("在getter中收集依赖,depend");
-  Dep.target.addDep(this);
+Dep.prototype.depend = function() {
+    console.log("在getter中收集依赖,depend");
+    Dep.target.addDep(this);
 };
 
-Dep.prototype.notify = function () {
-  console.log("notify");
-  const subs = this.subs.slice();
-  for (let i = 0, l = subs.length; i < l; i++) {
-    subs[i].update();
-  }
+Dep.prototype.notify = function() {
+    console.log("notify");
+    const subs = this.subs.slice();
+    for (let i = 0, l = subs.length; i < l; i++) {
+        subs[i].update();
+    }
 };
 
-export {Dep};
+export { Dep };

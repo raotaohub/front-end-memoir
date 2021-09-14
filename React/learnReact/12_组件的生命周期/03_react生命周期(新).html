@@ -7,105 +7,103 @@
 <body>
 <div id="test1"></div>
 
-<script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
-<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
-<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
-<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+<script src="../js/17.0.1/prop-types.js" type="text/javascript"></script>
+<script src="../js/17.0.1/react.development.js" type="text/javascript"></script>
+<script src="../js/17.0.1/react-dom.development.js" type="text/javascript"></script>
+<script src="../js/17.0.1/babel.min.js" type="text/javascript"></script>
 
 <script type="text/babel">
-  /**
-   * 废3新2
-   *        ❌ componentWillMount
-   *        ❌ componentWillUpdate
-   *        ❌ componentWillReceiveProps
-   *
-   *  ✔ getDerivedStateFromProps
-   *
-   *  ✔ getSnapshotBeforeUpdate(prevProps, prevState) @return prevSnapshot 传递给下面的钩子 更新之前获取快照
-   *    https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate
-   *
-   *    componentDidUpdate(prevProps,prevState,snapshot)
-   * **/
-  class Count extends React.Component {
-    state = {
-      count: 1
-    }
-    add = () => {
-      let {count} = this.state
-      count += 1
-      /** 正常更新 **/
-      this.setState({count})
-    }
-    death = () => {
-      ReactDOM.unmountComponentAtNode(document.getElementById('test1'))
-    }
-    force = () => {
-      /** 强制更新 **/
-      this.forceUpdate()
+    /**
+     * 废3新2
+     *        ❌ componentWillMount
+     *        ❌ componentWillUpdate
+     *        ❌ componentWillReceiveProps
+     *
+     *  ✔ getDerivedStateFromProps
+     *
+     *  ✔ getSnapshotBeforeUpdate(prevProps, prevState) @return prevSnapshot 传递给下面的钩子 更新之前获取快照
+     *    https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate
+     *
+     *    componentDidUpdate(prevProps,prevState,snapshot)
+     * **/
+    class Count extends React.Component {
+        state = {
+            count: 1
+        };
+        constructor(props) {
+            console.log("constructor-- 1");
+            super(props);
+        }
+        /** 返回的状态对象，会修改组件的状态对象，且以该对象为主无法再修改了。**/
+        static getDerivedStateFromProps(props, state) {
+            console.log("getDerivedStateFromProps-- 2");
+            console.log(props, state);
+            return null;
+        }
+        add = () => {
+            let { count } = this.state;
+            count += 1;
+            /** 正常更新 **/
+            this.setState({ count });
+        };
+        death = () => {
+            ReactDOM.unmountComponentAtNode(document.getElementById("test1"));
+        };
+        force = () => {
+            /** 强制更新 **/
+            this.forceUpdate();
+        };
+
+        /** 组件挂载之前 **/
+        // UNSAFE_componentWillMount() {
+        //   console.log("UNSAFE_componentWillMount-- 2")
+        // }
+        /** 开始渲染 **/
+        render() {
+            console.log("render-- 3");
+            return (
+                <div>
+                    <h1> 求和 {this.state.count}</h1>
+                    <button onClick={this.add}>飘飘乎如遗世独立</button>
+                    <button onClick={this.death}>羽化而登仙</button>
+                    <button onClick={this.force}>知不可乎骤得，托遗响于悲风。</button>
+                </div>
+            );
+        }
+
+        getSnapshotBeforeUpdate() {
+            console.log("getSnapshotBeforeUpdate-- 4");
+            return null;
+        }
+
+        /** 组件挂载完成 **/
+        componentDidMount() {
+            console.log("componentDidMount-- 4");
+        }
+
+        /** 组件卸载之前 **/
+        componentWillUnmount() {
+            console.log("componentWillUnmount-- 5");
+        }
+
+        /** 组件是否可以更新 **/
+        shouldComponentUpdate() {
+            console.log("shouldComponentUpdate-- 6");
+            return true;
+        }
+
+        /** 组件将要更新 **/
+        // UNSAFE_componentWillUpdate() {
+        //   console.log("UNSAFE_componentWillUpdate-- 7")
+        // }
+
+        /** 组件更新完成 **/
+        componentDidUpdate() {
+            console.log("componentDidUpdate-- 8");
+        }
     }
 
-    constructor(props) {
-      console.log("constructor-- 1")
-      super(props)
-    }
-    /** 返回的状态对象，会修改组件的状态对象，且以该对象为主无法再修改了。**/
-    static getDerivedStateFromProps(props, state) {
-      console.log("getDerivedStateFromProps-- 2")
-      console.log(props, state)
-      return null
-    }
-
-    /** 组件挂载之前 **/
-    // UNSAFE_componentWillMount() {
-    //   console.log("UNSAFE_componentWillMount-- 2")
-    // }
-
-    /** 开始渲染 **/
-    render() {
-      console.log("render-- 3")
-      return (
-          <div>
-            <h1> 求和 {this.state.count}</h1>
-            <button onClick={this.add}>飘飘乎如遗世独立</button>
-            <button onClick={this.death}>羽化而登仙</button>
-            <button onClick={this.force}>知不可乎骤得，托遗响于悲风。</button>
-          </div>
-      )
-    }
-
-    getSnapshotBeforeUpdate() {
-      console.log("getSnapshotBeforeUpdate-- 4")
-      return null
-    }
-
-    /** 组件挂载完成 **/
-    componentDidMount() {
-      console.log("componentDidMount-- 4")
-    }
-
-    /** 组件卸载之前 **/
-    componentWillUnmount() {
-      console.log("componentWillUnmount-- 5")
-    }
-
-    /** 组件是否可以更新 **/
-    shouldComponentUpdate() {
-      console.log("shouldComponentUpdate-- 6")
-      return true
-    }
-
-    /** 组件将要更新 **/
-    // UNSAFE_componentWillUpdate() {
-    //   console.log("UNSAFE_componentWillUpdate-- 7")
-    // }
-
-    /** 组件更新完成 **/
-    componentDidUpdate() {
-      console.log("componentDidUpdate-- 8")
-    }
-  }
-
-  ReactDOM.render(<Count count={999}/>, document.getElementById('test1'))
+    ReactDOM.render(<Count count={999}/>, document.getElementById("test1"));
 
 </script>
 </body>

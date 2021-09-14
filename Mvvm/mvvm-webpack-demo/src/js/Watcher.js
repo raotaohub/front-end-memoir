@@ -6,7 +6,7 @@
  * @FilePath: \mvvm-webpack-demo\src\js\Watcher.js
  * @Description: Edit......
  */
-import {Dep} from "./Dep";
+import { Dep } from "./Dep";
 
 /**
  * 什么时候会触发 get ？ 当读取对象值的时候 。也就是获得 exp 的值的时候，
@@ -25,42 +25,42 @@ import {Dep} from "./Dep";
 let uid2 = 0;
 
 function Watcher(vm, exp, cb) {
-  this.vm = vm;
-  this.exp = exp;
-  this.cb = cb;
-  this.id = uid2++;
-  this.depIdsAnddeps = {};
-  this.getter = parsePath(this.exp);
-  this.value = this.get();
+    this.vm = vm;
+    this.exp = exp;
+    this.cb = cb;
+    this.id = uid2++;
+    this.depIdsAnddeps = {};
+    this.getter = parsePath(this.exp);
+    this.value = this.get();
 }
 
-Watcher.prototype.update = function () {
-  /**
-   *  update方法会执行视图发生变化时候的回调 cb
-   *  这个方法会真正的触发视图的改变
-   * */
-  let value = this.get();
-  let oldValue = this.value
-  this.cb.call(this, value, oldValue);
+Watcher.prototype.update = function() {
+    /**
+     *  update方法会执行视图发生变化时候的回调 cb
+     *  这个方法会真正的触发视图的改变
+     * */
+    let value = this.get();
+    let oldValue = this.value;
+    this.cb.call(this, value, oldValue);
 };
 /**
  *
  * */
-Watcher.prototype.addDep = function (dep) {
-  if (!this.depIdsAnddeps.hasOwnProperty(dep.id)) {
-    console.log("addDep");
-    this.depIdsAnddeps[dep.id] = dep;
-    dep.addSub(this);
-  }
+Watcher.prototype.addDep = function(dep) {
+    if (!this.depIdsAnddeps.hasOwnProperty(dep.id)) {
+        console.log("addDep");
+        this.depIdsAnddeps[dep.id] = dep;
+        dep.addSub(this);
+    }
 };
-Watcher.prototype.get = function () {
-  let vm = this.vm;
-  Dep.target = this;
-  console.log("被触摸 Dep.target=", Dep.target);
-  let value = this.getter.call(this, vm);
-  Dep.target = null;
-  console.log("触摸结束 Dep.target=", Dep.target);
-  return value;
+Watcher.prototype.get = function() {
+    let vm = this.vm;
+    Dep.target = this;
+    console.log("被触摸 Dep.target=", Dep.target);
+    let value = this.getter.call(this, vm);
+    Dep.target = null;
+    console.log("触摸结束 Dep.target=", Dep.target);
+    return value;
 };
 
 /**
@@ -72,16 +72,16 @@ Watcher.prototype.get = function () {
  * 简要的写一下该方法，由于exp也可以传入function ，但是这里不考虑这种情况,这是一个高阶函数
  * */
 function parsePath(exp) {
-  let segments = exp.split(".");
-  return function (obj) {
-    for (let i = 1; i < segments.length; i++) {
-      if (!obj) {
-        return;
-      }
-      obj = obj[segments[i]];
-    }
-    return obj;
-  };
+    let segments = exp.split(".");
+    return function(obj) {
+        for (let i = 1; i < segments.length; i++) {
+            if (!obj) {
+                return;
+            }
+            obj = obj[segments[i]];
+        }
+        return obj;
+    };
 }
 
-export {Watcher};
+export { Watcher };

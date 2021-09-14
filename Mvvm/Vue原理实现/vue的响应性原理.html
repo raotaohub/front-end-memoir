@@ -7,77 +7,77 @@
 <body>
 <span class="cell b1"></span>
 <script>
-  /**
-   * @activeUpdate 一个全局变量，用于指向当前的 watcher
-   * */
-  let activeUpdate = null
+    /**
+     * @activeUpdate 一个全局变量，用于指向当前的 watcher
+     * */
+    let activeUpdate = null;
 
-  class Dep {
-    constructor() {
-      this.subscribers = new Set()
-    }
-    depend() {
-      // 添加
-      activeUpdate && this.subscribers.add(activeUpdate)
-    }
-    notify() {
-      // 通知
-      this.subscribers.forEach(sub => sub())
-    }
-  }
-
-  function autorun(update) {
-    const wrappedUpdate = () => {
-      activeUpdate = wrappedUpdate
-      update()
-      activeUpdate = null
-    }
-    wrappedUpdate()
-  }
-
-  // 劫持和代理的部分
-  function observe(obj) {
-    Object.keys(obj).forEach(key => {
-      let innerValue = obj[key]
-      const dep = new Dep()
-
-      Object.defineProperty(obj, key, {
-        configurable: true,
-        enumerable: true,
-        get() {
-          dep.depend()
-          return innerValue
-        },
-        set(newValue) {
-          const changed = innerValue !== newValue
-          innerValue = newValue
-          if (changed) {
-            dep.notify()
-          }
+    class Dep {
+        constructor() {
+            this.subscribers = new Set();
         }
-      })
-    })
-    return obj
-  }
+        depend() {
+            // 添加
+            activeUpdate && this.subscribers.add(activeUpdate);
+        }
+        notify() {
+            // 通知
+            this.subscribers.forEach(sub => sub());
+        }
+    }
 
-  const state = {
-    count: 0
-  }
+    function autorun(update) {
+        const wrappedUpdate = () => {
+            activeUpdate = wrappedUpdate;
+            update();
+            activeUpdate = null;
+        };
+        wrappedUpdate();
+    }
 
-  observe(state)
+    // 劫持和代理的部分
+    function observe(obj) {
+        Object.keys(obj).forEach(key => {
+            let innerValue = obj[key];
+            const dep = new Dep();
 
-  autorun(() => {
-    console.log(state.count)
-  })
-  // 打印"count is: 0"
+            Object.defineProperty(obj, key, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                    dep.depend();
+                    return innerValue;
+                },
+                set(newValue) {
+                    const changed = innerValue !== newValue;
+                    innerValue = newValue;
+                    if (changed) {
+                        dep.notify();
+                    }
+                }
+            });
+        });
+        return obj;
+    }
 
-  state.count++
-  // 打印"count is: 1"
-  state.count = 5
-  state.count = 6
-  state.count = 7
-  state.count = 8
-  state.count = 9
+    const state = {
+        count: 0
+    };
+
+    observe(state);
+
+    autorun(() => {
+        console.log(state.count);
+    });
+    // 打印"count is: 0"
+
+    state.count++;
+    // 打印"count is: 1"
+    state.count = 5;
+    state.count = 6;
+    state.count = 7;
+    state.count = 8;
+    state.count = 9;
 </script>
 
 </body>

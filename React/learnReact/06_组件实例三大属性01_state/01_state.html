@@ -8,42 +8,42 @@
 
 <div id="test"></div>
 
-<script type="text/javascript" src="../js/react.development.js"></script>
-<script type="text/javascript" src="../js/react-dom.development.js"></script>
-<script type="text/javascript" src="../js/babel.min.js"></script>
+<script src="../js/react.development.js" type="text/javascript"></script>
+<script src="../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../js/babel.min.js" type="text/javascript"></script>
 <script type="text/babel">
 
-  class Weather extends React.Component {
-    // props
-    constructor(props) {
-      super(props)
-      this.state = {
-        isHot: true,
-        wind: "微风"
-      }
-      this.alertWeather = this.alertWeather.bind(this)
-    }
+    class Weather extends React.Component {
+        // props
+        constructor(props) {
+            super(props);
+            this.state = {
+                isHot: true,
+                wind: "微风"
+            };
+            this.alertWeather = this.alertWeather.bind(this);
+        }
 
-    render() {
-      const {isHot, wind} = this.state
-      return (
-          <h1 onClick={this.alertWeather}>
-            今天天气很{isHot ? "炎热" : "凉爽"}，{wind}
-          </h1>
-      )
-    }
+        render() {
+            const { isHot, wind } = this.state;
+            return (
+                <h1 onClick={this.alertWeather}>
+                    今天天气很{isHot ? "炎热" : "凉爽"}，{wind}
+                </h1>
+            );
+        }
 
-    alertWeather() {
-      /*
-      * 状态需要通过 setState 修改。
-      *     而且会合并冲突的地方💥
-      * */
-      const isHot = this.state.isHot
-      this.setState({isHot: !isHot})
+        alertWeather() {
+            /*
+            * 状态需要通过 setState 修改。
+            *     而且会合并冲突的地方💥
+            * */
+            const isHot = this.state.isHot;
+            this.setState({ isHot: !isHot });
 
+        }
     }
-  }
-  ReactDOM.render(<Weather/>, document.getElementById('test'))
+    ReactDOM.render(<Weather/>, document.getElementById("test"));
 
 
 </script>

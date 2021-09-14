@@ -6,22 +6,22 @@
 </head>
 <body>
 <script type="text/javascript">
-  /*
-  * 展开运算符的用法 ——【对象】
-  * */
-  const data = {
-    name: "猪猪", sex: "女", age: "16"
-  }
-  const data2 = {
-    size: 24
-  }
-  // 1. 浅度拷贝，可以代替 Object.assign()
-  const clonedata = {...data, ...data2}
-  console.log(clonedata)
+    /*
+    * 展开运算符的用法 ——【对象】
+    * */
+    const data = {
+        name: "猪猪", sex: "女", age: "16"
+    };
+    const data2 = {
+        size: 24
+    };
+    // 1. 浅度拷贝，可以代替 Object.assign()
+    const clonedata = { ...data, ...data2 };
+    console.log(clonedata);
 
-  //  2. 展开合并和新增
-  const clonedata2 = {...clonedata, children: [1, 2, 3]}
-  console.log(clonedata2)
+    //  2. 展开合并和新增
+    const clonedata2 = { ...clonedata, children: [1, 2, 3] };
+    console.log(clonedata2);
 </script>
 
 </body>

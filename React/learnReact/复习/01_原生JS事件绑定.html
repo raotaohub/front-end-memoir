@@ -15,27 +15,27 @@
 <script src="../js/react-dom.development.js" type="text/javascript"></script>
 <script src="../js/babel.min.js" type="text/javascript"></script>
 <script type="text/babel">
-  /*
-  * 原生JS的事件点击事件如何绑定
-  *     1. addEventListener
-  *         2. onclick = function(){}
-  *             3. <tag onclick="callback"></tag>   ※React※推荐在标签内写事件绑定 且要onclick => onClick
-  * */
+    /*
+    * 原生JS的事件点击事件如何绑定
+    *     1. addEventListener
+    *         2. onclick = function(){}
+    *             3. <tag onclick="callback"></tag>   ※React※推荐在标签内写事件绑定 且要onclick => onClick
+    * */
 
-  const btn1 = document.getElementById("btn1")
-  btn1.addEventListener("click", () => {
-    alert("按钮1被点击")
-  })
+    const btn1 = document.getElementById("btn1");
+    btn1.addEventListener("click", () => {
+        alert("按钮1被点击");
+    });
 
-  const btn2 = document.getElementById("btn2")
-  btn2.onclick = function () {
-    alert("按钮2被点击")
-  }
+    const btn2 = document.getElementById("btn2");
+    btn2.onclick = function() {
+        alert("按钮2被点击");
+    };
 
-  const demo3 = (self) => {
-    alert("按钮3被点击")
-    console.log(self)
-  }
+    const demo3 = (self) => {
+        alert("按钮3被点击");
+        console.log(self);
+    };
 
 </script>
 </body>
