@@ -5,7 +5,7 @@ class List extends Component {
 
   render() {
     return (
-      <h3>我是About的内容</h3>
+        <h3>我是About的内容</h3>
     );
   }
 }

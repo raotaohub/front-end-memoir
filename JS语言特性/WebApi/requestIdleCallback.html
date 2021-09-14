@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Document</title>
+</head>
+<body>
+<button id="btn" type="">点击</button>
+<script>
+  let btn = document.querySelector('#btn')
+  let works = [
+    () => {
+      console.log('任务1开始')
+      sleep(20)
+      console.log('任务1结束')
+    },
+    () => {
+      console.log('任务2开始')
+      sleep(20)
+      console.log('任务2结束')
+    },
+    () => {
+      console.log('任务3开始')
+      sleep(20)
+      console.log('任务3结束')
+    },
+    () => {
+      console.log('任务4开始')
+      sleep(20)
+      console.log('任务4结束')
+    },
+  ]
+  let backup = []
+
+  function sleep(delay) {
+    for (let start = Date.now(); Date.now() - start <= delay;) {
+    }
+  }
+
+  function getWorkContent(deadline) {
+    console.log('剩余时间，', deadline.timeRemaining())
+
+    // Fiber思想，查看是否又剩余时间，如果没有就把控制权还给浏览器，
+    while (
+        (deadline.timeRemaining() > 0 || deadline.didTimeout) &&
+        works.length
+        ) {
+      let cb = works.shift()
+      backup.push(cb)
+      cb()
+    }
+    if (works.length) {
+      console.warn('放弃控制权限')
+      window.requestIdleCallback(getWorkContent, {timeout: 1500})
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    window.requestIdleCallback(getWorkContent, {timeout: 1500})
+    console.log(backup)
+  })
+</script>
+</body>
+</html>

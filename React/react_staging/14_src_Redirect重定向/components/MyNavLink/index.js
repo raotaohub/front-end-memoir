@@ -5,7 +5,7 @@ class MyNavLink extends Component {
   render() {
     const {props} = this
     return (
-      <NavLink activeClassName="demo" className="list-group-item" {...props}/>
+        <NavLink activeClassName="demo" className="list-group-item" {...props}/>
     );
   }
 }

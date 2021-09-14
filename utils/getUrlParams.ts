@@ -5,9 +5,9 @@ export const getUrlParams1 = (url: string) => {
     const [key, value] = item.split('=');
     if (paramsObj[key]) {
       paramsObj[key] =
-        typeof paramsObj[key] === 'string'
-          ? [paramsObj[key], value]
-          : paramsObj[key].concat(value);
+          typeof paramsObj[key] === 'string'
+              ? [paramsObj[key], value]
+              : paramsObj[key].concat(value);
     } else {
       paramsObj[key] = value;
     }
@@ -20,8 +20,8 @@ export const getUrlParams2 = (url: string) => {
     const [key, value] = v.split('=');
     if (a[key]) {
       a[key] = ((typeof a[key] === 'string'
-        ? [a[key]]
-        : a[key]) as string[]).concat(value);
+          ? [a[key]]
+          : a[key]) as string[]).concat(value);
     } else {
       a[key] = value;
     }

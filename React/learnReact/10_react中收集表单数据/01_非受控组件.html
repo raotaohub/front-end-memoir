@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>01_非受控组件</title>
+  <meta charset="UTF-8">
+  <title>01_非受控组件</title>
 </head>
 <body>
 <div id="test1"></div>
@@ -22,11 +22,11 @@
     }
     render() {
       return (
-        <form action={void 0} onSubmit={this.handleSubmit}>
-          用户名：<input type="text" ref={c => this.username = c} name="username"/>
-          密码：<input type="password" ref={c => this.password = c} name="password"/>
-          <button>点击提交</button>
-        </form>
+          <form action={void 0} onSubmit={this.handleSubmit}>
+            用户名：<input type="text" ref={c => this.username = c} name="username"/>
+            密码：<input type="password" ref={c => this.password = c} name="password"/>
+            <button>点击提交</button>
+          </form>
       )
     }
   }

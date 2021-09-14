@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>02_回调形式的ref</title>
+  <meta charset="UTF-8">
+  <title>02_回调形式的ref</title>
 </head>
 <body>
 
@@ -29,11 +29,11 @@
     render() {
       /** 在回调中，将参数设置给自身属性 **/
       return (
-        <div>
-          <input ref={c => this.input1 = c} placeholder="点击按钮提示内容"/>
-          <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
-          <input ref={t => this.input2 = t} onBlur={this.showData2} placeholder="失去焦点提示内容"/>
-        </div>
+          <div>
+            <input ref={c => this.input1 = c} placeholder="点击按钮提示内容"/>
+            <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
+            <input ref={t => this.input2 = t} onBlur={this.showData2} placeholder="失去焦点提示内容"/>
+          </div>
       )
     }
   }

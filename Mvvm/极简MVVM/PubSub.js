@@ -29,12 +29,10 @@ class PubSub {
 }
 
 const pub = new PubSub()
-pub.on('test',function (a){
+pub.on('test', function (a) {
   console.log(a)
 })
-pub.emit('test','test,test,test,test,test,test,')
-
-
+pub.emit('test', 'test,test,test,test,test,test,')
 
 // 题外话 表编程 即策略模式
 // {

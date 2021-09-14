@@ -24,11 +24,11 @@ class Detail extends Component {
       return detailObj.id === id
     })
     return (
-      <ul>
-        <li>ID:{id}</li>
-        <li>TITLE:{title}</li>
-        <li>CONTENT:{findResult.content}</li>
-      </ul>
+        <ul>
+          <li>ID:{id}</li>
+          <li>TITLE:{title}</li>
+          <li>CONTENT:{findResult.content}</li>
+        </ul>
     )
   }
 }

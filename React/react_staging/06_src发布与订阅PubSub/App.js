@@ -5,10 +5,10 @@ import List from "./components/List"
 export default class App extends React.Component {
   render() {
     return (
-      <div className="container">
-        <Search/>
-        <List/>
-      </div>
+        <div className="container">
+          <Search/>
+          <List/>
+        </div>
     )
   }
 }

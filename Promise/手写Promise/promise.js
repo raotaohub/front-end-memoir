@@ -67,12 +67,12 @@ Promise.resolve = function resolve(value) {
     try {
       if (value instanceof Promise) {
         value.then(
-          (r) => {
-            resolve(r);
-          },
-          (e) => {
-            reject(e);
-          }
+            (r) => {
+              resolve(r);
+            },
+            (e) => {
+              reject(e);
+            }
         );
       } else {
         resolve(value);
@@ -106,16 +106,16 @@ Promise.all = function all(promises) {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < length; i++) {
       promises[i].then(
-        (r) => {
-          count++;
-          result[i] = r; // 使用push 可能会在调用异步任务时导致无序
-          if (count === length) {
-            resolve(result);
+          (r) => {
+            count++;
+            result[i] = r; // 使用push 可能会在调用异步任务时导致无序
+            if (count === length) {
+              resolve(result);
+            }
+          },
+          (e) => {
+            reject(e);
           }
-        },
-        (e) => {
-          reject(e);
-        }
       );
     }
   });
@@ -134,14 +134,14 @@ Promise.race = function race(promises) {
     try {
       for (const p of promises) {
         p.then(
-          (r) => {
-            resolve(r);
-            flag = true;
-          },
-          (e) => {
-            reject(e);
-            flag = true;
-          }
+            (r) => {
+              resolve(r);
+              flag = true;
+            },
+            (e) => {
+              reject(e);
+              flag = true;
+            }
         );
         if (flag) break;
       }
@@ -197,12 +197,12 @@ Promise.prototype.then = function then(onResolved, onRejected) {
           let result = type(self.PromiseReason); // 这个返回值是实例上的返回值
           if (result instanceof Promise) {
             result.then(
-              (r) => {
-                resolve(r);
-              },
-              (e) => {
-                reject(e);
-              }
+                (r) => {
+                  resolve(r);
+                },
+                (e) => {
+                  reject(e);
+                }
             );
           } else {
             resolve(result);

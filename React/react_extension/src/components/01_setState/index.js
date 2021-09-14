@@ -6,7 +6,7 @@
  * @FilePath: \react_extension\src\components\01_setState\index.js
  * @Description: Edit......
  */
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 export default class Demo extends Component {
   state = {
@@ -23,17 +23,17 @@ export default class Demo extends Component {
 
     // （2）函数式 setState 接收一个函数，默认接收2个参数
     this.setState((state, props) => {
-      return { count: state.count + 1 };
+      return {count: state.count + 1};
     });
   };
 
   render() {
     return (
-      <div>
-        <h5>01_setState</h5>
-        <div>当前求和项是：{this.state.count}</div>
-        <button onClick={this.add}>点击加1</button>
-      </div>
+        <div>
+          <h5>01_setState</h5>
+          <div>当前求和项是：{this.state.count}</div>
+          <button onClick={this.add}>点击加1</button>
+        </div>
     );
   }
 }

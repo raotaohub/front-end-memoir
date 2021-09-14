@@ -43,4 +43,4 @@ Dep.prototype.notify = function () {
   }
 };
 
-export { Dep };
+export {Dep};

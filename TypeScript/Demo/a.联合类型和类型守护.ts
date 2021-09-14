@@ -11,6 +11,7 @@ interface IProps1 {
   type: boolean
   skill: () => {}
 }
+
 interface IProps2 {
   ability: boolean
   sayHello: () => {}

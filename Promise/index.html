@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>手写Promise</title>
+  <meta charset="UTF-8">
+  <title>手写Promise</title>
 </head>
 <body>
 <script src="promise.js"></script>
@@ -39,14 +39,14 @@
     }, 1000)
   })
   let a2 = new Promise((resolve, reject) => {
-    setTimeout(()=>{
+    setTimeout(() => {
       resolve('成功2')
-    },2000)
+    }, 2000)
   })
   let a3 = new Promise((resolve, reject) => {
-    setTimeout(()=>{
+    setTimeout(() => {
       resolve('成功3')
-    },3000)
+    }, 3000)
   })
 
   let result = Promise.all([a1, a2, a3])

@@ -19,15 +19,15 @@ class Header extends Component {
     console.log("Header收到的props是", this.props)
     const {props} = this
     return (
-      <div>
-        <h5>props是{props.a}</h5>
-        <button onClick={this.back}>回退</button>
-        &nbsp;
-        <button onClick={this.forward}>前进</button>
-        &nbsp;
-        <button onClick={this.go}>g o</button>
-        &nbsp;
-      </div>
+        <div>
+          <h5>props是{props.a}</h5>
+          <button onClick={this.back}>回退</button>
+          &nbsp;
+          <button onClick={this.forward}>前进</button>
+          &nbsp;
+          <button onClick={this.go}>g o</button>
+          &nbsp;
+        </div>
     );
   }
 }

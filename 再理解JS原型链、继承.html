@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>再读JS原型链、继承</title>
+  <meta charset="UTF-8">
+  <title>再读JS原型链、继承</title>
 </head>
 <body>
 <!--
@@ -12,10 +12,10 @@
   // JavaScript 创建对象
   // a1对象字面量, a2调用构造函数 ,a3用传入对象的prototype提供新对象的[[prototype]], a4 实例化 , a5 浅复制
   let a1 = {name: 'ect', age: 16},
-    a2 = Object({name: 'pig', age: 12}),
-    a3 = Object.create(a2),
-    a4 = new Object({name: 'pig', age: 12}),
-    a5 = Object.assign(a1, a2, a3);
+      a2 = Object({name: 'pig', age: 12}),
+      a3 = Object.create(a2),
+      a4 = new Object({name: 'pig', age: 12}),
+      a5 = Object.assign(a1, a2, a3);
   console.log(a1, a2, a3.__proto__, a4, a5)
 
   // 1、工厂模式
@@ -249,13 +249,13 @@
   console.log(c1, c2, c3, c4, c5);
 
   console.log(
-    (function () {
-      var x = foo();
-      function foo() {
-        return "foobar"
-      };
-      return x;
-    })()
+      (function () {
+        var x = foo();
+        function foo() {
+          return "foobar"
+        };
+        return x;
+      })()
   )
 
   let str = String('111')

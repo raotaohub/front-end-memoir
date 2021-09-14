@@ -27,9 +27,18 @@ interface ILady {
 }
 
 const xiaojiejie: ILady[] = [
-  { name: '111', age: 111, sayName: () => {} },
-  { name: '222', age: 222, sayName: () => {} },
-  { name: '333', age: 333, sayName: () => {} },
+  {
+    name: '111', age: 111, sayName: () => {
+    }
+  },
+  {
+    name: '222', age: 222, sayName: () => {
+    }
+  },
+  {
+    name: '333', age: 333, sayName: () => {
+    }
+  },
 ]
 
 // 也可以定义 type 或者 class

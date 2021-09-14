@@ -8,10 +8,10 @@ import './index.css'; // 引入全局样式表
 import App from './App';// 引入APP组件
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+      <App/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 

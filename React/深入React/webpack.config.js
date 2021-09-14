@@ -9,10 +9,10 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname,'www'),
-    compress:false,
-    port:8080,
-    publicPath:'/xuni/',
+    contentBase: path.resolve(__dirname, 'www'),
+    compress: false,
+    port: 8080,
+    publicPath: '/xuni/',
     hot: true,
   },
   module: {

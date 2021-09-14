@@ -10,8 +10,8 @@
 function Promise(fn) {
   const self = this;
   const PENDING = "pending",
-    FULFILLED = "fulfilled",
-    REJECTED = "rejected";
+      FULFILLED = "fulfilled",
+      REJECTED = "rejected";
 
   this.PromiseState = PENDING;
   this.PromiseReason = null;
@@ -66,12 +66,12 @@ Promise.prototype.then = function (onResolve, onReject) {
           let result = type(self.PromiseReason);
           if (result instanceof Promise) {
             result.then(
-              (res) => {
-                resolve(res);
-              },
-              (err) => {
-                reject(err);
-              }
+                (res) => {
+                  resolve(res);
+                },
+                (err) => {
+                  reject(err);
+                }
             );
           } else {
             resolve(result);
@@ -114,12 +114,12 @@ Promise.prototype.resolve = function (value) {
     try {
       if (value instanceof Promise) {
         value.then(
-          (res) => {
-            resolve(res);
-          },
-          (err) => {
-            reject(err);
-          }
+            (res) => {
+              resolve(res);
+            },
+            (err) => {
+              reject(err);
+            }
         );
       } else {
         resolve(value);

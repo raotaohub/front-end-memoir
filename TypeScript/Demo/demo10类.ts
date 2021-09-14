@@ -1,5 +1,6 @@
 class Lady {
   content = "hi , 帅哥"
+
   sayHello() {
     return this.content
   }
@@ -12,6 +13,7 @@ class XiaoJieJie extends Lady {
   sayLove() {
     return 'I love you'
   }
+
   // 也可以重写父类里的方法 也可以通过 super 关键字 调用父类里的sayHello
   sayHello() {
     return 'hi honey!' + super.sayHello() + ',你们好呀'
@@ -41,6 +43,7 @@ class Person {
 
 class Teacher extends Person {
   name = "我是老师"
+
   public sayCall() {
     // 可以在继承中的类使用 外部不可以使用
     this.sayHello()
@@ -57,10 +60,12 @@ person2.sayCall()
 // 就是说 类在初始化的时候 自动执行一个方法 constructor()
 class Dog {
   public name: string
+
   // 构造函数 要求传递一个 name
   constructor(name: string) {
     this.name = name
   }
+
   // 可以简化写法 constructor(public name: string)
 }
 
@@ -85,94 +90,4 @@ console.log(olddog.age)
 /**************************************              类的Getter 和Setter            **************************************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export { }
+export {}

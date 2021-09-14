@@ -6,8 +6,7 @@ class JA {
     this.name = name
   }
 
-
-  get(){
+  get() {
     return this.name
   }
 }

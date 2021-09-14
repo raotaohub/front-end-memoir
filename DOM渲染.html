@@ -8,66 +8,66 @@
  * @Description: Edit......
 -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Document</title>
+  <style>
       #container {
-        background-color: burlywood;
-        min-height: 300px;
-        min-width: 300px;
+          background-color: burlywood;
+          min-height: 300px;
+          min-width: 300px;
       }
-    </style>
-  </head>
-  <input type="text" value="10" id="num" />
-  <input type="button" onclick="render()" value="重渲染" />
-  <div id="container"></div>
+  </style>
+</head>
+<input id="num" type="text" value="10"/>
+<input onclick="render()" type="button" value="重渲染"/>
+<div id="container"></div>
 
-  <body>
-    <script>
-      let container = document.getElementById('container');
-      const num = document.getElementById('num');
+<body>
+<script>
+  let container = document.getElementById('container');
+  const num = document.getElementById('num');
 
-      function render() {
-        for (let i = 0; i < container.childNodes.length; i++) {
-          container.removeChild(container.childNodes[i]);
-        }
-        gameStart(num.nodeValue);
-      }
+  function render() {
+    for (let i = 0; i < container.childNodes.length; i++) {
+      container.removeChild(container.childNodes[i]);
+    }
+    gameStart(num.nodeValue);
+  }
 
-      function gameStart(num) {
-        function createBox(tag) {
-          let box = document.createElement(tag);
-          box.style.height = 30 + 'px';
-          box.style.width = 30 + 'px';
-          box.style.background = 'while';
-          box.style.display = 'inline-block';
-          box.style.border = 'solid';
-          container.appendChild(box);
-        }
+  function gameStart(num) {
+    function createBox(tag) {
+      let box = document.createElement(tag);
+      box.style.height = 30 + 'px';
+      box.style.width = 30 + 'px';
+      box.style.background = 'while';
+      box.style.display = 'inline-block';
+      box.style.border = 'solid';
+      container.appendChild(box);
+    }
+    createBox('div');
+
+    function br() {
+      return document.createElement('br');
+    }
+
+    function mainStar(n) {
+      for (let i = 0; i < n; ++i) {
         createBox('div');
-
-        function br() {
-          return document.createElement('br');
+        for (let j = 1; j < n; ++j) {
+          createBox('div');
         }
-
-        function mainStar(n) {
-          for (let i = 0; i < n; ++i) {
-            createBox('div');
-            for (let j = 1; j < n; ++j) {
-              createBox('div');
-            }
-            container.appendChild(br());
-          }
-        }
-
-        mainStar(4);
-
-        function addListen(element) {}
+        container.appendChild(br());
       }
-      gameStart();
-    </script>
-  </body>
+    }
+
+    mainStar(4);
+
+    function addListen(element) {}
+  }
+  gameStart();
+</script>
+</body>
 </html>

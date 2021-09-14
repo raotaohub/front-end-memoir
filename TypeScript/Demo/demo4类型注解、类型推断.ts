@@ -21,11 +21,13 @@ const three = one + two
 function getTotal(a: number, b: number) {
   return (a + b).toString()
 }
+
 getTotal(1, 2)
 
 function getTotal2(a: number, b: number) {
   return (a + b).toString()
 }
+
 getTotal2(1, 2)
 
 export {}

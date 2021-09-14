@@ -66,7 +66,9 @@ addMethod<string, number>('string', 123)
 /***********************************************  在类中使用泛型  **********************************************/
 
 class SelectRow1<T> {
-  constructor(private select: T[]) {}
+  constructor(private select: T[]) {
+  }
+
   getSelect(index: number): T {
     return this.select[index]
   }
@@ -80,11 +82,14 @@ seleterRow1.getSelect(1)
 
 interface ISelectRow {
   name: string
+
   [key: string]: unknown
 }
 
 class SelectRow2<T extends ISelectRow> {
-  constructor(private select: T[]) {}
+  constructor(private select: T[]) {
+  }
+
   getSelect(index: number): string {
     return this.select[index].name
   }
@@ -93,16 +98,18 @@ class SelectRow2<T extends ISelectRow> {
 // 这就要求了实例化时传入的 [] 中每一个元素是一个对象，并且必须有name属性
 
 const selectRow2 = new SelectRow2<ISelectRow>([
-  { name: '猪猪' },
-  { name: '蛇蛇' },
-  { name: '狗狗', age: 19 },
+  {name: '猪猪'},
+  {name: '蛇蛇'},
+  {name: '狗狗', age: 19},
 ])
 
 /***********************************************  泛型约束  **********************************************/
 
 // 约束了泛型T 只能是  number | string
 class SelectRow3<T extends ISelectRow | number | string> {
-  constructor(private select: T[]) {}
+  constructor(private select: T[]) {
+  }
+
   getSelect(index: number) {
     if (typeof this.select[index] !== 'number' || 'string') {
       return (this.select[index] as ISelectRow).name

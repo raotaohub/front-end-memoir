@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Document</title>
+</head>
+<body>
+<div
+    id="item"
+    style="background: burlywood; width: 0px; height: 30px"
+></div>
+<button id="btn">点击</button>
+<script>
+  let btn = document.querySelector('#btn')
+  let div = document.querySelector('#item')
+
+  let start
+  function progress() {
+    div.style.width = div.offsetWidth + 1 + 'px'
+    div.innerHTML = div.offsetWidth + '%'
+
+    if (div.offsetWidth < 100) {
+      let current = Date.now()
+      console.log(current - start)
+      start = current
+      window.requestAnimationFrame(progress)
+    }
+  }
+  btn.addEventListener('click', () => {
+    start = Date.now()
+    div.style.width = 0
+    let current = Date.now()
+    start = current
+    window.requestAnimationFrame(progress)
+  })
+
+</script>
+</body>
+</html>

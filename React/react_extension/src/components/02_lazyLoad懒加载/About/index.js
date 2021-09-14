@@ -6,7 +6,7 @@
  * @FilePath: \react_extension\src\components\02_lazyLoad懒加载\About\index.js
  * @Description: Edit......
  */
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 export default class Home extends Component {
   render() {

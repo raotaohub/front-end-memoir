@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Promise封装</title>
+  <meta charset="UTF-8">
+  <title>Promise封装</title>
 </head>
 <body>
 <script src="promise.js"></script>
@@ -18,7 +18,6 @@
     // throw 'error'
   })
 
-
   p.then(v => {
     console.log('111')
   }).then(v => {
@@ -28,7 +27,7 @@
     throw '中间失败'
   }).then(v => {
     console.log('444')
-  }).catch(err=>{
+  }).catch(err => {
     console.warn(err)
   })
 

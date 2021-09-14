@@ -9,7 +9,7 @@ interface IGirl {
 }
 
 const searchResume = (girl: IGirl) => {
-  const { name, age, bust } = girl
+  const {name, age, bust} = girl
   age < 24 && bust >= 90 && console.log(name + '你被录用了是')
   ;(age >= 24 || bust < 90) && console.log(name + '你被淘汰了❌')
   girl.waistLine && console.log(girl.waistLine)

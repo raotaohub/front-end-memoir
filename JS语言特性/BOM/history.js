@@ -1,7 +1,7 @@
 const history = window.history
 console.log(
-  '%chistory------------------------------------------',
-  'color: red ;font-size:18px'
+    '%chistory------------------------------------------',
+    'color: red ;font-size:18px'
 )
 
 console.log(window.history)

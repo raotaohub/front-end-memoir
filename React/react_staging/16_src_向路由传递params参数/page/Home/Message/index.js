@@ -13,23 +13,23 @@ class Message extends Component {
   render() {
     const {messageList} = this.state
     return (
-      <div>
-        <ul>
-          {
-            messageList.map((msgObj) => {
-              return (
-                <li key={msgObj.id}>
-                  {/** 入口 传递 params**/}
-                  <Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link>&nbsp;&nbsp;
-                </li>
-              )
-            })
-          }
-        </ul>
-        <hr/>
-        {/** 出口 接收 params 参数**/}
-        <Route path={`/home/message/detail/:id/:title`} component={Detail}/>
-      </div>
+        <div>
+          <ul>
+            {
+              messageList.map((msgObj) => {
+                return (
+                    <li key={msgObj.id}>
+                      {/** 入口 传递 params**/}
+                      <Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link>&nbsp;&nbsp;
+                    </li>
+                )
+              })
+            }
+          </ul>
+          <hr/>
+          {/** 出口 接收 params 参数**/}
+          <Route path={`/home/message/detail/:id/:title`} component={Detail}/>
+        </div>
     );
   }
 }

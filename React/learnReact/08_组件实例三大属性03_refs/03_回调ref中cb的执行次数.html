@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>03_回调ref中cb的执行次数</title>
+  <meta charset="UTF-8">
+  <title>03_回调ref中cb的执行次数</title>
 </head>
 <body>
 
@@ -40,13 +40,13 @@
     render() {
       const {isHot} = this.state
       return (
-        <div>
-          <h2>今天天气很{isHot ? "炎热" : "凉爽"}</h2>
-          {/*<input ref={(c) => {this.input1 = c;console.count("###")}} placeholder="点击按钮提示内容"/> */}
-          <input ref={this.saveInput} placeholder="点击按钮提示内容"/>
-          <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
-          <button onClick={this.changeShow}>切换</button>
-        </div>
+          <div>
+            <h2>今天天气很{isHot ? "炎热" : "凉爽"}</h2>
+            {/*<input ref={(c) => {this.input1 = c;console.count("###")}} placeholder="点击按钮提示内容"/> */}
+            <input ref={this.saveInput} placeholder="点击按钮提示内容"/>
+            <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
+            <button onClick={this.changeShow}>切换</button>
+          </div>
       )
     }
   }

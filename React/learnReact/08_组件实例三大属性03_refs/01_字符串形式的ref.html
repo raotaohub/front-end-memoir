@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>01_字符串形式的ref</title>
+  <meta charset="UTF-8">
+  <title>01_字符串形式的ref</title>
 </head>
 <body>
 
@@ -30,11 +30,11 @@
     render() {
       /** 在标签内加上ref属性  **/
       return (
-        <div>
-          <input ref="input1" placeholder="点击按钮提示内容"/>
-          <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
-          <input ref="input2" onBlur={this.showData2} placeholder="失去焦点提示内容"/>
-        </div>
+          <div>
+            <input ref="input1" placeholder="点击按钮提示内容"/>
+            <button ref="btn" onClick={this.showData1}>点击展示左侧输入框的内容</button>
+            <input ref="input2" onBlur={this.showData2} placeholder="失去焦点提示内容"/>
+          </div>
       )
     }
   }

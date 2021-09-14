@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>01_事件处理</title>
+  <meta charset="UTF-8">
+  <title>01_事件处理</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     /**
      （1）onclick  =====> onClick  on后的事件名首字的大写
      （2）React使用的是自定义合成事件 ————————————————————————————为了更好的兼容性
-         React使用的是【事件委托机制】，委托给组件最外层的元素—————————高效
+     React使用的是【事件委托机制】，委托给组件最外层的元素—————————高效
      （3）尽可能通过event.target来获得发生事件的DOM元素对象——————————尽量减少使用 ref
      */
     myRef = React.createRef()
@@ -32,11 +32,11 @@
     }
     render() {
       return (
-        <div>
-          <input ref={this.myRef} placeholder="点击按钮提示内容"/>
-          <button ref="btn" onClick={this.showData}>点击展示左侧输入框的内容</button>
-          <input onBlur={this.input2} type="text"/>
-        </div>
+          <div>
+            <input ref={this.myRef} placeholder="点击按钮提示内容"/>
+            <button ref="btn" onClick={this.showData}>点击展示左侧输入框的内容</button>
+            <input onBlur={this.input2} type="text"/>
+          </div>
       )
     }
   }

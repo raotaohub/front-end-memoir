@@ -8,65 +8,70 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>节流函数和防抖函数</title>
-  </head>
-  <body>
-    <!--
-  节流函数的应用场景:
-      用户在表单进行搜索时，会发送ajax请求，利用节流函数，作用是多次触发时间，只执行一次
+<head>
+  <meta charset="UTF-8"/>
+  <title>节流函数和防抖函数</title>
+</head>
+<body>
+<!--
+节流函数的应用场景:
+  用户在表单进行搜索时，会发送ajax请求，利用节流函数，作用是多次触发时间，只执行一次
 -->
-    <script>
-      // 防抖
-      function debounce(fn, wait) {
-        let timer = null
-        return function () {
-          if (!timer) {
-            clearTimeout(timer)
-          }
-          timer = setTimeout(() => {
-            fn.apply(this)
-          }, wait)
-        }
+<script>
+  // 防抖
+  function debounce(fn, wait) {
+    let timer = null
+    return function () {
+      if (!timer) {
+        clearTimeout(timer)
       }
-      // 节流函数
-      function throttle(fn, wait) {
-        let lastTime = 0
-        return function () {
-          let nowTime = new Date()
-          if (nowTime - lastTime >= wait) {
-            fn.apply(this)
-            lastTime = nowTime
-          }
-        }
+      timer = setTimeout(() => {
+        fn.apply(this)
+      }, wait)
+    }
+  }
+  // 节流函数
+  function throttle(fn, wait) {
+    let lastTime = 0
+    return function () {
+      let nowTime = new Date()
+      if (nowTime - lastTime >= wait) {
+        fn.apply(this)
+        lastTime = nowTime
       }
-<<<<<<< HEAD
+    }
+  }
+  <
+  <
+  <
+  <
+  <
+  << HEAD
 
       function debounce(fn, wait) {
-        let timer = null
-        return function () {
-          if (timer !== null) {
-            clearTimeout(timer)
-          }
-          timer = setTimeout(() => {
-            fn.apply(this)
-          }, wait)
-        }
-      }
+  let timer = null
+  return function () {
+  if (timer !== null) {
+  clearTimeout(timer)
+  }
+  timer = setTimeout(() => {
+  fn.apply(this)
+  }, wait)
+  }
+  }
 
-      function throttle(fn, wait) {
-        let lastTime = 0
-        return function () {
-          let nowTime = new Date()
-          if (nowTime - lastTime >= wait) {
-            fn.apply(this)
-            lastTime = nowTime
-          }
-        }
-      }
-=======
->>>>>>> ec104e5473d2d43a62fb869032a78785b647b68a
-    </script>
-  </body>
+  function throttle(fn, wait) {
+  let lastTime = 0
+  return function () {
+  let nowTime = new Date()
+  if (nowTime - lastTime >= wait) {
+    fn.apply(this)
+    lastTime = nowTime
+  }
+  }
+  }
+  =======
+  >>>>>>> ec104e5473d2d43a62fb869032a78785b647b68a
+</script>
+</body>
 </html>

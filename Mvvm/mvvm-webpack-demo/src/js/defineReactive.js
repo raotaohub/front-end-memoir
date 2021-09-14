@@ -1,4 +1,4 @@
-import {observe,dependArray} from "./Vm"
+import {observe, dependArray} from "./Vm"
 import {Dep} from "./Dep"
 
 /**
@@ -25,7 +25,7 @@ export default function defineReactive(obj, key, value) {
         dep.depend()
         if (childOb) {
           childOb.dep.depend()
-          if(Array.isArray(value)){
+          if (Array.isArray(value)) {
             dependArray(value)
           }
         }

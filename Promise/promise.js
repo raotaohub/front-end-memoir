@@ -1,8 +1,8 @@
 function Promise(fn) {
   const self = this
   const PENDING = 'pending',
-    FULFILLED = 'fulfilled',
-    REJECTED = 'rejected'
+      FULFILLED = 'fulfilled',
+      REJECTED = 'rejected'
 
   this.PromiseState = PENDING
   this.PromiseReason = null
@@ -37,12 +37,12 @@ Promise.resolve = function (value) {
     try {
       if (value instanceof Promise) {
         value.then(
-          res => {
-            resolve(res)
-          },
-          err => {
-            reject(err)
-          }
+            res => {
+              resolve(res)
+            },
+            err => {
+              reject(err)
+            }
         )
       } else {
         resolve(value)
@@ -66,16 +66,16 @@ Promise.all = function (iterable) {
     let result = []
     for (let i = 0; i < length; i++) {
       iterable[i].then(
-        v => {
-          result[i] = v
-          count++
-          if (count === length) {
-            resolve(result)
+          v => {
+            result[i] = v
+            count++
+            if (count === length) {
+              resolve(result)
+            }
+          },
+          e => {
+            reject(e)
           }
-        },
-        e => {
-          reject(e)
-        }
       )
     }
   })
@@ -85,11 +85,11 @@ Promise.race = function (iterable) {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < iterable.length; i++) {
       iterable[i].then(v => {
-          resolve(v)
-        },
-        e => {
-          reject(e)
-        }
+            resolve(v)
+          },
+          e => {
+            reject(e)
+          }
       )
     }
   })
@@ -117,12 +117,12 @@ Promise.prototype.then = function (onResolved, onRejected) {
           const result = type(self.PromiseReason)
           if (result instanceof Promise) {
             result.then(
-              res => {
-                resolve(res)
-              },
-              err => {
-                reject(err)
-              })
+                res => {
+                  resolve(res)
+                },
+                err => {
+                  reject(err)
+                })
           } else {
             resolve(result)
           }

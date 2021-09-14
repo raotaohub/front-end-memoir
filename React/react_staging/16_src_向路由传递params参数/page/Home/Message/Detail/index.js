@@ -15,11 +15,11 @@ class Detail extends Component {
       return detailObj.id === id
     })
     return (
-      <ul key={findResult.id}>
-        <li>ID:{id}</li>
-        <li>TITLE:{title}</li>
-        <li>CONTENT:{findResult.content}</li>
-      </ul>
+        <ul key={findResult.id}>
+          <li>ID:{id}</li>
+          <li>TITLE:{title}</li>
+          <li>CONTENT:{findResult.content}</li>
+        </ul>
     );
   }
 }

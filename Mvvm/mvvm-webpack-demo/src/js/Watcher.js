@@ -6,7 +6,7 @@
  * @FilePath: \mvvm-webpack-demo\src\js\Watcher.js
  * @Description: Edit......
  */
-import { Dep } from "./Dep";
+import {Dep} from "./Dep";
 
 /**
  * 什么时候会触发 get ？ 当读取对象值的时候 。也就是获得 exp 的值的时候，
@@ -41,7 +41,7 @@ Watcher.prototype.update = function () {
    * */
   let value = this.get();
   let oldValue = this.value
-  this.cb.call(this,value,oldValue);
+  this.cb.call(this, value, oldValue);
 };
 /**
  *
@@ -84,4 +84,4 @@ function parsePath(exp) {
   };
 }
 
-export { Watcher };
+export {Watcher};

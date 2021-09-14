@@ -4,9 +4,11 @@ namespace Components {
   // 命名空间支持嵌套
   export namespace SubComponents {
     export class Test {
-      constructor() {}
+      constructor() {
+      }
     }
   }
+
   export class Header {
     constructor() {
       const ele = document.createElement('div')

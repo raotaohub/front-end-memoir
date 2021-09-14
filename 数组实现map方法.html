@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>实现数组map方法</title>
+  <meta charset="UTF-8">
+  <title>实现数组map方法</title>
 </head>
 <body>
 <!--
@@ -15,7 +15,7 @@ callback 函数只会在有值的索引上被调用
     let array = this
     let value
     for (let i = 0; i < array.length; i++) {
-      value = cb(array[i],i,array)
+      value = cb(array[i], i, array)
       result.push(value)
     }
     return result

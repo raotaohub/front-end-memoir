@@ -6,7 +6,7 @@
  * @FilePath: \react_extension\src\components\05_Context\index.js
  * @Description: Edit......
  */
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 export default class Demo extends Component {
   render() {

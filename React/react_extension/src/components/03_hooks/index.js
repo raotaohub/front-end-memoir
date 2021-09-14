@@ -7,7 +7,7 @@
  * @Description: Edit......
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 /* export default class Demo extends Component {
   state = {
@@ -35,11 +35,11 @@ export default function Demo() {
     setName((name) => "zhuzhu"); //2.setXxx(newValue): 参数为非函数值, 直接指定新的状态值, 内部用其覆盖原来的状态值
   }
   return (
-    <div>
-      <h2>当前求和为：{count}</h2>
-      <button onClick={add}>点击加2</button>
-      <h2>当前名字为：{name}</h2>
-      <button onClick={changeName}>点击改名</button>
-    </div>
+      <div>
+        <h2>当前求和为：{count}</h2>
+        <button onClick={add}>点击加2</button>
+        <h2>当前名字为：{name}</h2>
+        <button onClick={changeName}>点击改名</button>
+      </div>
   );
 }

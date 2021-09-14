@@ -16,7 +16,9 @@ const xiaojiejie: {
 const xiaojiejies: string[] = ['大小', 'nihao', '😀小红']
 
 // 3、类类型 规定该变量为 Person 的一个实例
-class Person {}
+class Person {
+}
+
 const xiaohong: Person = new Person()
 
 // 4、函数类型 规定该函数返回值为 字符串
