@@ -2,7 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/React/just-react/just-react" vcs="" />
+    <mapping directory="$PROJECT_DIR$/React/just-react/just-react" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/React/react_redux" vcs="" />
     <mapping directory="$PROJECT_DIR$/React/reactdemo" vcs="" />
   </component>
