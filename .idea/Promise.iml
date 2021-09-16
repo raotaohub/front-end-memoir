@@ -3,8 +3,15 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/React/.idea/inspectionProfiles" />
+      <excludeFolder url="file://$MODULE_DIR$/React/react_staging/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/React/useContext_useReducer/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/TypeScript/Demo/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/utils/date-tool/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/设计模式/事件/event/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/设计模式/发布订阅模式/pubsub-lite/.idea" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
