@@ -23,7 +23,7 @@
     class EventEmitter {
         constructor() {
             /*
-                listeners = {
+                _events = {
                     "event1": [f1,f2,f3],
                     "event2": [f4,f5],
                 }
@@ -34,35 +34,38 @@
         getListeners() {
             return this._events || (this._events = {});
         }
-
+        // 注册一个监听
         on(name, cb) {
-
+            // 回调必须是个函数
             if (!isValidListener(cb)) {
                 throw console.log('listen callback must be a function')
             }
-
+            // 获得事件总线对象
             const listeners = this.getListeners()
 
             const listenerIsWrapped = typeof cb === 'object'
-
+            // 看看是否有该事件
             if (!listeners.hasOwnProperty(name)) {
-                listeners[name] = []
+                listeners[name] = [] // 如果没有则为添加事件到事件总线对象
             }
-
+            // 将回调存入该事件的任务队列中
             listeners[name].push(listenerIsWrapped ? cb : {
                 listener: cb,
                 once: false
             })
             return this
         }
-
+        // 触发一个事件
         emit(name, ...args) {
+            // 获得事件总线对象
             const listeners = this.getListeners()
+            // 看看是否有该事件
             if (listeners.hasOwnProperty(name)) {
+                // 取出这个事件的任务队列并执行里面的子任务
                 listeners[name].forEach((cb) => {
 
                     cb.listener && cb.listener.apply(this, args)
-
+                    // 如果这个事件是1次性的那么执行后注销
                     if (cb.once === true) {
                         this.remove(name, cb.listener)
                     }
@@ -77,11 +80,14 @@
                 listener: cb, once: true
             })
         }
-
+        // 移除1个事件
         remove(name, cb) {
+            // 获得事件总线对象
             const listeners = this.getListeners()
             let index;
+            // 看看是否有该事件
             if (listeners.hasOwnProperty(name)) {
+                // 在该事件的任务队列中查找这个回调，如果有的话就删除
                 index = indexOfListener(listeners[name], cb)
                 if (index !== -1) {
                     listeners[name].splice(index, 1);

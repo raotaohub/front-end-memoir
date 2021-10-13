@@ -1,32 +1,26 @@
-/**
- * Copyright (c) 2010,2011,2012,2013,2014 Morgan Roderick http://roderick.dk
- * License: MIT - http://mrgnrdrck.mit-license.org
- *
- * https://github.com/mroderick/PubSubJS
- */
-
 (function (root, factory) {
-    'use strict';
+    "use strict";
 
     var PubSub = {};
     root.PubSub = PubSub;
     factory(PubSub);
     // CommonJS and Node.js module support
-    if (typeof exports === 'object') {
+    if (typeof exports === "object") {
         if (module !== undefined && module.exports) {
             exports = module.exports = PubSub; // Node.js specific `module.exports`
         }
         exports.PubSub = PubSub; // CommonJS module 1.1.1 spec
         module.exports = exports = PubSub; // CommonJS
     }
-        // AMD support
+    // AMD support
     /* eslint-disable no-undef */
-    else if (typeof define === 'function' && define.amd) {
-        define(function () { return PubSub; });
+    else if (typeof define === "function" && define.amd) {
+        define(function () {
+            return PubSub;
+        });
         /* eslint-enable no-undef */
     }
-
-}((typeof window === 'object' && window) || this, function (PubSub) {
+})((typeof window === "object" && window) || this, function (PubSub) {
     /**
      * {
      * message1:{uid01:Function,uid02:Function}
@@ -39,25 +33,25 @@
      * **/
     let messages = {},
         lastUid = -1,
-        ALL_SUBSCRIBING_MSG = '*';
+        ALL_SUBSCRIBING_MSG = "*";
 
     /**  **/
     PubSub.subscribe = function (message, callback) {
         /** 确保第 2 个参数是一个函数 **/
-        if (typeof callback !== 'function') throw console.log('callback must be a function')
+        if (typeof callback !== "function") throw console.log("callback must be a function");
 
-        message = (typeof message === 'symbol') ? message.toString() : message
+        message = typeof message === "symbol" ? message.toString() : message;
 
         if (!Object.prototype.hasOwnProperty.call(messages, message)) {
-            messages[message] = []
+            messages[message] = [];
         }
 
-        const token = 'uid' + String(++lastUid)
+        const token = "uid" + String(++lastUid);
 
-        messages[message][token] = callback
+        messages[message][token] = callback;
 
-        return token
-    }
+        return token;
+    };
 
     function hasKeys(obj) {
         let key;
@@ -74,9 +68,7 @@
         let topic = String(message),
             found =
                 /** 1.确保 messages 总线中有该 订阅 **/
-                Boolean(Object.prototype.hasOwnProperty.call(messages, topic)
-                    && /** 2. 确保订阅中有对应的 回调 **/
-                    hasKeys(messages[topic]))
+                Boolean(Object.prototype.hasOwnProperty.call(messages, topic) /** 2. 确保订阅中有对应的 回调 **/ && hasKeys(messages[topic]));
 
         return found;
     }
@@ -89,24 +81,23 @@
             position = topic.lastIndexOf(".");
 
         while (!found && position !== -1) {
-            topic = topic.substring(0, position + 1)
+            topic = topic.substring(0, position + 1);
             position = topic.lastIndexOf(".");
-            found = hasDirectSubscribersFor(topic)
+            found = hasDirectSubscribersFor(topic);
         }
         /** **/
 
-        return found
+        return found;
     }
-
+    /* 调用存储的回调 */
     function deliverMessage(originalMessage, matchedMessage, data) {
         /** 获得订阅对象**/
         let subscribers = messages[matchedMessage],
             callSubscriber = function (subscriber, message, data) {
                 try {
-                    subscriber(message, data)
+                    subscriber(message, data);
                 } catch (e) {
-                    setTimeout(function () {
-                    }, 0)
+                    setTimeout(function () {}, 0);
                 }
             },
             k;
@@ -117,10 +108,9 @@
 
         for (k in subscribers) {
             if (Object.prototype.hasOwnProperty.call(subscribers, k)) {
-                callSubscriber(subscribers[k], originalMessage, data)
+                callSubscriber(subscribers[k], originalMessage, data);
             }
         }
-
     }
 
     /** 创建 订阅对应的 回调 **/
@@ -128,41 +118,39 @@
         return function () {
             let topic = String(message),
                 /** 修剪层次结构并将消息传递到每个级别 **/
-                position = topic.lastIndexOf('.');
+                position = topic.lastIndexOf(".");
 
-            deliverMessage(message, message, data)
+            deliverMessage(message, message, data);
 
             while (position !== -1) {
-                topic = topic.substring(0, position)
+                topic = topic.substring(0, position);
                 position = topic.lastIndexOf(".");
-                deliverMessage(message, topic, data)
+                deliverMessage(message, topic, data);
             }
             /** **/
 
-            deliverMessage(message, "*", data)
-        }
+            deliverMessage(message, "*", data);
+        };
     }
 
     PubSub.publish = function (message, data, sync = false) {
+        const deliver = createDeliveryFunction(message, data);
+        const has = hasSubscribes(message);
 
-        const deliver = createDeliveryFunction(message, data)
-        const has = hasSubscribes(message)
-
-        if (!has) return false
+        if (!has) return false;
 
         if (sync === true) {
-            deliver()
+            deliver();
         } else {
-            setTimeout(deliver, 0)
+            setTimeout(deliver, 0);
         }
 
-        return false
+        return false;
+    };
 
-    }
-
-    /**  **/
+    /** 取消订阅 **/
     PubSub.unsubscribe = function (value) {
-
+        
         let descendantTopicExists = function (topic) {
                 let m;
                 for (m in messages) {
@@ -173,36 +161,37 @@
 
                 return false;
             },
-            isTopic =
-                typeof value === 'string' && (Object.prototype.hasOwnProperty.call(messages, value) || descendantTopicExists(value))
-            , isToken = !isTopic && typeof value === 'string'
-            , isFunction = typeof value === 'function'
+            // 取消订阅支持 通过消息主题、订阅令牌、订阅回调、结果不一致
+            isTopic = typeof value === "string" && (Object.prototype.hasOwnProperty.call(messages, value) || descendantTopicExists(value)),
+            isToken = !isTopic && typeof value === "string",
+            isFunction = typeof value === "function",
             /** 用于迭代 **/
-            , m
-            , message,
+            m,
+            message,
             t,
             /** 执行结果 **/
             result = false;
 
+        // 若是订阅主题，那么整个订阅会在消息池里移除
         if (isTopic) {
-            let m
+            let m;
             for (m in messages) {
                 if (Object.prototype.hasOwnProperty.call(messages, m) && m.indexOf(value) === 0) {
-                    delete messages[m]
-                    return
+                    delete messages[m];
+                    return;
                 }
             }
         }
-
+        // else 要遍历所有的消息主题
         for (m in messages) {
             if (Object.prototype.hasOwnProperty.call(messages, m)) {
-                message = messages[m]
+                message = messages[m];
                 /** message1:{uid01:Function,uid02:Function} **/
-                /** 如果是 token 的话，那么存储在 message 下的属性中 **/
+                /** 如果是 token 的话，那么删除存储在 message 下的属性中的Function **/
 
                 if (isToken && message[value]) {
-                    delete message[value]
-                    result = value // 返回移除的回调
+                    delete message[value];
+                    result = value; // 返回移除的回调
                     break; /** token 是唯一的，因此可以在这里停止**/
                 }
 
@@ -211,19 +200,14 @@
                     for (t in message) {
                         /** 如果 函数的引用一致则说明找到了**/
                         if (Object.prototype.hasOwnProperty.call(message, t) && message[t] === value) {
-                            delete message[t]
-                            result = true
+                            delete message[t];
+                            result = true;
                         }
                     }
-
                 }
             }
         }
-        return result
-    }
-
-}));
-PubSub = module.exports
-
-
-
+        return result;
+    };
+});
+PubSub = module.exports;
