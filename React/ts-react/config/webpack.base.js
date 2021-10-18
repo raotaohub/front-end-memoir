@@ -29,9 +29,26 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      },
+        test: /\.(le|c)ss$/,
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                modifyVars: {
+                  'primary-color': '#2196f3',
+                  'warning-color': '#fb8c00',
+                  'success-color': '#4caf50',
+                  'info-color': '#2196f3'
+                }
+              }
+            }
+          }
+        ]
+      }
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
