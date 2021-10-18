@@ -1,0 +1,32 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build
+    image: node
+    environment:
+      baidu_tongji_token:
+        from_secret: baidu_tongji_token
+    commands:
+      - npm install
+      - npm run build
+      - npm run tongji
+
+  - name: deploy
+    image: appleboy/drone-scp
+    settings:
+      host:
+        from_secret: ip
+      target:
+        from_secret: target
+      user:
+        from_secret: user
+      port:
+        from_secret: port
+      source:
+        - ./dist
+      rm: true
+      key:
+        from_secret: ssh_key

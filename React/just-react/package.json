@@ -1,0 +1,35 @@
+{
+  "devDependencies": {
+    "markdown-it-mark": "^3.0.0",
+    "vuepress": "^1.5.0"
+  },
+  "name": "just-react",
+  "description": "React技术揭秘",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "tongji": "node ./.bin/create_tongji",
+    "deploy": "sh deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetaSu/just-react.git"
+  },
+  "resolutions": {
+    "watchpack": "1.6.1"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "beta_su",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BetaSu/just-react/issues"
+  },
+  "homepage": "https://github.com/BetaSu/just-react#readme"
+}
