@@ -98,4 +98,7 @@ class aClock implements ClockConstructor {
   }
 }
 
+type FunctionInfer<T> = T extends(...args:infer A) =>infer R ? [A,R]:never
 export {}
+
+
