@@ -9,11 +9,11 @@ function getAsyncData() {
 
 // 全局mobx配置
 configure({
-   enforceActions: 'always', // 始终需要通过action来改变状态
+   enforceActions: 'always', // 始终需要通过 action 来改变状态
    computedRequiresReaction: true // 禁止从动作或反应外部直接访问任何未观察到的计算值
 })
 
-class TestStore {
+export class GlobalStore {
    isReady = false // !observable state
    amount = 1 // !observable state
    data = {} // !observable state
@@ -68,6 +68,6 @@ class TestStore {
    }
 }
 
-const store = new TestStore()
+const globalStore = new GlobalStore()
 
-export default store
+export default globalStore

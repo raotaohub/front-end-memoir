@@ -3,7 +3,15 @@
       "experimentalDecorators": true,
       "baseUrl": "./src",
       "paths": {
-         "@/*": ["src/*"]
+         "@/*": ["*"],
+         "@components/*": ["components/*"],
+         "@public/*": ["components/public/*"],
+         "@store/*": ["store/*"]
+         // "@view/*": ["components/view/*"] /* 存放不可复用的业务组件 */,
+         // "@common/*": ["components/common/*"] /* 存放与业务无关的组件 */,
+         // "@constants/*": ["constants/*"] /*存放枚举、常量*/,
+         // "@utils/*": ["utils/*"] /* 存放工具类 */,
+         // "@services/*": ["services/*"] /*存放服务端api接口*/
       },
       "target": "ESNext",
       "useDefineForClassFields": true,
