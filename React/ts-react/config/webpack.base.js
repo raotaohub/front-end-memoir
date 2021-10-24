@@ -1,4 +1,5 @@
 const path = require('path')
+const glob = require('glob')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -21,13 +22,14 @@ module.exports = {
                cacheDirectory: true
             }
          },
-         {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-         },
+         // {
+         //    test: /\.css$/,
+         //    use: ['style-loader', 'css-loader']
+         // },
          {
             test: /\.(le|c)ss$/,
             use: [
+               'style-loader',
                'css-loader',
                {
                   loader: 'less-loader',
@@ -41,6 +43,19 @@ module.exports = {
                            'info-color': '#2196f3'
                         }
                      }
+                  }
+               }
+            ]
+         },
+         {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: [
+               {
+                  loader: 'url-loader',
+                  options: {
+                     limit: 8192,
+                     name: 'imgs/[name]_[hash:8][ext]',
+                     fallback: 'file-loader?name=imgs/[name]_[hash:8][ext]'
                   }
                }
             ]
@@ -58,9 +73,7 @@ module.exports = {
    },
    plugins: [
       // 将css提取成单独的文件
-      new MiniCssExtractPlugin({
-         filename: 'css/[name]_[contenthash:8].css'
-      }),
+      new MiniCssExtractPlugin(),
       new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new HtmlWebpackPlugin({
          template: path.join(__dirname, `../public/index.html`),
