@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-02-19 20:44:47
- * @LastEditTime: 2021-10-24 17:43:58
+ * @LastEditTime: 2021-10-31 23:30:36
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\comopoents\public\Main\Main.tsx
  * @Description: Edit......
@@ -18,14 +18,13 @@ import { Layout, Menu, message } from 'antd'
 //------------------- 引入公共组件
 import Header from '@/comopoents/public/Layout/Header'
 import _Content from '@/comopoents/public/Layout/Content'
-import SideBar from '@/comopoents/public/Layout/SideBar'
+import MenuView from '@/comopoents/public/Layout/MenuView/MenuView'
 import Loading from '@/comopoents/public/Loading/Loading'
 
 //------------------- 引入样式
 import './main.less'
 
 import routes from '@/routes/index'
-import Logs from '@/view/logs/Logs/Logs'
 
 interface IProps {
    className?: string
@@ -35,8 +34,8 @@ interface IProps {
 
 const Main = (props: IProps): ReactElement => {
    const [collapsed, setCollapsed] = React.useState(false)
-   const { route, ready } = props
-   console.log(route)
+   const { ready } = props
+   console.log(routes)
 
    let history = useHistory()
 
@@ -53,9 +52,7 @@ const Main = (props: IProps): ReactElement => {
    const toggle = () => {
       setCollapsed(!collapsed)
    }
-   const refresh = () => {
-      history.replace('/')
-   }
+
    return (
       <Observer>
          {() => (
@@ -63,7 +60,8 @@ const Main = (props: IProps): ReactElement => {
                <Layout style={{ height: '100%', width: '100%' }}>
                   <Header />
                   <Layout>
-                     <SideBar width={200} className='site-layout-background'></SideBar>
+                     {renderRoutes(routes)}
+                     {/* <MenuView toggle={toggle} collapsed={collapsed} width={200} className='site-layout-background' />
                      <Layout style={{ padding: '0 24px 24px' }}>
                         <Loading loading={!ready} size='large' tip='正在初始化,请稍等...' height='100vh'>
                            <Layout.Content
@@ -79,7 +77,7 @@ const Main = (props: IProps): ReactElement => {
                               {renderRoutes(routes)}
                            </Layout.Content>
                         </Loading>
-                     </Layout>
+                     </Layout> */}
                   </Layout>
                </Layout>
             </HashRouter>

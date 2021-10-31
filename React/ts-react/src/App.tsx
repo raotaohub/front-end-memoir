@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-02-19 17:00:44
- * @LastEditTime: 2021-10-24 22:47:09
+ * @LastEditTime: 2021-10-31 21:31:21
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\App.tsx
  * @Description: App外壳组件
@@ -19,6 +19,7 @@ import routesStore from './store/routesStore/routesStore'
 import Main from '@/comopoents/public/Main/Main'
 // ------
 import './app.css'
+import '@/routes/initRoutes'
 
 // todo 在这里可以向 globalStore 设置某个特定的值
 
@@ -31,6 +32,9 @@ function App() {
       setTimeout(() => {
          setInit(true)
       }, 1500)
+      return () => {
+         setInit(false)
+      }
    }, [])
 
    // 在这里用 mobx的Store 初始化 ，包括生成路由[]、菜单[]
