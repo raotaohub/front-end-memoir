@@ -24,7 +24,7 @@ nav1.createRoute('rate', {
    title: 'rate',
    component: Rate
 })
-
+//
 const nav2 = createGroup('nav2', {
    title: 'nav2',
    component: Nav2
@@ -39,12 +39,12 @@ nav2.createRoute('star', {
    title: 'star',
    component: Star
 })
-
+//
 const nav3 = createGroup('nav3', {
    title: 'nav3',
    component: Nav3
 })
 
-//
+export const routes = getRoutes()
 
-console.log(getRoutes(), getMenus())
+export const menus = getMenus()

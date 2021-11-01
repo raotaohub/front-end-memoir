@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-02-19 17:00:44
- * @LastEditTime: 2021-10-31 21:31:21
+ * @LastEditTime: 2021-10-31 23:44:37
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\App.tsx
  * @Description: App外壳组件
@@ -14,12 +14,11 @@ import zhCN from 'antd/es/locale/zh_CN'
 // ------
 import mobxStore from '@store/index'
 import globalStore from './store/globalStore/globalStore'
-import routesStore from './store/routesStore/routesStore'
 // ------
 import Main from '@/comopoents/public/Main/Main'
 // ------
+import { menus, routes } from './routes/initRoutes'
 import './app.css'
-import '@/routes/initRoutes'
 
 // todo 在这里可以向 globalStore 设置某个特定的值
 
@@ -42,7 +41,7 @@ function App() {
    return (
       <ConfigProvider locale={zhCN} autoInsertSpaceInButton={false}>
          <MobxProvider {...mobxStore}>
-            <Main ready={init} />
+            <Main ready={init} routes={routes} menus={menus} />
          </MobxProvider>
       </ConfigProvider>
    )

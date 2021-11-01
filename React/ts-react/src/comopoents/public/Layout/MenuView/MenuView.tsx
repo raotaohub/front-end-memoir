@@ -12,6 +12,10 @@ import { getMenus } from '@/routes/core'
 const { Sider } = Layout
 const { SubMenu } = Menu
 
+// const menus = useMemo(() => {
+//    return MENU_LIST.find(item => item.name === currentModuleName)?.children;
+//  }, [currentModuleName]);
+
 function MenuView(props: any): ReactElement {
    const { collapsed, refresh, toggle } = props
    const history = useHistory()
