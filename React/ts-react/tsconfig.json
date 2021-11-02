@@ -6,7 +6,12 @@
          "@/*": ["*"],
          "@components/*": ["components/*"],
          "@public/*": ["components/public/*"],
-         "@store/*": ["store/*"]
+         "@store/*": ["store/*"],
+         "@routes/*": ["routes/*"],
+         "@utils/*": ["utils/*"],
+         "@style/*": ["style/*"],
+         "@services/*": ["services/*"],
+
          // "@view/*": ["components/view/*"] /* 存放不可复用的业务组件 */,
          // "@common/*": ["components/common/*"] /* 存放与业务无关的组件 */,
          // "@constants/*": ["constants/*"] /*存放枚举、常量*/,

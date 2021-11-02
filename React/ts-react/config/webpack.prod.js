@@ -1,26 +1,12 @@
 const { merge } = require('webpack-merge')
-
 const webpack = require('webpack')
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const baseConfig = require('./webpack.base')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin') // 打包速度分析
 const speedMeasurePlugin = new SpeedMeasurePlugin()
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const prodConfig = speedMeasurePlugin.wrap({
    mode: 'production',
    plugins: [
-      // 压缩css
-      new OptimizeCssAssetsWebpackPlugin({
-         assetNameRegExp: /\.css$/,
-         cssProcessor: require('cssnano')
-      }),
-      new BundleAnalyzerPlugin({
-         openAnalyzer: false,
-         analyzerMode: 'static',
-         reportTitle: 'bundle-analyzer-report',
-         reportFilename: 'bundle-analyzer-report.html'
-      }),
       new webpack.DefinePlugin({
          'process.IS_DEV': JSON.stringify(false)
       })
