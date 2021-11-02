@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-10-24 17:21:32
- * @LastEditTime: 2021-10-31 12:23:15
+ * @LastEditTime: 2021-11-01 22:15:38
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\view\nav2\Like\Like.tsx
  * @Description: Edit......
@@ -15,4 +15,4 @@ const Like = () => {
    return <div>Like{location.pathname} </div>
 }
 
-export default Like
+export default React.memo(Like)

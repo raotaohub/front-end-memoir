@@ -4,7 +4,8 @@
    "description": "",
    "scripts": {
       "vite": "vite",
-      "dev": "webpack serve --open --config config/webpack.dev.js"
+      "dev": "webpack serve --open --config config/webpack.dev.js",
+      "build": "webpack serve --open --config config/webpack.prod.js"
    },
    "keywords": [],
    "author": "",

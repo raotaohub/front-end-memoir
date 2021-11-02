@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-10-24 17:21:32
- * @LastEditTime: 2021-10-31 12:22:52
+ * @LastEditTime: 2021-11-01 22:15:45
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\view\nav2\Star\Star.tsx
  * @Description: Edit......
@@ -15,4 +15,4 @@ const Star = () => {
    return <div>Star{location.pathname} </div>
 }
 
-export default Star
+export default React.memo(Star)

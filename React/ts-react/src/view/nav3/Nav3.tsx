@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-10-24 17:21:32
- * @LastEditTime: 2021-10-31 23:37:01
+ * @LastEditTime: 2021-11-01 22:15:54
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\view\nav3\Nav3.tsx
  * @Description: Edit......
@@ -33,4 +33,4 @@ const Nav3 = (props: any) => {
    )
 }
 
-export default Nav3
+export default React.memo(Nav3)

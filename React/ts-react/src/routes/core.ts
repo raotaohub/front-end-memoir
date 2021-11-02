@@ -1,21 +1,15 @@
 import { RouteConfig } from './type'
 
-interface IRoute {
-   path: string
-   exact: boolean
-   component: React.ComponentType<any>
-}
-
-interface IOption {
+export interface IOption {
    isMenu?: boolean
    icon?: string
    key?: string
-   exact?: IRoute['exact']
+   exact?: boolean
    component?: React.ComponentType<any>
    [propName: string]: any
 }
 
-interface IMenu {
+export interface IMenu {
    path: string
    title: string
    iconName?: string
@@ -36,7 +30,7 @@ function RouteFactory(path: string, option: IOption) {
 
    config = {
       path: `/${path}`,
-      exact: option?.option || false,
+      exact: option?.option || false, // 一级路由
       component: option.component,
       render: option?.render,
       routes: []
@@ -54,20 +48,21 @@ function RouteFactory(path: string, option: IOption) {
 
    menus.push(menu)
 
-   const createRoute = (_path: string, option: IOption) => {
+   const createRoute = (_path: string, option: IOption, createMenu = true) => {
       config?.routes?.push({
          path: `/${path}/${_path}`,
          exact: option?.exact ?? true,
          component: option?.component,
          render: option?.render
       })
-      menu?.subMenu?.push({
-         path: `/${path}/${_path}`,
-         title: option?.title,
-         show: option?.show,
-         iconName: option?.iconName
-      })
-      console.log(config, menu)
+      if (createMenu) {
+         menu?.subMenu?.push({
+            path: `/${path}/${_path}`,
+            title: option?.title,
+            show: option?.show,
+            iconName: option?.iconName
+         })
+      }
    }
 
    return {
@@ -91,14 +86,3 @@ export const getRoutes = () => {
 export const getMenus = () => {
    return menus
 }
-// export interface RouteConfig {
-//     key?: React.Key | undefined;
-//     location?: Location | undefined;
-//     component?: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | undefined;
-//     path?: string | string[] | undefined;
-//     exact?: boolean | undefined;
-//     strict?: boolean | undefined;
-//     routes?: RouteConfig[] | undefined;
-//     render?: ((props: RouteConfigComponentProps<any>) => React.ReactNode) | undefined;
-//     [propName: string]: any;
-// }
