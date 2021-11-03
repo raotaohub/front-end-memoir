@@ -1,0 +1,50 @@
+@paddings: 4, 8, 12, 16, 20, 24, 28, 32, 40;
+@paddingsLen: length(@paddings);
+.mainPaddingLoop(@index) when(@index > 0) {
+  .mainPaddingLoop(@index - 1);
+
+  @value: extract(@paddings, @index);
+  .mt@{value} {
+    margin-top: ~'@{value}px' !important;
+  }
+  .mb@{value} {
+    margin-bottom: ~'@{value}px' !important;
+  }
+  .mr@{value} {
+    margin-right: ~'@{value}px' !important;
+  }
+  .ml@{value} {
+    margin-left: ~'@{value}px' !important;
+  }
+
+  .mx@{value} {
+    margin-right: ~'@{value}px' !important;
+    margin-left: ~'@{value}px' !important;
+  }
+  .my@{value} {
+    margin-top: ~'@{value}px' !important;
+    margin-bottom: ~'@{value}px' !important;
+  }
+
+  .pt@{value} {
+    padding-top: ~'@{value}px' !important;
+  }
+  .pb@{value} {
+    padding-bottom: ~'@{value}px' !important;
+  }
+  .pr@{value} {
+    padding-right: ~'@{value}px' !important;
+  }
+  .pl@{value} {
+    padding-left: ~'@{value}px' !important;
+  }
+  .px@{value} {
+    padding-right: ~'@{value}px' !important;
+    padding-left: ~'@{value}px' !important;
+  }
+  .py@{value} {
+    padding-top: ~'@{value}px' !important;
+    padding-bottom: ~'@{value}px' !important;
+  }
+}
+.mainPaddingLoop(@paddingsLen);

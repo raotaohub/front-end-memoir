@@ -37,3 +37,18 @@ export const getUrlParams2 = (url: string) => {
     return a;
   }, {} as { [key: string]: string | string[] });
 };
+
+function getQueryString (name: string, _href?: string) {
+    try {
+      const href = _href || window.location.href
+      const params = href.substr(href.indexOf('?') + 1)
+      const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+      const r = params.match(reg)
+      if (r !== null) {
+        return decodeURIComponent(r[2])
+      }
+      return null
+    } catch (e) {
+      return null
+    }
+}

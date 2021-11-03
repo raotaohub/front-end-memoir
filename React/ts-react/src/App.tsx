@@ -1,7 +1,7 @@
 /*
  * @Author: raotaohub
  * @Date: 2021-02-19 17:00:44
- * @LastEditTime: 2021-10-31 23:44:37
+ * @LastEditTime: 2021-11-01 22:10:40
  * @LastEditors: raotaohub
  * @FilePath: \ts-react\src\App.tsx
  * @Description: App外壳组件
@@ -17,7 +17,7 @@ import globalStore from './store/globalStore/globalStore'
 // ------
 import Main from '@/comopoents/public/Main/Main'
 // ------
-import { menus, routes } from './routes/initRoutes'
+import { menus, routes } from './routes'
 import './app.css'
 
 // todo 在这里可以向 globalStore 设置某个特定的值

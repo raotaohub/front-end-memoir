@@ -1,0 +1,175 @@
+// #v5-root,
+.ant-modal-root {
+   --color-main: #e53935;
+   --color-main-hover: #f44336;
+   --color-main-focus: #d32f2f;
+   --color-main-light: #ffebee;
+   --color-main-border: #e53935;
+   --color-primary: #2196f3;
+   --color-primary-hover: #42a5f5;
+   --color-primary-focus: #1e88e5;
+   --color-primary-light: #e3f2fd;
+   --color-primary-border: #2196f3;
+   --color-customer: #f59a23;
+   --color-warning: #fb8c00;
+   --color-warning-hover: #ff9800;
+   --color-warning-focus: #f57c00;
+   // --color-warning-light: #fff3e0;
+   --color-warning-light: #fff7dc;
+   --color-warning-border: #fb8c00;
+   --color-success: #4caf50;
+   --color-success-hover: #66bb6a;
+   --color-success-focus: #388e3c;
+   --color-success-light: #e8f5e9;
+   --color-info: #2196f3;
+   --color-info-hover: #42a5f5;
+   --color-info-focus: #1e88e5;
+   --color-info-light: #e3f2fd;
+   --color-error: #ee4e61;
+   --color-error-light: #ff6476;
+   --color-purple: #bf24cb;
+   --color-blue: #11a0f8;
+   --color-blue-light: #f3f5fd;
+   --color-major: #333;
+   --color-major-hover: #000;
+   --color-majorMiddle: #666;
+   --color-description: #999;
+   --color-black: #000;
+   --color-darkest: #292929;
+   --color-darker: #33343d;
+   --color-dark: #3a3c44;
+   --color-lightDark: #43454f;
+   --color-borderWeightGrey: #4e505c;
+   --color-borderGrey: #6e6f76;
+   --color-borderChecked: #999;
+   --color-borderLightGrey: #b8b8b8;
+   --color-filledGrey: #c2c2c2;
+   --color-filledGreyLighter: #ccc;
+   --color-filledLightGrey: #d6d6d6;
+   --color-lightWhite: #f7f7f7;
+   --color-lightWhiter: #fafafa;
+   --color-white: #fff;
+   --border-color: #d6d6d6;
+   --border-color-light: #e6e6e6;
+   --border-radius-size: 4px;
+}
+
+@colorNames: error, purple, blue, major, customer, description, black, darkest, darker, dark, lightDark, borderWeightGrey, borderGrey,
+   filledGrey, lightWhite, white, majorMiddle;
+@colorsLen: length(@colorNames);
+
+.colorLoop(@index) when(@index > 0) {
+   .colorLoop(@index - 1);
+   @colorName: extract(@colorNames, @index);
+   @color: var(~'--color-@{colorName}');
+
+   .fc-@{colorName} {
+      color: @color !important;
+   }
+
+   .bc-@{colorName} {
+      background-color: @color !important;
+   }
+}
+
+.colorLoop(@colorsLen);
+
+.fc-minor {
+   color: #777 !important;
+}
+
+@mainColorNames: main, primary, info, warning, success;
+@mainColorsLen: length(@mainColorNames);
+
+.mainColorLoop(@index) when(@index > 0) {
+   .mainColorLoop(@index - 1);
+
+   @colorName: extract(@mainColorNames, @index);
+   @color: var(~'--color-@{colorName}');
+   @colorLight: var(~'--color-@{colorName}-light');
+   @colorBorder: var(~'--color-@{colorName}-border');
+   @colorHover: var(~'--color-@{colorName}-hover');
+   @colorFocus: var(~'--color-@{colorName}-focus');
+
+   /* fc */
+   .fc-@{colorName} {
+      color: @color !important;
+
+      &-hover {
+         color: @colorHover !important;
+      }
+
+      &-light {
+         color: @colorLight !important;
+      }
+
+      &.ant-btn-background-ghost {
+         border-color: @color !important;
+
+         &:hover {
+            border-color: @colorHover !important;
+         }
+      }
+   }
+
+   /* bc */
+   .bc-@{colorName} {
+      color: #fff;
+      background-color: @color !important;
+
+      &.ant-btn {
+         border-color: @color !important;
+      }
+
+      &-hover {
+         color: #fff;
+         background-color: @colorHover !important;
+      }
+
+      &-light {
+         background-color: @colorLight !important;
+      }
+   }
+}
+
+.mainColorLoop(@mainColorsLen);
+
+.link-hover {
+   cursor: pointer;
+
+   &:hover {
+      color: var(--color-primary) !important;
+   }
+}
+
+.ant-btn.disabled,
+.ant-btn.disabled:hover,
+.ant-btn.disabled:focus,
+.ant-btn.disabled:active {
+   color: rgba(0, 0, 0, 0.25) !important;
+   text-shadow: none !important;
+   background: #f5f5f5 !important;
+   border-color: #d9d9d9 !important;
+   box-shadow: none !important;
+   cursor: no-drop !important;
+}
+
+.border {
+   border: 1px solid var(--border-color);
+}
+
+.border-active {
+   border: 1px solid #db2739;
+}
+
+.border-radius {
+   border-radius: var(--border-radius-size);
+}
+
+.border-bottom {
+   border-bottom: 1px solid var(--border-color);
+}
+
+.border-top {
+   border-top: 1px solid var(--border-color);
+}
