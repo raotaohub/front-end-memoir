@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <button id="btn1">open</button>
+        <button id="btn2">close</button>
+        <script>
+            const Modal = (function () {
+                let modal = null;
+                return function () {
+                    if (!modal) {
+                        modal = document.createElement("div");
+                        modal.innerHTML = `
+                            <div>
+                                <ul>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                </ul>
+                            </div>
+                        `;
+                        modal.style.border = "1px solid red";
+                        modal.style.height = 300 + "px";
+                        modal.style.width = 300 + "px";
+                        modal.style.display = "none";
+                        modal.id = "rt-modal-container";
+                        document.body.appendChild(modal);
+                    }
+                    return modal;
+                };
+            })();
+
+            const btn1 = document.getElementById("btn1");
+            const btn2 = document.getElementById("btn2");
+
+            btn1.addEventListener("click", () => {
+                const modal = new Modal();
+                modal.style.display = "block";
+            });
+
+            btn2.addEventListener("click", () => {
+                const modal = new Modal();
+                modal.style.display = "none";
+            });
+        </script>
+    </body>
+</html>
