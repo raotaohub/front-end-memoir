@@ -323,20 +323,6 @@ winter 大佬的解释
   let child = mynew(Parent, "new操作", 20);
   console.log(child);
 
-  const _mynew = function (Parent, ...rest) {
-    let child = Object.create(Parent.prototype);
-    let result = Parent.apply(child, rest);
-    return typeof result === "object" ? result : child;
-  };
-  let child1 = _mynew(Parent, "new操作1", 201);
-  console.log(child1);
-
-  const __mynew = function (Parent, ...params) {
-    let child = Object.create(Parent);
-    let result = Parent.apply(this, params);
-    return typeof result === "object" ? result : child;
-  };
-
 </script>
 </body>
 </html>
