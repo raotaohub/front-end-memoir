@@ -77,7 +77,7 @@
 
 // todo 开放封闭
 
-const stateToProcessor = {
+/* const stateToProcessor = {
   american() {
     console.log("我只吐黑咖啡");
   },
@@ -115,3 +115,61 @@ class CoffeeMaker {
 
 const mk = new CoffeeMaker();
 mk.changeState("latte");
+ */
+class CoffeeMaker {
+  state: string;
+  leftMilk: string;
+  constructor() {
+    /**
+      这里略去咖啡机中与咖啡状态切换无关的一些初始化逻辑
+    **/
+    // 初始化状态，没有切换任何咖啡模式
+    this.state = "init";
+    // 初始化牛奶的存储量
+    this.leftMilk = "500ml";
+  }
+  // 把状态-行为映射对象作为主体类对应实例的一个属性添加进去
+  stateToProcessor = {
+    that: this,
+    american() {
+      // 尝试在行为函数里拿到咖啡机实例的信息并输出
+      console.log("咖啡机现在的牛奶存储量是:", this.that.leftMilk);
+      console.log("我只吐黑咖啡");
+    },
+    latte() {
+      this.american();
+      console.log("加点奶");
+    },
+    vanillaLatte() {
+      this.latte();
+      console.log("再加香草糖浆");
+    },
+    mocha() {
+      this.latte();
+      console.log("再加巧克力");
+    }
+  };
+
+  // 关注咖啡机状态切换函数 这里的状态就是指 制作不同咖啡时所需的状态
+  changeState(state) {
+    this.state = state;
+    if (!this.stateToProcessor[state]) {
+      return;
+    }
+    this.stateToProcessor[state]();
+  }
+}
+
+const mk = new CoffeeMaker();
+mk.changeState("latte");
+
+/* 
+唯一的区别在于，定义里强调了”类“的概念。
+但我们的示例中，包括大家今后的实践中，一个对象的状态如果复杂到了你不得不给它的每 N 种状态划分为一类、
+一口气划分很多类这种程度，我更倾向于你去反思一个这个对象是不是做太多事情了。事实上，在大多数场景下，
+我们的行为划分，都是可以像本节一样，控制在”函数“这个粒度的。
+
+* 状态模式的调用 会依赖调用者的状态 比如这里【CoffeeMaker类】的 state
+*/
+
+export default {};
