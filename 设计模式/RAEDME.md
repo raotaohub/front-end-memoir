@@ -8,7 +8,54 @@
 **单一功能原则**（Single Responsibility Principle）
 **开放封闭原则**（Opened Closed Principle）
 里式替换原则（Liskov Substitution Principle）
-接口隔离原则（Interface Segregation Principle）
+**接口隔离原则**（Interface Segregation Principle）
+
+> 例子
+
+```typescript
+//狗 的技能 吃 捕食 跑..
+//鸟 的技能 吃 捕食 飞..
+abstract class Animal {
+  abstract eat() {}
+  abstract prey() {}
+}
+
+abstract class Action {
+  abstract run() {}
+  abstract fly() {}
+}
+
+class Dog extends Animal {
+  eat() {
+    consooe.log("我继承了 Animal，就需要实现 Animal 的抽象方法");
+  }
+  prey() {
+    consooe.log("我继承了 Animal，就需要实现 Animal 的抽象方法");
+  }
+  run() {
+    consooe.log("我继承了 Action，就需要实现 Action 的抽象方法，我是小狗所以我会奔跑");
+  }
+  fly() {
+    // 需要实现
+  }
+}
+
+class Birds extends Animal {
+  eat() {
+    consooe.log("我继承了 Animal，就需要实现 Animal 的抽象方法");
+  }
+  prey() {
+    consooe.log("我继承了 Animal，就需要实现 Animal 的抽象方法");
+  }
+  run() {
+    // 需要实现
+  }
+  fly() {
+    consooe.log("我继承了 Action，就需要实现 Action 的抽象方法，我是小鸟会飞翔");
+  }
+}
+```
+
 依赖反转原则（Dependency Inversion Principle）
 
 ## 23 种设计模式
@@ -81,3 +128,17 @@ table、
 
 ![img](.\picture\观察者模式.png)
 
+```
+
+```
+
+<details>
+<summary>点击展开重写状态</summary>
+
+你的代码
+你的代码
+你的代码
+你的代码
+你的代码
+
+</details>
