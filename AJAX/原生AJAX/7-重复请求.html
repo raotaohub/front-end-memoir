@@ -1,0 +1,68 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-24 17:17:09
+ * @LastEditTime: 2021-02-24 23:16:33
+ * @LastEditors: raotaohub
+ * @FilePath: \AJAX\原生AJAX\7-重复请求.html
+ * @Description: Edit......
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      height: 200px;
+      width: 200px;
+      background: rgb(138, 138, 31);
+    }
+    #btn {
+      width: 80px;
+      height: 45px;
+      background: wheat;
+      border-style: none;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+    <button id="btn">点击</button>
+    <script>
+      /** 设置请求头 xhr.setHeader **/
+      const btn = document.getElementById("btn");
+
+      const box = document.getElementsByClassName("box")[0];
+
+      let xhr = null;
+
+      let flag = false;
+
+      btn.onclick = () => {
+        if (flag) xhr.abort();
+
+        xhr = new XMLHttpRequest();
+
+        flag = true;
+
+        xhr.open("GET", "http://localhost:8000/delay");
+
+        xhr.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+
+        xhr.send();
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            flag = false;
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

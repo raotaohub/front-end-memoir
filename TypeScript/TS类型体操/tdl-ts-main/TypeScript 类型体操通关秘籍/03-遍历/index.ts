@@ -1,0 +1,18 @@
+// !interface
+
+type myReadonly<T extends {}> = {
+  readonly [Key in keyof T]: T[Key];
+};
+
+type res1 = myReadonly<{ a: string; b: string }>;
+
+// !array
+
+const tuple = ['a', 'b', 'c'] as const;
+
+type ArrayToObject<A extends readonly (number | string | symbol)[]> = {
+  [P in A[number]]: P;
+};
+
+type res2 = ArrayToObject<typeof tuple>;
+export {};

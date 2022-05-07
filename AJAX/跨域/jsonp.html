@@ -1,0 +1,45 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-24 17:17:09
+ * @LastEditTime: 2021-02-25 10:39:56
+ * @LastEditors: raotaohub
+ * @FilePath: \AJAX\跨域\jsonp.html
+ * @Description: Edit......
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      height: 200px;
+      width: 200px;
+      background: rgb(138, 138, 31);
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+    <button id="btn">点击JSONP</button>
+    <script>
+      const btn = document.getElementById("btn");
+
+      // 前端代码 需要准备一个全局函数
+      function handle(data) {
+        const box = document.getElementsByClassName("box")[0];
+        box.innerHTML = data.name;
+      }
+
+      btn.onclick = () => {
+        const body = document.body;
+        const script = document.createElement("script");
+        script.src = "http://localhost:8000/jsonp";
+        body.appendChild(script);
+      };
+    </script>
+  </body>
+</html>

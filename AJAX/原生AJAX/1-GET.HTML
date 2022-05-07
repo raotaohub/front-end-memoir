@@ -1,0 +1,58 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-24 17:17:09
+ * @LastEditTime: 2021-02-24 17:47:06
+ * @LastEditors: raotaohub
+ * @FilePath: \AJAX\原生AJAX\1-GET.HTML
+ * @Description: Edit......
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      height: 200px;
+      width: 200px;
+      background: rgb(138, 138, 31);
+    }
+    #btn {
+      width: 80px;
+      height: 45px;
+      background: wheat;
+      border-style: none;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+    <button id="btn">点击</button>
+    <script>
+      const btn = document.getElementById("btn");
+      const box = document.getElementsByClassName("box")[0];
+      btn.onclick = () => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:8000/server");
+
+        xhr.send();
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status <= 300) {
+              console.log("客户端已接受");
+              console.log(xhr);
+              box.innerHTML = xhr.response;
+            } else {
+              console.warn("出现错误");
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

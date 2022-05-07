@@ -1,0 +1,60 @@
+<!--
+ * @Author: raotaohub
+ * @Date: 2021-02-24 17:17:09
+ * @LastEditTime: 2021-02-24 20:51:17
+ * @LastEditors: raotaohub
+ * @FilePath: \AJAX\原生AJAX\3-POST.html
+ * @Description: Edit......
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      height: 200px;
+      width: 200px;
+      background: rgb(138, 138, 31);
+    }
+    #btn {
+      width: 80px;
+      height: 45px;
+      background: wheat;
+      border-style: none;
+    }
+  </style>
+  <body>
+    <div class="box"></div>
+    <button id="btn">点击</button>
+    <script>
+      const btn = document.getElementById("btn");
+
+      const box = document.getElementsByClassName("box")[0];
+
+      btn.onclick = () => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", "http://localhost:8000/server?a=300&b=200"); //设置请求体参数 方式1 url中携带
+
+        xhr.send("name=rao&age=99"); //设置请求体参数 方式2 在send中携带
+        // xhr.send("debounce:fn1&throttle:obj"); //设置请求体参数 方式2 在send中携带
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status <= 300) {
+              console.log("OK");
+              box.innerHTML = xhr.response;
+            } else {
+              console.log("NOT");
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
