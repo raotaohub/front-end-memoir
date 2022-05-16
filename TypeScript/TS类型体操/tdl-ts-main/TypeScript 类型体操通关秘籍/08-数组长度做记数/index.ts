@@ -67,4 +67,22 @@ type getStrLength<
 
 type res = getStrLength<"012345">;
 
+// ?比较
+
+type GreaterThan<
+  N1 extends number,
+  N2 extends number,
+  CountRes extends unknown[] = []
+> = N1 extends N2 // n1 === n2
+  ? false
+  : CountRes["length"] extends N2
+  ? true
+  : CountRes["length"] extends N1
+  ? false
+  : GreaterThan<N1, N2, [...CountRes, unknown]>;
+
+// 2 extends 1 ? false : []['length'] extends 1 ? true : []['length'] extends 1 ? false : GreaterThan<2,1[unknown]>
+// 2 extends 1 ? false : [unknown]['length'] extends 1 ? true : [unknown]['length'] extends 1 ? false : GreaterThan<2,1[unknown,unknown]>
+
+type res2 = GreaterThan<2, 1>;
 export {};
