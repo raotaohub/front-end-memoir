@@ -13,14 +13,14 @@ type result = GetValueType<p>;
 type GetArrayFirstType<A extends unknown[]> = A extends [infer First, ...unknown[]] ? First : never;
 // type GetArrayFirstType<A extends unknown[]> = A extends [infer First, ...infer T] ? First : never;
 
-type result1 = GetArrayFirstType<[1, '2', []]>;
+type result1 = GetArrayFirstType<[1, "2", []]>;
 
 // 提取数组第1个元素的类型
 
 type GetArrayLastType<A extends unknown[]> = A extends [...unknown[], infer Last] ? Last : never;
 // type GetArrayLastType<A extends unknown[]> = A extends [...infer T, infer Last] ? Last : never;
 
-type result2 = GetArrayLastType<[1, '2', []]>;
+type result2 = GetArrayLastType<[1, "2", []]>;
 
 // 提取除第1个元素外的类型
 type GetExcludeFirstType<A extends unknown[]> = A extends []
@@ -35,7 +35,7 @@ type ShiftArr<Arr extends unknown[]> = Arr extends []
   ? Rest
   : never;
 
-type result3 = GetExcludeFirstType<[1, '2', []]>;
+type result3 = GetExcludeFirstType<[1, "2", []]>;
 
 // 提取除最后1个元素外的类型
 type GetExcludeLastType<A extends unknown[]> = A extends []
@@ -50,15 +50,17 @@ type PopArr<Arr extends unknown[]> = Arr extends []
   ? Rest
   : never;
 
-type result4 = GetExcludeLastType<[1, '2', []]>;
+type result4 = GetExcludeLastType<[1, "2", []]>;
 
 /**
  * !字符串
  */
 
-type startWith<Str extends string, Pirfix extends string> = Str extends `${Pirfix}${string}` ? true : false;
+type startWith<Str extends string, Pirfix extends string> = Str extends `${Pirfix}${string}`
+  ? true
+  : false;
 
-type result5 = startWith<'raotaohub-abc', 'raotaohub'>;
+type result5 = startWith<"raotaohub-abc", "raotaohub">;
 
 type ReplaceStr<
   Str extends string,
@@ -66,17 +68,17 @@ type ReplaceStr<
   To extends string
 > = Str extends `${infer Pirfix}${From}${infer Suffix}` ? `${Pirfix}${To}${Suffix}` : Str;
 
-type result6 = ReplaceStr<'raotaohub-abc', 'hub', 'pbc'>;
+type result6 = ReplaceStr<"raotaohub-abc", "hub", "pbc">;
 
-type TrimStrLeft<Str extends string> = Str extends `${' ' | '\n' | '\t'}${infer Rest}`
+type TrimStrLeft<Str extends string> = Str extends `${" " | "\n" | "\t"}${infer Rest}`
   ? TrimStrLeft<Rest>
   : Str;
-type TrimStrRight<Str extends string> = Str extends `${infer Rest}${' ' | '\n' | '\t'}`
+type TrimStrRight<Str extends string> = Str extends `${infer Rest}${" " | "\n" | "\t"}`
   ? TrimStrRight<Rest>
   : Str;
 type TrimStr<Str extends string> = TrimStrLeft<TrimStrRight<Str>>;
 
-type result7 = TrimStr<'\t\n\t\n             \n\t\n\t哈哈哈\t\n\t\n             \n\t\n\t'>;
+type result7 = TrimStr<"\t\n\t\n             \n\t\n\t哈哈哈\t\n\t\n             \n\t\n\t">;
 
 /**
  * !函数
@@ -95,7 +97,7 @@ class Dong {
   name: string;
 
   constructor() {
-    this.name = 'dong';
+    this.name = "dong";
   }
 
   hello(this: Dong, a: string) {
@@ -103,14 +105,17 @@ class Dong {
   }
 }
 
-type GetThisParameterType<F extends Function> = F extends (this: infer ThisType, ...args: any[]) => unknown
+type GetThisParameterType<F extends Function> = F extends (
+  this: infer ThisType,
+  ...args: any[]
+) => unknown
   ? ThisType
   : unknown;
 const dong = new Dong();
 
-type result11 = GetThisParameterType<Dong['hello']>;
+type result11 = GetThisParameterType<Dong["hello"]>;
 
-dong.hello('rao');
+dong.hello("rao");
 // dong.hello.call({ name: 'tao' }, ''); //  类型 "{ name: string; }" 中缺少属性 "hello"，但类型 "Dong" 中需要该属性
 
 /**
@@ -129,11 +134,8 @@ interface PersonConstructor {
   new (name: string): Person; // ?构造器类型可以用 interface 声明，使用 new(): xx 的语法。
 }
 // 提取构造函数返回值类型
-type GetInstanceType<ConstructorType extends new (...args: any) => any> = ConstructorType extends new (
-  ...args: any
-) => infer InstanceType
-  ? InstanceType
-  : any;
+type GetInstanceType<ConstructorType extends new (...args: any) => any> =
+  ConstructorType extends new (...args: any) => infer InstanceType ? InstanceType : any;
 
 type result12 = GetInstanceType<PersonConstructor>;
 
@@ -143,3 +145,11 @@ type GetConstructorParameters<ConstructorType extends new (...args: any) => any>
 
 type result13 = GetConstructorParameters<PersonConstructor>;
 export {};
+
+// ?索引类型
+
+type GetRefProps<P> = "ref" extends keyof P
+  ? P extends { ref?: infer Value | undefined }
+    ? Value
+    : never
+  : never;

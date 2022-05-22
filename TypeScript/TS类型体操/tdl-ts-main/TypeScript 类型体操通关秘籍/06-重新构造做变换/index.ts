@@ -37,7 +37,7 @@ type res4 = Shift<tuple, 5>;
 
 // 合并数组
 type tuple1 = [1, 2];
-type tuple2 = ['guang', 'dong'];
+type tuple2 = ["guang", "dong"];
 
 type Zip<T extends unknown[], P extends unknown[]> = T extends [...infer Rest]
   ? P extends [...infer Rest2]
@@ -62,13 +62,16 @@ type res8 = Zip2<tuple1, tuple2>;
 
 // ?合并任意个数 【递归、剩余参数】
 
-type ZipPlus<One extends unknown[], Other extends unknown[]> = One extends [infer OneFirst, ...infer Rest]
+type ZipPlus<One extends unknown[], Other extends unknown[]> = One extends [
+  infer OneFirst,
+  ...infer Rest
+]
   ? Other extends [infer OtherFirst, ...infer OtherRest]
     ? [[OneFirst, OtherFirst], ...ZipPlus<Rest, OtherRest>]
     : []
   : [];
 
-type Zip2Result = ZipPlus<[1, 2, 3, 4, 5], ['guang', 'dong', 'is', 'best', 'friend']>;
+type Zip2Result = ZipPlus<[1, 2, 3, 4, 5], ["guang", "dong", "is", "best", "friend"]>;
 
 /**
  * ! 一、数组、字符串、函数等类型的重新构造
@@ -81,30 +84,34 @@ type CapitalizeStr<Str extends string> = Str extends `${infer First}${infer Rest
   ? `${Uppercase<First>}${Rest}`
   : Str;
 
-type res9 = CapitalizeStr<'raotaohub'>;
+type res9 = CapitalizeStr<"raotaohub">;
 
 // ? 实现 rao_tao_hub 到 raoTaoHub 的变换。
 type CamelCase<Str extends string> = Str extends `${infer First}_${infer Second}${infer Rest}`
   ? `${First}${CapitalizeStr<Second>}${CamelCase<Rest>}`
   : Str;
 
-type res10 = CamelCase<'rao_tao_hub'>;
+type res10 = CamelCase<"rao_tao_hub">;
 
 // ?删除其中一段子串
 
 type DropSubStr<
   Str extends string,
   Delete extends string
-> = Str extends `${infer Prefix}${Delete}${infer Subfix}` ? DropSubStr<`${Prefix}${Subfix}`, Delete> : Str;
+> = Str extends `${infer Prefix}${Delete}${infer Subfix}`
+  ? DropSubStr<`${Prefix}${Subfix}`, Delete>
+  : Str;
 
-type res11 = DropSubStr<'~~~rao~~tao~hub~~~', '~'>;
+type res11 = DropSubStr<"~~~rao~~tao~hub~~~", "~">;
 
 /**
  * ! 一、数组、字符串、函数等类型的重新构造
  * ? 3.函数
  */
 
-type AppendArgument<F extends Function, AppendArg> = F extends (...args: infer Args) => infer ReturnType
+type AppendArgument<F extends Function, AppendArg> = F extends (
+  ...args: infer Args
+) => infer ReturnType
   ? (...args: [...Args, AppendArg]) => ReturnType
   : never;
 
@@ -170,20 +177,29 @@ type My_Pick<O extends object, T extends keyof O> = {
   [K in T]: O[K];
 };
 
-type res18 = My_Pick<O, 'gender'>;
-type res19 = MyPick<O, 'gender'>;
+type res18 = My_Pick<O, "gender">;
+type res19 = MyPick<O, "gender">;
 
 // Omit 排除指定属性
 
 type MyOmit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-type res20 = Exclude<'a' | 'b' | 'gender', 'c'>;
-type res21 = Exclude<'a' | 'b' | 'gender', 'b'>; // 排除 b 剩余 a
-type res22 = Pick<O, 'a' | 'gender'>; // 挑选出 a 来构建新的映射类型
-type res23 = MyOmit<O, 'b'>;
+type res20 = Exclude<"a" | "b" | "gender", "c">;
+type res21 = Exclude<"a" | "b" | "gender", "b">; // 排除 b 剩余 a
+type res22 = Pick<O, "a" | "gender">; // 挑选出 a 来构建新的映射类型
+type res23 = MyOmit<O, "b">;
 
 type MyOmit2<T, K extends keyof T> = {
   [Key in keyof T as Key extends K ? Key : never]: T[Key];
 };
 
-type res24 = MyOmit<O, 'b'>;
+type res24 = MyOmit<O, "b">;
+
+const statusConfig = {
+  normal: 0,
+  freeze: 1,
+  block: 2
+} as const;
+
+type ValueOf<T> = T[keyof T];
+type StatusVal = ValueOf<typeof statusConfig>;
