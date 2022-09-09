@@ -16,10 +16,16 @@ type ArrayToObject<A extends readonly (number | string | symbol)[]> = {
 
 type res2 = ArrayToObject<typeof tuple>;
 
+// !string 的遍历
 /* type res2 = {
   a: "a";
   b: "b";
   c: "c";
 } */
 
-export {};
+type foreachString<T extends string, R extends unknown[] = []> = T extends `${infer F}${infer Rest}`
+  ? foreachString<Rest, [...R, F]>
+  : R;
+
+type res3 = foreachString<'1234567'>
+export { };

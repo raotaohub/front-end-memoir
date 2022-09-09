@@ -41,8 +41,8 @@ type tuple2 = ["guang", "dong"];
 
 type Zip<T extends unknown[], P extends unknown[]> = T extends [...infer Rest]
   ? P extends [...infer Rest2]
-    ? [Rest, Rest2]
-    : []
+  ? [Rest, Rest2]
+  : []
   : [];
 
 type res5 = Zip<tuple1, tuple2>;
@@ -54,8 +54,8 @@ type Zip2<One extends [unknown, unknown], Other extends [unknown, unknown]> = On
   infer OneSecond
 ]
   ? Other extends [infer OtherFirst, infer OtherSecond]
-    ? [[OneFirst, OtherFirst], [OneSecond, OtherSecond]]
-    : []
+  ? [[OneFirst, OtherFirst], [OneSecond, OtherSecond]]
+  : []
   : [];
 
 type res8 = Zip2<tuple1, tuple2>;
@@ -67,8 +67,8 @@ type ZipPlus<One extends unknown[], Other extends unknown[]> = One extends [
   ...infer Rest
 ]
   ? Other extends [infer OtherFirst, ...infer OtherRest]
-    ? [[OneFirst, OtherFirst], ...ZipPlus<Rest, OtherRest>]
-    : []
+  ? [[OneFirst, OtherFirst], ...ZipPlus<Rest, OtherRest>]
+  : []
   : [];
 
 type Zip2Result = ZipPlus<[1, 2, 3, 4, 5], ["guang", "dong", "is", "best", "friend"]>;
@@ -98,7 +98,7 @@ type res10 = CamelCase<"rao_tao_hub">;
 type DropSubStr<
   Str extends string,
   Delete extends string
-> = Str extends `${infer Prefix}${Delete}${infer Subfix}`
+  > = Str extends `${infer Prefix}${Delete}${infer Subfix}`
   ? DropSubStr<`${Prefix}${Subfix}`, Delete>
   : Str;
 
@@ -188,6 +188,7 @@ type res20 = Exclude<"a" | "b" | "gender", "c">;
 type res21 = Exclude<"a" | "b" | "gender", "b">; // 排除 b 剩余 a
 type res22 = Pick<O, "a" | "gender">; // 挑选出 a 来构建新的映射类型
 type res23 = MyOmit<O, "b">;
+type res26 = Omit<O, "b">;
 
 type MyOmit2<T, K extends keyof T> = {
   [Key in keyof T as Key extends K ? Key : never]: T[Key];
