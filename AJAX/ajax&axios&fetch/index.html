@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style></style>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <div id="app">
+        {{ message }}
+        <div><button @click="greet">Greet</button></div>
+        <div>
+            <h1>XMLHttpRequest</h1>
+            <button @click="requestAjax">Click</button>
+            <div v-if="ajax">请求返回：{{ajax}}</div>
+        </div>
+
+        <div>
+            <h1>axios</h1>
+            <button @click="requestAxios">Click</button>
+            <div v-if="axios">请求返回：{{axios}}</div>
+        </div>
+
+        <div>
+            <h1>fetch</h1>
+            <button @click="requestFetch">Click</button>
+            <div v-if="axios">请求返回：{{fetch}}</div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        const Axios = axios
+
+        createApp({
+            data() {
+                return {
+                    message: "Hello Vue!",
+                    name: "Vue.js",
+                    axios: "",
+                    ajax: "",
+                    fetch: ""
+                };
+            },
+            methods: {
+                greet(event) {
+                    // 方法中的 `this` 指向当前活跃的组件实例
+                    alert(`Hello ${this.name}!`);
+                    console.log("this:", this);
+                    // `event` 是 DOM 原生事件
+                    if (event) {
+                        alert(event.target.tagName);
+                    }
+                },
+
+                request(type) {
+                    const self = this
+                    if (type === "ajax") {
+                        const xhr = new XMLHttpRequest()
+                        xhr.open("get", "//localhost:8000/server")
+                        xhr.send()
+
+                        xhr.onreadystatechange = e => {
+                            console.log('xhr.readyState:', xhr.readyState)
+                            if (xhr.readyState === 4) {
+                                if (xhr.responseText) {
+                                    console.log(xhr.responseText);
+                                    self.ajax = xhr.responseText
+                                }
+                            }
+                        }
+                    }
+
+                    if (type === "axios") {
+                        Axios
+                            .get("//localhost:8000/server")
+                            .then(function (response) {
+                                // 处理成功情况
+                                console.log(response);
+
+                                self.axios = response.data;
+                            })
+                            .catch(function (error) {
+                                // 处理错误情况
+                                console.log(error);
+                            })
+                            .then(function () {
+                                // 总是会执行
+                            });
+                    }
+
+                    if (type === 'fetch') {
+                        fetch('//localhost:8000/server', {
+                            method: 'get',
+                            body: null
+                        }).then(response => {
+                            console.log(response)
+                        })
+
+                        // return fetch(url, {
+                        //     method: (_method || options.method || 'get').toUpperCase(),
+                        //     body: data,
+                        //     headers: deepMerge(options.headers, customHeaders, true),
+                        //     credentials: options.withCredentials ? 'include' : _undefined
+                        // }).then((res) => {
+                        //     for (const i in res) {
+                        //         if (typeof res[i] != 'function') response[i] = res[i];
+                        //     }
+
+                        //     if (options.responseType == 'stream') {
+                        //         response.data = res.body;
+                        //         return response;
+                        //     }
+
+                        //     return res[options.responseType || 'text']()
+                        //         .then((data) => {
+                        //             response.data = data;
+                        //             // its okay if this fails: response.data will be the unparsed value:
+                        //             response.data = JSON.parse(data);
+                        //         })
+                        //         .catch(Object)
+                        //         .then(() => {
+                        //             const ok = options.validateStatus ? options.validateStatus(res.status) : res.ok;
+                        //             return ok ? response : Promise.reject(response);
+                        //         });
+                        // });
+
+                    }
+                },
+
+                requestAxios() {
+                    this.request("axios");
+                },
+
+                requestAjax() {
+                    this.request("ajax");
+                },
+
+                requestFetch() {
+                    this.request("fetch");
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
