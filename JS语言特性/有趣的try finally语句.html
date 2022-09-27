@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>try finally 语句</div>
+    <script>
+        {
+            /**
+             * 
+             * react 源码 里这样一段代码。
+             * 函数中 使用 try finally 语句，并且在try中就return了。
+             * 问：finally的语句还会执行吗？
+             * 先说答案：会执行。
+             */
+
+            function useState(initialState) {
+                currentHookNameInDev = 'useState';
+                mountHookTypesDev();
+                const prevDispatcher = ReactCurrentDispatcher.current;
+                ReactCurrentDispatcher.current = InvalidNestedHooksDispatcherOnMountInDEV;
+                try {
+                    return mountState(initialState);
+                } finally {
+                    ReactCurrentDispatcher.current = prevDispatcher;
+                }
+            }
+
+            /**
+             * 来运行一段代码
+             */
+
+            function add() {
+                try {
+                    return 0
+                } finally {
+                    return 1
+                }
+            }
+            // 1，基本可以判断,会改变return行为
+            console.log(add());// 10
+
+            let o = { num: 0 }
+            function add2() {
+                try {
+                    return o.num
+                } finally {
+                    o.num = 10
+                    return o.num
+                }
+            }
+
+            // 2.在finally 中对引用值修改并 return。 
+            console.log(add2());// 输出 10;  1的结论没问题。
+
+            // 再往下看值修改，而不返回
+            let ob = { num: 0 }
+            function add3() {
+                try {
+                    return ob.num
+                } finally {
+                    ob.num = 10
+                }
+            }
+            // 3.在 finally 中对引用值的修改但不 return。
+            // 如果不在finally里return ，那么函数返回值是符合直觉的。但是同时 引用值的修改也是成功的。
+            console.log(add3(), ob); //0，{ num: 10 } 。
+
+            // 4. 执行顺序符合直觉，就是自上而下
+            (function add4() {
+                try {
+                    console.log('add4-try');
+                } finally {
+                    console.log('add4-finally');
+
+                }
+
+                // add4-try
+                // add4-finally
+                // 输出顺序符合直觉。
+            }())
+
+
+            // 5. 最后看一下 对于引用类型的引用值修改
+            let obj = { array: [] }
+
+            function add5() {
+                try {
+                    return obj.array
+                } finally {
+                    obj.array = { '丢': '丢' }
+                }
+            }
+
+            console.log(add5(), obj); // [] {array: { '丢': '丢' }}
+
+            // 先返回了引用值，随后该引用被修改为另一个引用。
+            //  打印结果是修改前的引用[]，再次打印obj，就呈现出修改后的  '丢': '丢' }
+
+            console.log(add5()); //再次打印。 没问题 得到 { '丢': '丢' }
+
+
+            // 我没得出根源性的原理，无法明白该机制。不过答案在ecma262 https://tc39.es/ecma262/#sec-runtime-semantics
+
+        }
+    </script>
+
+    <script>
+
+
+        eval(`
+        {
+            var i = 1; // normal, empty, empty
+            return i; // return, 1, empty
+            i++;
+            console.log(i)
+        }
+        `)
+    </script>
+</body>
+
+</html>
