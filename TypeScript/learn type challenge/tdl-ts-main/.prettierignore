@@ -1,0 +1,17 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+build
+dist
+lib
+es
+release
+.cache-loader
+.vscode
+.activitys
+
+# Ignore all HTML files:
+*.html
+*.js
+*.md
