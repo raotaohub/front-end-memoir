@@ -1,7 +1,7 @@
 <!--
  * @Author: raotaohub
  * @Date: 2020-12-21 23:36:52
- * @LastEditTime: 2021-06-06 21:13:21
+ * @LastEditTime: 2022-10-27 15:36:35
  * @LastEditors: raotaohub
  * @FilePath: \Speaking-JavaScript\utils\防抖函数、节流函数.html
  * @Description: Edit......
@@ -41,37 +41,6 @@
       }
     }
   }
-  <
-  <
-  <
-  <
-  <
-  << HEAD
-
-      function debounce(fn, wait) {
-  let timer = null
-  return function () {
-  if (timer !== null) {
-  clearTimeout(timer)
-  }
-  timer = setTimeout(() => {
-  fn.apply(this)
-  }, wait)
-  }
-  }
-
-  function throttle(fn, wait) {
-  let lastTime = 0
-  return function () {
-  let nowTime = new Date()
-  if (nowTime - lastTime >= wait) {
-    fn.apply(this)
-    lastTime = nowTime
-  }
-  }
-  }
-  =======
-  >>>>>>> ec104e5473d2d43a62fb869032a78785b647b68a
 </script>
 </body>
 </html>
