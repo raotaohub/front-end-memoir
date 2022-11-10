@@ -6,7 +6,7 @@
  * 步骤
  *  1. 传入的数据转成 string ，通过补 "0" ，让2个值长度相同
  *  2. traverse 相加，利用1个变量保存进位值 carry bit value
- * 
+ *
  * 拓展
  *      两数相加
  *      N数相加
@@ -22,7 +22,7 @@ function toStr(a) {
 
   throw "invalid !";
 }
-``
+
 function bigNumberSun(a, b) {
   a = toStr(a);
   b = toStr(b);
