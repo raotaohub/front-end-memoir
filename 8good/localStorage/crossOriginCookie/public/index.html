@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>this is index.html at port 8000</h2>
+    <button id="button">发送同源请求</button>
+    <button id="cross-button">发送跨域请求</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const button = document.querySelector("#button");
+        const crossButton = document.querySelector("#cross-button");
+
+        axios.get("http://localhost:8000/login", {}).then((res) => {
+            console.log(res);
+        });
+        // 发送同域请求
+        button.onclick = function () {
+            axios.get("http://localhost:8000/user", {}).then((res) => {
+                console.log(res);
+            });
+        };
+        // 发送跨域请求
+        crossButton.onclick = function () {
+            axios({
+                method: "get",
+                url: "http://localhost:8003/anotherService",
+                withCredentials: true,
+            }).then((res) => {
+                console.log(res);
+            });
+        };
+    </script>
+</body>
+
+</html>
