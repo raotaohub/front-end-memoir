@@ -2,6 +2,12 @@
 const express = require("express");
 const app = express();
 
+app.all("*", (req, res, next) => {
+  res.header("Cache-Control", "no-cache;max-age=604800;");
+  // res.header("Cache-Control", "max-age=360000");
+  next();
+});
+
 // `index.html` 加载时会请求login接口
 // 设置`cookie`
 app.get("/login", (req, res) => {
@@ -13,6 +19,7 @@ app.get("/login", (req, res) => {
 app.get("/user", (req, res) => {
   // req.headers.cookie: user=jay
   const user = req.headers.cookie.split("=")[1];
+  // app.headers('sss','sssss11')
   res.json({ code: 0, user });
 });
 
