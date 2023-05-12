@@ -7,7 +7,7 @@ function Promise(executor) {
   const state = {
     PENDING: "pending",
     FULFILL: "fulfill",
-    REJECTED: "rejected",
+    REJECTED: "rejected"
   };
   this.PromiseState = state.PENDING;
   this.PromiseReason = null;
@@ -67,12 +67,12 @@ Promise.resolve = function resolve(value) {
     try {
       if (value instanceof Promise) {
         value.then(
-            (r) => {
-              resolve(r);
-            },
-            (e) => {
-              reject(e);
-            }
+          (r) => {
+            resolve(r);
+          },
+          (e) => {
+            reject(e);
+          }
         );
       } else {
         resolve(value);
@@ -106,16 +106,16 @@ Promise.all = function all(promises) {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < length; i++) {
       promises[i].then(
-          (r) => {
-            count++;
-            result[i] = r; // 使用push 可能会在调用异步任务时导致无序
-            if (count === length) {
-              resolve(result);
-            }
-          },
-          (e) => {
-            reject(e);
+        (r) => {
+          count++;
+          result[i] = r; // 使用push 可能会在调用异步任务时导致无序
+          if (count === length) {
+            resolve(result);
           }
+        },
+        (e) => {
+          reject(e);
+        }
       );
     }
   });
@@ -134,14 +134,14 @@ Promise.race = function race(promises) {
     try {
       for (const p of promises) {
         p.then(
-            (r) => {
-              resolve(r);
-              flag = true;
-            },
-            (e) => {
-              reject(e);
-              flag = true;
-            }
+          (r) => {
+            resolve(r);
+            flag = true;
+          },
+          (e) => {
+            reject(e);
+            flag = true;
+          }
         );
         if (flag) break;
       }
@@ -151,6 +151,15 @@ Promise.race = function race(promises) {
     }
   });
 };
+
+/**
+ * 方法以 promise 组成的可迭代对象作为输入，并且返回一个 Promise 实例。
+ * 当输入的所有 promise 都已敲定时（包括传递空的可迭代类型），返回的 promise 将兑现，并带有描述每个 promsie 结果的对象数组。
+ */
+Promise.allSettled = function allSettled(promises) {
+  // 待实现
+};
+
 /**
  *  一、then 实例对象 方法接收两个函数作为参数
  *    1. 成功的回调  onResolved
@@ -197,15 +206,15 @@ Promise.prototype.then = function then(onResolved, onRejected) {
           let result = type(self.PromiseReason); // 这个返回值是实例上的返回值
           if (result instanceof Promise) {
             result.then(
-                (r) => {
-                  resolve(r);
-                },
-                (e) => {
-                  reject(e);
-                }
+              (r) => {
+                resolve(r);
+              },
+              (e) => {
+                reject(e);
+              }
             );
           } else {
-            resolve(result);
+            resolve(result); // 返回值如果不是 Promise 实例 则默认调用成功的回调
           }
         } catch (e) {
           reject(e);
@@ -232,7 +241,7 @@ Promise.prototype.then = function then(onResolved, onRejected) {
         },
         onRejected: function () {
           callback(onRejected);
-        },
+        }
       });
     }
   });
