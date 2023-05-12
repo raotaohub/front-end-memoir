@@ -27,3 +27,15 @@ getAllName();
  * 优点：解决回调地狱，链式调用
  * 缺点：链式调用，代码堆叠
  */
+
+function add() {
+  return new Promise((resolve, reject) => {
+    resolve("11");
+  });
+}
+
+// add().then((v) => console.log(v));
+
+const res = await add()
+
+console.log(res)
