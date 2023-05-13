@@ -1,6 +1,7 @@
 function _instanceof(A, B) {
   let prototype = B.prototype;
-  A = A.__proto__;
+  // A = A.__proto__;
+  A = Object.getPrototypeOf(A);
   while (true) {
     if (A === null) {
       return false;
