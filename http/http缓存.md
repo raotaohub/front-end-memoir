@@ -4,7 +4,8 @@
 
 HTTP 缓存请求结果，实现将缓存，应用于后续请求的策略，达到减少请求，优化加载速度的效果。
 
-## 缓存的开关
+## 缓存的2种机制
+
 
 1. 强缓存
    - Cache-Control : 
@@ -15,7 +16,24 @@ HTTP 缓存请求结果，实现将缓存，应用于后续请求的策略，达
 2. 协商缓存
    - 通过比对资源的hash和date，由服务器判断资源是否一样，一致则返回304，否则返回200和最新资源
 
-## 1.强缓存策略（长期缓存）
+### Cache-Control 通用消息头是控制缓存机制的开关
+
+- 请求体中的 Cache-Control：
+  - no-cache：强制每次请求都要向服务器验证资源是否过期；
+  - no-store：禁止任何形式的缓存；
+  - max-age=xxx：资源在 xxx 秒内可以从缓存中读取，不必再向服务器请求；
+
+- 响应体中的 Cache-Control：
+  - public：响应可以被客户端和代理服务器缓存；
+  - private：响应只能被客户端缓存，不能被代理服务器缓存；
+  - no-cache：缓存前必须向服务器验证资源是否过期；
+  - no-store：禁止任何形式的缓存；
+  - max-age=xxx：资源在 xxx 秒内可以从缓存中读取，不必再向服务器请求；
+
+
+
+## 2种机制的例子说明
+### 1.强缓存策略（长期缓存）
 
 通过响应头 Cache-Control : max-age = date ；如
 
@@ -35,10 +53,9 @@ Cache-Control: max-age=604800
 
 [HTTP Caching]([draft-ietf-httpbis-cache-19](https://datatracker.ietf.org/doc/html/RFC9111#section-5.2.2.9))
 
-## 2. 协商缓存（重验证缓存）
+### 2. 协商缓存（重验证缓存）
 
-配置 Cache-Control: max-age=0; no-cache;
-
+配置 Cache-Control: max-age=0; no-cache; 这意味着每次请求都要重新验证
 
 
 `在响应标头中携带`
@@ -55,12 +72,10 @@ If-None-Match : hash	 哈希值
 请求过程
 客户端请求服务端时，通过比较`请求标头`中
 
-If-Modified-Since 或 If-None-Match 中的哈希值，与`响应标头` Etag 是否一致
+If-Modified-Since中的date 或 If-None-Match 中hash，与`响应标头` 中LAST-MODIFIED 或 Etag 是否一致
 
 若不一致 , 则返回 200 资源获取成功，并缓存该资源
 若为一致 , 则返回 304 Not Modified ，从缓存中获取
-
-
 
 
 
