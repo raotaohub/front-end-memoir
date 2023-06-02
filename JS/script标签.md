@@ -6,9 +6,9 @@
 <script async src="app.js"></script>
 ```
 
-1. 默认情况下 script 标签的执行是从上到下的，download 和会阻塞 HTML parse。【阻塞】
-2. async 加载，script download 和 HTML parse 并行，一但 script 下载完成，就执行 JS 代码（对内联 script 无效）。【可能阻塞】
-3. defer 加载，script download 和 HTML parse 并行，HTML 解析完成后，执行 JS 代码（对内联 script 无效）。【不阻塞】
+1. 默认情况下 script 标签的执行是从上到下的，download 和 execute 会阻塞 HTML parse。【阻塞】
+2. async 加载，script download 和 HTML parse 并行，一但 script 下载完成，就 execute JS 代码（对内联 script 无效）。【可能阻塞】
+3. defer 加载，script download 和 HTML parse 并行，HTML 解析完成后，execute JS 代码（对内联 script 无效）。【不阻塞】
 
 https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html
 
