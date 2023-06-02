@@ -32,9 +32,9 @@ const sleep = (seconds) => new Promise((resolve) => setTimeout(resolve, seconds)
 
 const now = Date.now();
 console.log("Start");
-pMap([1, 1, 1], (x) => sleep(x * 1000)).then((o) => {
-  console.log(o);
-  console.log(Date.now() - now, "seconds");
-});
+// pMap([1, 1, 1], (x) => sleep(x * 1000)).then((o) => {
+//   console.log(o);
+//   console.log(Date.now() - now, "seconds");
+// });
 
-pMap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], (x) => x * 3).then((o) => console.log(o));
+pMap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], (x) => x * 3, 2).then((o) => console.log(o));
