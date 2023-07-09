@@ -1,6 +1,6 @@
 1. 注册 npm 账号 https://www.npmjs.com/
 2. 本地通过命令行 `npm login` 登陆
-3. 进入到项目目录下（与 package.json 同级），在 package.json 中指定发布文件、文件夹
+3. 进入到项目目录下（与 package.json 同级），在 package.json files字段指定发布文件、文件夹 
 
 ```json
 {
