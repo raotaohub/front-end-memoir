@@ -751,6 +751,27 @@ export const compose = <T = any, R = any>(middleware: IMiddleware<T, R>[]) => {
   };
 };
 
+/**
+ * 2023~2024 用的最多的一个工具方法了，缺点是不支持字符串枚举，因为字符串枚举不会生成 vk 映射
+ * 枚举转select选项数组
+ * @param enumObject 枚举对象
+ * @param valueMapKey 用于映射原始key的中文表达
+ * @returns select选项数组
+ */
+export const getEnumOptions = <T extends number | string>(
+  enumObject: Record<string, T>,
+  disabled?: ((label: string, value: T) => boolean) | boolean
+): { value: T; label: string }[] =>
+  Object.entries(enumObject)
+    .filter(([label]) => Number.isNaN(+label))
+    .map(([key, value]) => {
+      return {
+        label: key,
+        value,
+        disabled: typeof disabled === "function" ? disabled(key, value) : disabled ?? false
+      };
+    });
+
 const Util = {
   deepSet,
   deepGet,
@@ -787,7 +808,8 @@ const Util = {
   getDifferenceSet,
   removeRepeatOfArr,
   getIntersectionSet,
-  parseBoolStr
+  parseBoolStr,
+  getEnumOptions
 };
 
 export default Util;
